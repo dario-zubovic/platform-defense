@@ -11,8 +11,6 @@ public class Player : Actor {
 	public int coyoteFrames, jumpAheadFrames;
 
 	[Header("Wall jump")]
-	[Range(0, 1f)]
-	public float wallSlideDamping = 0.9f;
 	public float wallJumpAngle;
 	public float wallJumpDuration = 0.2f;
 
@@ -75,20 +73,16 @@ public class Player : Actor {
 		// jump:
 
 		if(this.grounded || this.wallSliding) {
-			if(this.jump || this.jumpFrames < this.jumpAheadFrames) {
+			if(this.jump || this.jumpFrames < this.jumpAheadFrames) { // normal jump or wall jump
 				Jump();
 			}
 		} else {
-			if(this.jump && this.groundFrames < this.coyoteFrames) {
+			if(this.jump && this.groundFrames < this.coyoteFrames) { // normal jump or wall jump
 				Jump();
-			} else if(this.jump && this.canDoubleJump && !this.didDoubleJump) {
-				Jump();
+			} else if(this.jump && this.canDoubleJump && !this.didDoubleJump) { // double jump
 				this.didDoubleJump = true;
+				Jump();
 			}
-		}
-
-		if(this.wallSliding && this.velocity.y < 0 && Mathf.Sign(input.x) == -Mathf.Sign(this.wallNormalX) && Mathf.Abs(input.x) > 0.1f) {
-			this.velocity.y *= this.wallSlideDamping;
 		}
 	}
 

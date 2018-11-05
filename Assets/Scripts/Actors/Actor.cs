@@ -11,6 +11,8 @@ public abstract class Actor : MonoBehaviour {
 	public float airAccelerationTime;
 	[Range(0, 1f)]
 	public float groundFriction = 0.05f;
+	[Range(0, 1f)]
+	public float wallSlideDamping = 0.9f;
 
 	// constants:
 	private const float LOOK_AHEAD_DIST = 0.01f;
@@ -148,6 +150,10 @@ public abstract class Actor : MonoBehaviour {
 		// handle vertical movement:
 		
 		this.grounded = false;
+
+		if(this.wallSliding && this.velocity.y < 0 && Mathf.Sign(input.x) == -Mathf.Sign(this.wallNormalX) && Mathf.Abs(input.x) > 0.1f) {
+			this.velocity.y *= this.wallSlideDamping;
+		}
 
 		Vector2 deltaY = Vector2.up * this.velocity.y * Time.deltaTime;
 
