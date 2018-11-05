@@ -34,8 +34,8 @@ public class Player : MonoBehaviour {
 	private bool wallSliding;
 	private bool lastWasWall;
 	private float wallNormalX;
-	private int groundFrames = 100;
-	private int jumpFrames = 100;
+	private int groundFrames = 100; // number of frames since player touched ground or wall
+	private int jumpFrames = 100; // number of frames since last jump keypress
 	
 	private float forceMoveTimer = 0f;
 	private float forceMoveX;
@@ -66,7 +66,6 @@ public class Player : MonoBehaviour {
 	}
 
 	public void FixedUpdate() {
-		Vector2 deltaMovement = Vector2.zero;
 
 		// handle horizontal movement:
 
@@ -105,17 +104,20 @@ public class Player : MonoBehaviour {
 
 		for(int i = 0; i < c; i++) {
 			RaycastHit2D hit = this.raycastResults[i];
+			Vector2 normal = hit.normal;
 
-			if(Mathf.Abs(hit.normal.y) < MIN_GROUND_NORMAL_Y && !this.grounded) {
+			if(Mathf.Abs(normal.y) < MIN_GROUND_NORMAL_Y && !this.grounded) {
 				this.wallSliding = true;
 				this.lastWasWall = true;
 				this.groundFrames = 0;
-				this.wallNormalX = hit.normal.x;
+				this.wallNormalX = normal.x;
+	
+				normal.y = 0;
 			}
 
-			float p = Vector2.Dot(velocity, hit.normal);
+			float p = Vector2.Dot(velocity, normal);
 			if(p < 0) {
-				this.velocity -= p * hit.normal;
+				this.velocity -= p * normal;
 			}
 
 			if(hit.distance - LOOK_AHEAD_DIST < dist) {
@@ -123,7 +125,19 @@ public class Player : MonoBehaviour {
 			}
 		}
 
-		deltaMovement += moveVector.normalized * dist;
+		this.rigid.position += moveVector.normalized * dist;
+
+		// jump:
+
+		if(this.grounded || this.wallSliding) {
+			if(this.jump || this.jumpFrames < this.jumpAheadFrames) {
+				Jump();
+			}
+		} else {
+			if(this.jump && this.groundFrames < this.coyoteFrames) {
+				Jump();
+			}
+		}
 
 		// handle vertical movement:
 
@@ -164,23 +178,7 @@ public class Player : MonoBehaviour {
 			}
 		}
 
-		deltaMovement += deltaY.normalized * dist;
-
-		// actually move:
-
-		this.rigid.position += deltaMovement;
-
-		// jump:
-
-		if(this.grounded || this.wallSliding) {
-			if(this.jump || this.jumpFrames < this.jumpAheadFrames) {
-				Jump();
-			}
-		} else {
-			if(this.jump && this.groundFrames < this.coyoteFrames) {
-				Jump();
-			}
-		}
+		this.rigid.position += deltaY.normalized * dist;
 
 		// misc:
 
@@ -192,15 +190,15 @@ public class Player : MonoBehaviour {
 
 	private void Jump() {
 		if(this.lastWasWall) { // wall jump
-			this.velocity.y = 0;
+			// this.velocity.y = 0;
 
 			this.velocity.x += Mathf.Sign(this.wallNormalX) * Mathf.Cos(this.wallJumpAngle * Mathf.Deg2Rad) * this.jumpSpeed;
-			this.velocity.y += Mathf.Sin(this.wallJumpAngle * Mathf.Deg2Rad) * this.jumpSpeed;
+			this.velocity.y = Mathf.Sin(this.wallJumpAngle * Mathf.Deg2Rad) * this.jumpSpeed;
 		
 			this.forceMoveTimer = this.wallJumpDuration;
 			this.forceMoveX = Mathf.Sign(this.wallNormalX);
 		} else {
-			this.velocity.y += this.jumpSpeed;
+			this.velocity.y = this.jumpSpeed;
 		}
 
 		this.jumpFrames += 100;
