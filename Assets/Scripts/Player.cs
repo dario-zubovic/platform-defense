@@ -40,6 +40,8 @@ public class Player : MonoBehaviour {
 	private float forceMoveTimer = 0f;
 	private float forceMoveX;
 
+	private bool dead;
+
 	// inputs:
 	private Vector2 input;
 	private bool jump;
@@ -47,11 +49,15 @@ public class Player : MonoBehaviour {
 	// misc:
 	private Rigidbody2D rigid;
 
+	private Level level;
+
 	private ContactFilter2D contactFilter;
 	private RaycastHit2D[] raycastResults;
 
 	public void Awake() {
 		this.rigid = this.gameObject.GetComponent<Rigidbody2D>();
+
+		this.level = GameObject.FindObjectOfType<Level>();
 
 		this.contactFilter = new ContactFilter2D();
 		this.contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(this.gameObject.layer));
@@ -61,11 +67,40 @@ public class Player : MonoBehaviour {
 		this.raycastResults = new RaycastHit2D[32];
 	}
 
+	public void Spawn(Vector3 location) {
+		this.transform.position = location;
+
+		// reset state:
+		this.dead = false;
+		this.velocity = Vector2.zero;
+		this.velocityXRef = 0;
+		this.grounded = false;
+		this.groundNormal = Vector2.zero;
+		this.wallSliding = false;
+		this.lastWasWall = false;
+		this.wallNormalX = 0;
+		this.groundFrames = 100;
+		this.jumpFrames = 100;
+		this.forceMoveTimer = 0f;
+	}
+
 	public void Update() {
 		HandleInput();
 	}
 
+	public void OnTriggerEnter2D(Collider2D trigger) {
+		if(trigger.tag == "Spikes") {
+			Die();
+		}
+	}
+
 	public void FixedUpdate() {
+		if(this.dead) {
+			ResetInput();
+			this.jumpFrames = 100;
+			this.groundFrames = 100;
+			this.input = Vector2.zero;
+		}
 
 		// handle horizontal movement:
 
@@ -190,8 +225,6 @@ public class Player : MonoBehaviour {
 
 	private void Jump() {
 		if(this.lastWasWall) { // wall jump
-			// this.velocity.y = 0;
-
 			this.velocity.x += Mathf.Sign(this.wallNormalX) * Mathf.Cos(this.wallJumpAngle * Mathf.Deg2Rad) * this.jumpSpeed;
 			this.velocity.y = Mathf.Sin(this.wallJumpAngle * Mathf.Deg2Rad) * this.jumpSpeed;
 		
@@ -203,6 +236,15 @@ public class Player : MonoBehaviour {
 
 		this.jumpFrames += 100;
 		this.groundFrames += 100;
+	}
+
+	private void Die() {
+		if(this.dead) {
+			return;
+		}
+
+		this.dead = true;
+		this.level.PlayerDied();
 	}
 
 	private void HandleInput() {
