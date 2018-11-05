@@ -40,6 +40,8 @@ public class Player : MonoBehaviour {
 	private float forceMoveTimer = 0f;
 	private float forceMoveX;
 
+	private bool facingRight;
+
 	private bool dead;
 
 	// inputs:
@@ -49,6 +51,7 @@ public class Player : MonoBehaviour {
 	// misc:
 	private Rigidbody2D rigid;
 
+	private CameraController cameraController;
 	private Level level;
 
 	private ContactFilter2D contactFilter;
@@ -58,6 +61,7 @@ public class Player : MonoBehaviour {
 		this.rigid = this.gameObject.GetComponent<Rigidbody2D>();
 
 		this.level = GameObject.FindObjectOfType<Level>();
+		this.cameraController = GameObject.FindObjectOfType<CameraController>();
 
 		this.contactFilter = new ContactFilter2D();
 		this.contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(this.gameObject.layer));
@@ -82,6 +86,7 @@ public class Player : MonoBehaviour {
 		this.groundFrames = 100;
 		this.jumpFrames = 100;
 		this.forceMoveTimer = 0f;
+		this.facingRight = true;
 	}
 
 	public void Update() {
@@ -214,6 +219,22 @@ public class Player : MonoBehaviour {
 		}
 
 		this.rigid.position += deltaY.normalized * dist;
+
+		// facing & cam:
+
+		if(this.velocity.x > float.Epsilon && !facingRight) {
+			this.facingRight = true;
+			this.cameraController.SetFocus(false, true);
+			this.transform.eulerAngles = new Vector3(0, 0, 0);
+		} else if(this.velocity.x < -float.Epsilon && facingRight) {
+			this.facingRight = false;
+			this.cameraController.SetFocus(true, false);
+			this.transform.eulerAngles = new Vector3(0, 180f, 0);
+		}
+
+		if(this.grounded || this.wallSliding) {
+			this.cameraController.targetY = this.transform.position.y;
+		}
 
 		// misc:
 

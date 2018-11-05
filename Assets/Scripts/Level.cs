@@ -11,11 +11,18 @@ public class Level : MonoBehaviour {
 	[Header("Prefabs")]
 	public Player playerPrefab;
 
+	private CameraController cameraController;
 	private Player player;
 
 	public void Awake() {
+		this.cameraController = Camera.main.GetComponent<CameraController>();
+
 		this.player = GameObject.Instantiate<Player>(this.playerPrefab);
+	}
+
+	public void Start() {
 		this.player.Spawn(this.respawn.position);
+		this.cameraController.SetTarget(this.player.transform, false);
 	}
 
 	public void PlayerDied() {
@@ -24,11 +31,13 @@ public class Level : MonoBehaviour {
 
 	private IEnumerator WaitForRespawn() {
 		yield return new WaitForSeconds(this.dramaTime);
-
-		// TODO: change camera's target to respawn location
+		
+		this.cameraController.SetFocus(false, false);
+		this.cameraController.SetTarget(this.respawn, true);
 
 		yield return new WaitForSeconds(this.respawnTime - this.dramaTime);
 
 		this.player.Spawn(this.respawn.position);
+		this.cameraController.SetTarget(this.player.transform, false);
 	}
 }
