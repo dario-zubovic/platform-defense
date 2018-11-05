@@ -11,26 +11,34 @@ public class Player : MonoBehaviour {
 
 	[Header("Movement")]
 	public float moveSpeed;
-	public float groundedAccelerationTime, airAccelerationTime;
+	public float airAccelerationTime;
+	[Range(0, 1f)]
+	public float groundFriction = 0.05f;
+
+	[Header("Wall jump")]
 	[Range(0, 1f)]
 	public float wallSlideDamping = 0.9f;
 	public float wallJumpAngle;
+	public float wallJumpDuration = 0.2f;
 
 	// constants:
 	private const float LOOK_AHEAD_DIST = 0.01f;
 	private const float MIN_GROUND_NORMAL_Y = 0.65f;
-	private const float MIN_WALL_NORMAL_X = 0.65f;
 
 	// state:
 	private Vector2 velocity;
 	private float velocityXRef;
 
 	private bool grounded;
+	private Vector2 groundNormal;
 	private bool wallSliding;
 	private bool lastWasWall;
 	private float wallNormalX;
 	private int groundFrames = 100;
 	private int jumpFrames = 100;
+	
+	private float forceMoveTimer = 0f;
+	private float forceMoveX;
 
 	// inputs:
 	private Vector2 input;
@@ -60,62 +68,45 @@ public class Player : MonoBehaviour {
 	public void FixedUpdate() {
 		Vector2 deltaMovement = Vector2.zero;
 
-		// handle vertical movement:
-
-		this.grounded = false;
-
-		this.velocity += Physics2D.gravity * Time.deltaTime;
-
-		if(this.wallSliding && this.velocity.y < 0 && Mathf.Sign(input.x) == -Mathf.Sign(this.wallNormalX) && Mathf.Abs(input.x) > 0.1f) {
-			this.velocity.y *= this.wallSlideDamping;
-		}
-
-		Vector2 deltaY = Vector2.up * this.velocity.y * Time.deltaTime;
-
-		float dist = Mathf.Abs(deltaY.y);
-
-		int c = this.rigid.Cast(deltaY, this.contactFilter, this.raycastResults, dist + LOOK_AHEAD_DIST);
-
-		for(int i = 0; i < c; i++) {
-			RaycastHit2D hit = this.raycastResults[i];
-			Vector2 normal = hit.normal;
-
-			if(normal.y > MIN_GROUND_NORMAL_Y) {
-				this.grounded = true;
-				this.lastWasWall = false;
-				this.groundFrames = 0;
-			}
-
-			float p = Vector2.Dot(velocity, normal);
-			if(p < 0) {
-				this.velocity -= p * normal;
-			}
-
-			if(hit.distance - LOOK_AHEAD_DIST < dist) {
-				dist = hit.distance - LOOK_AHEAD_DIST;
-			}
-		}
-
-		if(dist > 0) {
-			deltaMovement += deltaY.normalized * dist;
-		}
-
 		// handle horizontal movement:
 
 		this.wallSliding = false;
-		
-		this.velocity.x = Mathf.SmoothDamp(this.velocity.x, this.input.x * this.moveSpeed, ref this.velocityXRef, this.grounded ? this.groundedAccelerationTime : this.airAccelerationTime);		
-		
-		Vector2 deltaX = Vector2.right * this.velocity.x * Time.deltaTime;
 
-		dist = Mathf.Abs(deltaX.x);
+		Vector2 moveVector;
 
-		c = this.rigid.Cast(deltaX, this.contactFilter, this.raycastResults, dist + LOOK_AHEAD_DIST);
+		if(this.grounded) {
+			this.velocity.x *= 1f - this.groundFriction;
+
+			if(Mathf.Abs(this.input.x) > 0.1f) {
+				this.velocity.x = this.input.x * this.moveSpeed;
+			}
+			
+			moveVector = new Vector2(this.groundNormal.y, -this.groundNormal.x) * this.velocity.x * Time.deltaTime;
+		
+			this.velocityXRef = 0;
+		} else {
+			if(Mathf.Abs(this.input.x) > 0.1f) { // air control
+				this.velocity.x = Mathf.SmoothDamp(
+					this.velocity.x,
+					this.moveSpeed * (this.forceMoveTimer > 0 ? this.forceMoveX : this.input.x),
+					ref this.velocityXRef,
+					this.airAccelerationTime
+				);
+			}
+
+			moveVector = Vector2.right * this.velocity.x * Time.deltaTime;
+		}
+
+		this.forceMoveTimer -= Time.deltaTime;
+
+		float dist = moveVector.magnitude;
+
+		int c = this.rigid.Cast(moveVector, this.contactFilter, this.raycastResults, dist + LOOK_AHEAD_DIST);
 
 		for(int i = 0; i < c; i++) {
 			RaycastHit2D hit = this.raycastResults[i];
 
-			if(Mathf.Abs(hit.normal.x) > MIN_WALL_NORMAL_X && !this.grounded) {
+			if(Mathf.Abs(hit.normal.y) < MIN_GROUND_NORMAL_Y && !this.grounded) {
 				this.wallSliding = true;
 				this.lastWasWall = true;
 				this.groundFrames = 0;
@@ -132,25 +123,50 @@ public class Player : MonoBehaviour {
 			}
 		}
 
-		if(dist > 0) {
-			deltaMovement += deltaX.normalized * dist;
+		deltaMovement += moveVector.normalized * dist;
+
+		// handle vertical movement:
+
+		this.grounded = false;
+
+		this.velocity += Physics2D.gravity * Time.deltaTime;
+
+		if(this.wallSliding && this.velocity.y < 0 && Mathf.Sign(input.x) == -Mathf.Sign(this.wallNormalX) && Mathf.Abs(input.x) > 0.1f) {
+			this.velocity.y *= this.wallSlideDamping;
 		}
 
-		// actually move:
-		dist = deltaMovement.magnitude;
-		c = this.rigid.Cast(deltaMovement, this.contactFilter, this.raycastResults, dist + LOOK_AHEAD_DIST);
+		Vector2 deltaY = Vector2.up * this.velocity.y * Time.deltaTime;
+
+		dist = Mathf.Abs(deltaY.y);
+
+		c = this.rigid.Cast(deltaY, this.contactFilter, this.raycastResults, dist + LOOK_AHEAD_DIST);
 
 		for(int i = 0; i < c; i++) {
 			RaycastHit2D hit = this.raycastResults[i];
-			
-			if(hit.distance <= dist) {
-				float p = Vector2.Dot(deltaMovement, hit.normal);
-				if(p < 0) {
-					Debug.Log(p * hit.normal);
-					deltaMovement -= p * hit.normal;
-				}
+			Vector2 normal = hit.normal;
+
+			if(normal.y > MIN_GROUND_NORMAL_Y) {
+				this.grounded = true;
+				this.lastWasWall = false;
+				this.groundFrames = 0;
+				this.groundNormal = normal;
+
+				normal.x = 0;
+			}
+
+			float p = Vector2.Dot(velocity, normal);
+			if(p < 0) {
+				this.velocity -= p * normal;
+			}
+
+			if(hit.distance - LOOK_AHEAD_DIST < dist) {
+				dist = hit.distance - LOOK_AHEAD_DIST;
 			}
 		}
+
+		deltaMovement += deltaY.normalized * dist;
+
+		// actually move:
 
 		this.rigid.position += deltaMovement;
 
@@ -180,6 +196,9 @@ public class Player : MonoBehaviour {
 
 			this.velocity.x += Mathf.Sign(this.wallNormalX) * Mathf.Cos(this.wallJumpAngle * Mathf.Deg2Rad) * this.jumpSpeed;
 			this.velocity.y += Mathf.Sin(this.wallJumpAngle * Mathf.Deg2Rad) * this.jumpSpeed;
+		
+			this.forceMoveTimer = this.wallJumpDuration;
+			this.forceMoveX = Mathf.Sign(this.wallNormalX);
 		} else {
 			this.velocity.y += this.jumpSpeed;
 		}
