@@ -3,17 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Player : MonoBehaviour {
+public class Player : Actor {
 	// settings:
+
 	[Header("Jump")]
 	public float jumpSpeed;
 	public int coyoteFrames, jumpAheadFrames;
-
-	[Header("Movement")]
-	public float moveSpeed;
-	public float airAccelerationTime;
-	[Range(0, 1f)]
-	public float groundFriction = 0.05f;
 
 	[Header("Wall jump")]
 	[Range(0, 1f)]
@@ -21,72 +16,36 @@ public class Player : MonoBehaviour {
 	public float wallJumpAngle;
 	public float wallJumpDuration = 0.2f;
 
-	// constants:
-	private const float LOOK_AHEAD_DIST = 0.01f;
-	private const float MIN_GROUND_NORMAL_Y = 0.65f;
+	// properties:
+
+	public bool canDoubleJump {
+		get;
+		set;
+	}
 
 	// state:
-	private Vector2 velocity;
-	private float velocityXRef;
-
-	private bool grounded;
-	private Vector2 groundNormal;
-	private bool wallSliding;
-	private bool lastWasWall;
-	private float wallNormalX;
-	private int groundFrames = 100; // number of frames since player touched ground or wall
-	private int jumpFrames = 100; // number of frames since last jump keypress
-	
-	private float forceMoveTimer = 0f;
-	private float forceMoveX;
-
-	private bool facingRight;
 
 	private bool dead;
 
 	// inputs:
-	private Vector2 input;
+
 	private bool jump;
+	private bool didDoubleJump;
 
 	// misc:
-	private Rigidbody2D rigid;
 
 	private CameraController cameraController;
 	private Level level;
 
-	private ContactFilter2D contactFilter;
-	private RaycastHit2D[] raycastResults;
-
-	public void Awake() {
-		this.rigid = this.gameObject.GetComponent<Rigidbody2D>();
-
+	protected override void Init() {
 		this.level = GameObject.FindObjectOfType<Level>();
 		this.cameraController = GameObject.FindObjectOfType<CameraController>();
-
-		this.contactFilter = new ContactFilter2D();
-		this.contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(this.gameObject.layer));
-		this.contactFilter.useLayerMask = true;
-		this.contactFilter.useTriggers = false;
-
-		this.raycastResults = new RaycastHit2D[32];
 	}
 
-	public void Spawn(Vector3 location) {
-		this.transform.position = location;
+	public override void Spawn(Vector3 location) {
+		base.Spawn(location);
 
-		// reset state:
 		this.dead = false;
-		this.velocity = Vector2.zero;
-		this.velocityXRef = 0;
-		this.grounded = false;
-		this.groundNormal = Vector2.zero;
-		this.wallSliding = false;
-		this.lastWasWall = false;
-		this.wallNormalX = 0;
-		this.groundFrames = 100;
-		this.jumpFrames = 100;
-		this.forceMoveTimer = 0f;
-		this.facingRight = true;
 	}
 
 	public void Update() {
@@ -99,7 +58,7 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	public void FixedUpdate() {
+	protected override void BeforeMovementPhase() {
 		if(this.dead) {
 			ResetInput();
 			this.jumpFrames = 100;
@@ -107,66 +66,12 @@ public class Player : MonoBehaviour {
 			this.input = Vector2.zero;
 		}
 
-		// handle horizontal movement:
-
-		this.wallSliding = false;
-
-		Vector2 moveVector;
-
 		if(this.grounded) {
-			this.velocity.x *= 1f - this.groundFriction;
-
-			if(Mathf.Abs(this.input.x) > 0.1f) {
-				this.velocity.x = this.input.x * this.moveSpeed;
-			}
-			
-			moveVector = new Vector2(this.groundNormal.y, -this.groundNormal.x) * this.velocity.x * Time.deltaTime;
-		
-			this.velocityXRef = 0;
-		} else {
-			if(Mathf.Abs(this.input.x) > 0.1f) { // air control
-				this.velocity.x = Mathf.SmoothDamp(
-					this.velocity.x,
-					this.moveSpeed * (this.forceMoveTimer > 0 ? this.forceMoveX : this.input.x),
-					ref this.velocityXRef,
-					this.airAccelerationTime
-				);
-			}
-
-			moveVector = Vector2.right * this.velocity.x * Time.deltaTime;
+			this.didDoubleJump = false;
 		}
+	}
 
-		this.forceMoveTimer -= Time.deltaTime;
-
-		float dist = moveVector.magnitude;
-
-		int c = this.rigid.Cast(moveVector, this.contactFilter, this.raycastResults, dist + LOOK_AHEAD_DIST);
-
-		for(int i = 0; i < c; i++) {
-			RaycastHit2D hit = this.raycastResults[i];
-			Vector2 normal = hit.normal;
-
-			if(Mathf.Abs(normal.y) < MIN_GROUND_NORMAL_Y && !this.grounded) {
-				this.wallSliding = true;
-				this.lastWasWall = true;
-				this.groundFrames = 0;
-				this.wallNormalX = normal.x;
-	
-				normal.y = 0;
-			}
-
-			float p = Vector2.Dot(velocity, normal);
-			if(p < 0) {
-				this.velocity -= p * normal;
-			}
-
-			if(hit.distance - LOOK_AHEAD_DIST < dist) {
-				dist = hit.distance - LOOK_AHEAD_DIST;
-			}
-		}
-
-		this.rigid.position += moveVector.normalized * dist;
-
+	protected override void MidMovementPhase() {
 		// jump:
 
 		if(this.grounded || this.wallSliding) {
@@ -176,60 +81,22 @@ public class Player : MonoBehaviour {
 		} else {
 			if(this.jump && this.groundFrames < this.coyoteFrames) {
 				Jump();
+			} else if(this.jump && this.canDoubleJump && !this.didDoubleJump) {
+				Jump();
+				this.didDoubleJump = true;
 			}
 		}
-
-		// handle vertical movement:
-
-		this.grounded = false;
-
-		this.velocity += Physics2D.gravity * Time.deltaTime;
 
 		if(this.wallSliding && this.velocity.y < 0 && Mathf.Sign(input.x) == -Mathf.Sign(this.wallNormalX) && Mathf.Abs(input.x) > 0.1f) {
 			this.velocity.y *= this.wallSlideDamping;
 		}
+	}
 
-		Vector2 deltaY = Vector2.up * this.velocity.y * Time.deltaTime;
-
-		dist = Mathf.Abs(deltaY.y);
-
-		c = this.rigid.Cast(deltaY, this.contactFilter, this.raycastResults, dist + LOOK_AHEAD_DIST);
-
-		for(int i = 0; i < c; i++) {
-			RaycastHit2D hit = this.raycastResults[i];
-			Vector2 normal = hit.normal;
-
-			if(normal.y > MIN_GROUND_NORMAL_Y) {
-				this.grounded = true;
-				this.lastWasWall = false;
-				this.groundFrames = 0;
-				this.groundNormal = normal;
-
-				normal.x = 0;
-			}
-
-			float p = Vector2.Dot(velocity, normal);
-			if(p < 0) {
-				this.velocity -= p * normal;
-			}
-
-			if(hit.distance - LOOK_AHEAD_DIST < dist) {
-				dist = hit.distance - LOOK_AHEAD_DIST;
-			}
-		}
-
-		this.rigid.position += deltaY.normalized * dist;
-
-		// facing & cam:
-
-		if(this.velocity.x > float.Epsilon && !facingRight) {
-			this.facingRight = true;
+	protected override void AfterMovementPhase() {
+		if(this.facingRight) {
 			this.cameraController.SetFocus(false, true);
-			this.transform.eulerAngles = new Vector3(0, 0, 0);
-		} else if(this.velocity.x < -float.Epsilon && facingRight) {
-			this.facingRight = false;
+		} else {
 			this.cameraController.SetFocus(true, false);
-			this.transform.eulerAngles = new Vector3(0, 180f, 0);
 		}
 
 		if(this.grounded || this.wallSliding) {
