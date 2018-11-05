@@ -7,6 +7,9 @@ public class GroundEnemy : Actor {
     [Header("Enemy settings")]
     public bool moveRight;
 
+    // [Header("Enemy stats")]
+
+
     protected override void Init() {
         this.input = this.moveRight ? Vector2.right : Vector2.left;
     }
