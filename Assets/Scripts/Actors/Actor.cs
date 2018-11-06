@@ -21,6 +21,7 @@ public abstract class Actor : MonoBehaviour {
 	// state:
 	protected Vector2 velocity;
 	protected float velocityXRef;
+	protected Vector2 inheritedVelocity;
 
 	protected bool grounded;
 	protected Vector2 groundNormal;
@@ -53,6 +54,8 @@ public abstract class Actor : MonoBehaviour {
 		this.contactFilter.useTriggers = false;
 
 		this.raycastResults = new RaycastHit2D[32];
+
+		this.gameObject.tag = "Actor";
 
 		Init();
 	}
@@ -92,7 +95,7 @@ public abstract class Actor : MonoBehaviour {
 				this.velocity.x = this.input.x * this.moveSpeed;
 			}
 			
-			moveVector = new Vector2(this.groundNormal.y, -this.groundNormal.x) * this.velocity.x * Time.deltaTime;
+			moveVector = new Vector2(this.groundNormal.y, -this.groundNormal.x) * (this.velocity.x + this.inheritedVelocity.x) * Time.deltaTime;
 		
 			this.velocityXRef = 0;
 		} else {
@@ -105,7 +108,7 @@ public abstract class Actor : MonoBehaviour {
 				);
 			}
 
-			moveVector = Vector2.right * this.velocity.x * Time.deltaTime;
+			moveVector = Vector2.right * (this.velocity.x + this.inheritedVelocity.x) * Time.deltaTime;
 		}
 
 		this.forceMoveTimer -= Time.deltaTime;
@@ -132,6 +135,10 @@ public abstract class Actor : MonoBehaviour {
 				this.velocity -= p * normal;
 			}
 
+			if(hit.collider.tag == "Platform") {
+				HandlePlatformHorizontal(hit, hit.collider.gameObject.GetComponent<Platform>());
+			}
+
 			if(hit.distance - LOOK_AHEAD_DIST < dist) {
 				dist = hit.distance - LOOK_AHEAD_DIST;
 			}
@@ -155,7 +162,9 @@ public abstract class Actor : MonoBehaviour {
 			this.velocity.y *= this.wallSlideDamping;
 		}
 
-		Vector2 deltaY = Vector2.up * this.velocity.y * Time.deltaTime;
+		Vector2 deltaY = Vector2.up * (this.velocity.y + this.inheritedVelocity.y) * Time.deltaTime;
+		
+		this.inheritedVelocity = Vector2.zero; // reset inherited velocity, it will be reaplied in vertical cast if we're still on the platform
 
 		dist = Mathf.Abs(deltaY.y);
 
@@ -177,6 +186,10 @@ public abstract class Actor : MonoBehaviour {
 			float p = Vector2.Dot(velocity, normal);
 			if(p < 0) {
 				this.velocity -= p * normal;
+			}
+
+			if(hit.collider.tag == "Platform") {
+				HandlePlatformVertical(hit, hit.collider.gameObject.GetComponent<Platform>());
 			}
 
 			if(hit.distance - LOOK_AHEAD_DIST < dist) {
@@ -212,5 +225,26 @@ public abstract class Actor : MonoBehaviour {
 	// called from FixedUpdate in after movement resolution
 	protected virtual void AfterMovementPhase() {
 		
+	}
+
+	protected virtual void HandlePlatformVertical(RaycastHit2D hit, Platform platform) {
+		switch(platform.type) {
+			case PlatformType.Moving:
+				if(hit.normal.y > MIN_GROUND_NORMAL_Y) {
+					this.inheritedVelocity += ((MovingPlatform)platform).velocity;
+				}
+				break;
+			case PlatformType.Disappearing:
+				((DisappearingPlatform)platform).Disappear();
+				break;
+		}
+	}
+
+	protected virtual void HandlePlatformHorizontal(RaycastHit2D hit, Platform platform) {
+		switch(platform.type) {
+			case PlatformType.Disappearing:
+				((DisappearingPlatform)platform).Disappear();
+				break;
+		}
 	}
 }
