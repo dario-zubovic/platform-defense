@@ -135,7 +135,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9, y: 1}
   m_Direction: 0
 --- !u!114 &114950202446308024
 MonoBehaviour:
@@ -152,6 +152,7 @@ MonoBehaviour:
   airAccelerationTime: 0.1
   groundFriction: 0.3
   wallSlideDamping: 0.75
+  moveRight: 0
 --- !u!212 &212159726200486880
 SpriteRenderer:
   m_ObjectHideFlags: 1

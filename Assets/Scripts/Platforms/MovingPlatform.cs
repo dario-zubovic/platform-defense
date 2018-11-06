@@ -34,7 +34,7 @@ public class MovingPlatform : Platform {
 		this.ping = true;
 	}
 
-	public void Update() {
+	public void FixedUpdate() {
 		float t = (Time.time - this.startTime) / this.travelTime;
 		if(t >= 1) {
 			t = 0;
