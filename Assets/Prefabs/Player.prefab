@@ -148,13 +148,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc371263a22f9f84ea58d625c1617e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSpeed: 15
-  coyoteFrames: 8
-  jumpAheadFrames: 8
   moveSpeed: 10
   airAccelerationTime: 0.1
   groundFriction: 0.3
   wallSlideDamping: 0.75
+  jumpSpeed: 17
+  coyoteFrames: 8
+  jumpAheadFrames: 8
   wallJumpAngle: 60
   wallJumpDuration: 0.1
 --- !u!212 &212023967676214324
