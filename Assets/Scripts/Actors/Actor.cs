@@ -43,7 +43,7 @@ public abstract class Actor : MonoBehaviour {
 	protected Rigidbody2D rigid;
 
 	private ContactFilter2D contactFilter;
-	private RaycastHit2D[] raycastResults;
+	private RaycastHit2D[] castResults;
 
 	public void Awake() {
 		this.rigid = this.gameObject.GetComponent<Rigidbody2D>();
@@ -53,7 +53,7 @@ public abstract class Actor : MonoBehaviour {
 		this.contactFilter.useLayerMask = true;
 		this.contactFilter.useTriggers = false;
 
-		this.raycastResults = new RaycastHit2D[32];
+		this.castResults = new RaycastHit2D[32];
 
 		this.gameObject.tag = "Actor";
 
@@ -84,7 +84,20 @@ public abstract class Actor : MonoBehaviour {
 
 		// inherited velocity:
 
-		this.rigid.position += this.inheritedVelocity * Time.deltaTime;
+		if(this.inheritedVelocity.sqrMagnitude > 0.001f) {
+			Vector2 inheritedMove = this.inheritedVelocity * Time.deltaTime;
+			float inheritedDist = inheritedMove.magnitude;
+			int count = this.rigid.Cast(inheritedMove, this.contactFilter, this.castResults, inheritedDist + LOOK_AHEAD_DIST);
+
+			for(int i = 0; i < count; i++) {
+				float p = Vector2.Dot(this.inheritedVelocity, this.castResults[i].normal);
+				if(p < 0) {
+					this.inheritedVelocity -= p * this.castResults[i].normal;
+				}
+			}
+
+			this.rigid.position += this.inheritedVelocity * Time.deltaTime;
+		}
 
 		// handle horizontal movement:
 
@@ -119,10 +132,10 @@ public abstract class Actor : MonoBehaviour {
 
 		float dist = moveVector.magnitude;
 
-		int c = this.rigid.Cast(moveVector, this.contactFilter, this.raycastResults, dist + LOOK_AHEAD_DIST);
+		int c = this.rigid.Cast(moveVector, this.contactFilter, this.castResults, dist + LOOK_AHEAD_DIST);
 
 		for(int i = 0; i < c; i++) {
-			RaycastHit2D hit = this.raycastResults[i];
+			RaycastHit2D hit = this.castResults[i];
 			Vector2 normal = hit.normal;
 
 			if(Mathf.Abs(normal.y) < MIN_GROUND_NORMAL_Y && !this.grounded) {
@@ -168,14 +181,15 @@ public abstract class Actor : MonoBehaviour {
 
 		Vector2 deltaY = Vector2.up * this.velocity.y * Time.deltaTime;
 		
-		this.inheritedVelocity = Vector2.zero; // reset inherited velocity, it will be reaplied in vertical cast if we're still on the platform
+		// reset inherited velocity, it will be reaplied in vertical cast if we're still on the platform:
+		this.inheritedVelocity = Vector2.zero;
 
 		dist = Mathf.Abs(deltaY.y);
 
-		c = this.rigid.Cast(deltaY, this.contactFilter, this.raycastResults, dist + LOOK_AHEAD_DIST);
+		c = this.rigid.Cast(deltaY, this.contactFilter, this.castResults, dist + LOOK_AHEAD_DIST);
 
 		for(int i = 0; i < c; i++) {
-			RaycastHit2D hit = this.raycastResults[i];
+			RaycastHit2D hit = this.castResults[i];
 			Vector2 normal = hit.normal;
 
 			if(normal.y > MIN_GROUND_NORMAL_Y) {
@@ -205,10 +219,10 @@ public abstract class Actor : MonoBehaviour {
 
 		// facing & cam:
 
-		if(this.velocity.x > float.Epsilon && !facingRight) {
+		if(this.velocity.x > 0.01f && !facingRight) {
 			this.facingRight = true;
 			this.transform.eulerAngles = new Vector3(0, 0, 0);
-		} else if(this.velocity.x < -float.Epsilon && facingRight) {
+		} else if(this.velocity.x < -0.01f && facingRight) {
 			this.facingRight = false;
 			this.transform.eulerAngles = new Vector3(0, 180f, 0);
 		}

@@ -39,6 +39,9 @@ public class CameraController : MonoBehaviour {
 	public void SetTarget(Transform target, bool followY) {
 		this.target = target;
 		this.followY = followY;
+		if(!followY) {
+			this.targetY = target.transform.position.y;
+		}
 	}
 
 	public void SetFocus(bool right, bool left) {
