@@ -24,7 +24,7 @@ public abstract class Turret : MonoBehaviour {
 		Init();
 	}
 
-	public void FixedUpdate() {
+	public virtual void FixedUpdate() {
 		if(Time.time - this.lastFireTime > this.fireRate) {
 			Aim();
 		}
@@ -49,7 +49,7 @@ public abstract class Turret : MonoBehaviour {
 			}
 		}
 
-		if(leftMostGo = null) {
+		if(leftMostGo == null) {
 			return;
 		}
 
@@ -68,9 +68,9 @@ public abstract class Turret : MonoBehaviour {
 
 #if UNITY_EDITOR
     
-	public void OnDrawGizmosSelected() {
+	public virtual void OnDrawGizmosSelected() {
 		Gizmos.color = Color.green;
-		Gizmos.DrawWireSphere(this.transform.position, radius);
+		Gizmos.DrawWireSphere(this.transform.position, this.radius);
     }
 
 #endif

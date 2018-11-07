@@ -9,4 +9,13 @@ public abstract class Enemy : Actor {
 
     protected override void Init() {
     }
+
+    public void TakeDamage(float damage) {        
+        this.health -= damage;
+
+        if(this.health < 0) {
+            Debug.Log("dead");
+            GameObject.Destroy(this.gameObject);
+        }
+    }
 }

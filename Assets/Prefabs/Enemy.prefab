@@ -152,6 +152,7 @@ MonoBehaviour:
   airAccelerationTime: 0.1
   groundFriction: 0.3
   wallSlideDamping: 0.75
+  health: 0
   moveRight: 0
 --- !u!212 &212159726200486880
 SpriteRenderer:
