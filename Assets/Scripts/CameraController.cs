@@ -83,13 +83,13 @@ public class CameraController : MonoBehaviour {
 
 		Vector2 targetViewPos = this.cam.WorldToViewportPoint(targetPos);	
 
-		Debug.DrawLine(new Vector3(targetPos.x, -100), new Vector3(targetPos.x, 100), Color.red);
-		Debug.DrawLine(this.cam.ViewportToWorldPoint(new Vector3(lowerX, 0, 10)), this.cam.ViewportToWorldPoint(new Vector3(lowerX, 1, 10)), Color.green);
-		Debug.DrawLine(this.cam.ViewportToWorldPoint(new Vector3(upperX, 0, 10)), this.cam.ViewportToWorldPoint(new Vector3(upperX, 1, 10)), Color.green);
+		// Debug.DrawLine(new Vector3(targetPos.x, -100), new Vector3(targetPos.x, 100), Color.red);
+		// Debug.DrawLine(this.cam.ViewportToWorldPoint(new Vector3(lowerX, 0, 10)), this.cam.ViewportToWorldPoint(new Vector3(lowerX, 1, 10)), Color.green);
+		// Debug.DrawLine(this.cam.ViewportToWorldPoint(new Vector3(upperX, 0, 10)), this.cam.ViewportToWorldPoint(new Vector3(upperX, 1, 10)), Color.green);
 
-		Debug.DrawLine(new Vector3(-100, this.followY ? this.targetY : targetPos.y), new Vector3(100, this.followY ? this.targetY : targetPos.y), Color.red);
-		Debug.DrawLine(new Vector3(-100, this.targetY + this.verticalZoneWorld, 0), new Vector3(100, this.targetY + this.verticalZoneWorld, 0), Color.blue);
-		Debug.DrawLine(new Vector3(-100, this.targetY - this.verticalZoneWorld, 0), new Vector3(100, this.targetY - this.verticalZoneWorld, 0), Color.blue);
+		// Debug.DrawLine(new Vector3(-100, this.followY ? this.targetY : targetPos.y), new Vector3(100, this.followY ? this.targetY : targetPos.y), Color.red);
+		// Debug.DrawLine(new Vector3(-100, this.targetY + this.verticalZoneWorld, 0), new Vector3(100, this.targetY + this.verticalZoneWorld, 0), Color.blue);
+		// Debug.DrawLine(new Vector3(-100, this.targetY - this.verticalZoneWorld, 0), new Vector3(100, this.targetY - this.verticalZoneWorld, 0), Color.blue);
 
 		if(targetViewPos.x < lowerX || targetViewPos.x > upperX) {
 			delta.x += (targetPos.x - currentPos.x) * this.horizontalSpeed;
