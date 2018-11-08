@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
 [RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour {
@@ -15,7 +16,21 @@ public class CameraController : MonoBehaviour {
 		set;
 	}
 
+	private Bounds _bounds;
+	public Bounds bounds {
+		get {
+			return this._bounds;
+		}
+		set {
+			this._bounds = value;
+			this._bounds.extents = this._bounds.extents * 0.5f - this.cameraExtents;
+		}
+	}
+
 	private Camera cam;
+	private PixelPerfectCamera pixelPerfectCamera;
+
+	private Vector3 cameraExtents;
 	
 	private float horizontalOffset;
 	private float offset;
@@ -32,6 +47,9 @@ public class CameraController : MonoBehaviour {
 
 	public void Awake() {
 		this.cam = this.gameObject.GetComponent<Camera>();
+		this.pixelPerfectCamera = this.gameObject.GetComponent<PixelPerfectCamera>();
+
+		this.cameraExtents = new Vector2(this.pixelPerfectCamera.refResolutionX, this.pixelPerfectCamera.refResolutionY) / this.pixelPerfectCamera.assetsPPU * 0.5f;
 
 		this.horizontalOffset = this.cam.ViewportToWorldPoint(new Vector3(0.5f + this.lookInFront, 0.5f)).x - this.cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f)).x;
 		this.verticalZoneWorld = this.cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f + this.verticalZone)).y - this.cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f)).y;
@@ -111,7 +129,8 @@ public class CameraController : MonoBehaviour {
 
 			delta.y += (this.targetY - currentPos.y) * this.verticalSpeed;
 		}
-	
-		this.transform.position = this.transform.position + new Vector3(delta.x, delta.y) * Time.deltaTime;
+
+		Vector3 pos = this.transform.position + new Vector3(delta.x, delta.y) * Time.deltaTime;
+		this.transform.position = this.bounds.ClosestPoint(pos);
 	}
 }

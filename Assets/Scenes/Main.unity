@@ -3510,6 +3510,31 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: 6.6
       objectReference: {fileID: 0}
+    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
+        type: 2}
+      propertyPath: levelBounds.m_Extent.x
+      value: 99.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
+        type: 2}
+      propertyPath: levelBounds.m_Extent.y
+      value: 63.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
+        type: 2}
+      propertyPath: levelBounds.m_Extent.z
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
+        type: 2}
+      propertyPath: levelBounds.m_Center.x
+      value: 6.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
+        type: 2}
+      propertyPath: levelBounds.m_Center.y
+      value: 14.37
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6999900d543fdc7429d3d09d6d1471bd, type: 2}
   m_IsPrefabAsset: 0

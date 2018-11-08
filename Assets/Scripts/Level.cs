@@ -7,6 +7,7 @@ public class Level : MonoBehaviour {
 	public Transform respawn;
 	public float dramaTime;
 	public float respawnTime;
+	public Bounds levelBounds;
 	
 	[Header("Prefabs")]
 	public Player playerPrefab;
@@ -23,6 +24,7 @@ public class Level : MonoBehaviour {
 	public void Start() {
 		this.player.Spawn(this.respawn.position);
 		this.cameraController.SetTarget(this.player.transform, false);
+		this.cameraController.bounds = this.levelBounds;
 	}
 
 	public void PlayerDied() {
@@ -40,4 +42,13 @@ public class Level : MonoBehaviour {
 		this.player.Spawn(this.respawn.position);
 		this.cameraController.SetTarget(this.player.transform, false);
 	}
+
+#if UNITY_EDITOR
+    
+	public void OnDrawGizmosSelected() {
+        Gizmos.color = Color.green;
+		Gizmos.DrawWireCube(this.levelBounds.center, this.levelBounds.extents);	
+	}
+
+#endif
 }
