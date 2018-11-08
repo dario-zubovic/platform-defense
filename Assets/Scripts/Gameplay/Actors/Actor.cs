@@ -138,7 +138,14 @@ public abstract class Actor : MonoBehaviour {
 			RaycastHit2D hit = this.castResults[i];
 			Vector2 normal = hit.normal;
 
-			if(Mathf.Abs(normal.y) < MIN_GROUND_NORMAL_Y && !this.grounded) {
+			if(normal.y >= MIN_GROUND_NORMAL_Y) {
+				this.grounded = true;
+				this.lastWasWall = false;
+				this.groundFrames = 0;
+				this.groundNormal = normal;
+
+				normal.x = 0;
+			} else if(Mathf.Abs(normal.y) < MIN_GROUND_NORMAL_Y && !this.grounded) {
 				this.wallSliding = true;
 				this.lastWasWall = true;
 				this.groundFrames = 0;
@@ -192,7 +199,7 @@ public abstract class Actor : MonoBehaviour {
 			RaycastHit2D hit = this.castResults[i];
 			Vector2 normal = hit.normal;
 
-			if(normal.y > MIN_GROUND_NORMAL_Y) {
+			if(normal.y >= MIN_GROUND_NORMAL_Y) {
 				this.grounded = true;
 				this.lastWasWall = false;
 				this.groundFrames = 0;

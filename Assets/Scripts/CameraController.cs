@@ -28,6 +28,7 @@ public class CameraController : MonoBehaviour {
 
 	private Vector3 velocity;
 	
+	private Vector2 lastTargetPosition;
 
 	public void Awake() {
 		this.cam = this.gameObject.GetComponent<Camera>();
@@ -39,6 +40,7 @@ public class CameraController : MonoBehaviour {
 	public void SetTarget(Transform target, bool followY) {
 		this.target = target;
 		this.followY = followY;
+		this.lastTargetPosition = target.transform.position;
 		if(!followY) {
 			this.targetY = target.transform.position.y;
 		}
@@ -80,6 +82,9 @@ public class CameraController : MonoBehaviour {
 			lowerX -= this.horizontalZone / 2f;
 			upperX += this.horizontalZone / 2f;
 		}
+
+		Vector2 targetVelocity = (targetPos - this.lastTargetPosition) / Time.deltaTime;
+		this.lastTargetPosition = targetPos;
 
 		Vector2 targetViewPos = this.cam.WorldToViewportPoint(targetPos);	
 
