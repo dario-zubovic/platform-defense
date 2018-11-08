@@ -14,7 +14,7 @@ public abstract class Enemy : Actor {
         this.health -= damage;
 
         if(this.health < 0) {
-            Debug.Log("dead");
+            // Debug.Log("dead");
             GameObject.Destroy(this.gameObject);
         }
     }

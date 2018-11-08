@@ -16,6 +16,11 @@ public class CameraController : MonoBehaviour {
 		set;
 	}
 
+	public Vector2 targetVelocity {
+		get;
+		set;
+	}
+
 	private Bounds _bounds;
 	public Bounds bounds {
 		get {
@@ -40,10 +45,9 @@ public class CameraController : MonoBehaviour {
 	private Transform target;
 	private bool followY;
 	private bool focusRight, focusLeft;
+	private Vector2 currentTargetVelocity;
 
 	private Vector3 velocity;
-	
-	private Vector2 lastTargetPosition;
 
 	public void Awake() {
 		this.cam = this.gameObject.GetComponent<Camera>();
@@ -58,10 +62,12 @@ public class CameraController : MonoBehaviour {
 	public void SetTarget(Transform target, bool followY) {
 		this.target = target;
 		this.followY = followY;
-		this.lastTargetPosition = target.transform.position;
 		if(!followY) {
 			this.targetY = target.transform.position.y;
 		}
+
+		this.currentTargetVelocity = Vector2.zero;
+		this.targetVelocity = Vector2.zero;
 	}
 
 	public void SetFocus(bool right, bool left) {
@@ -82,6 +88,11 @@ public class CameraController : MonoBehaviour {
 			return;
 		}
 
+		if(this.targetVelocity.x > 0.1f && Mathf.Sign(this.targetVelocity.x) != Mathf.Sign(this.currentTargetVelocity.x)) {
+			this.currentTargetVelocity = Vector2.zero;
+		}
+		this.currentTargetVelocity = Vector2.Lerp(this.targetVelocity, this.currentTargetVelocity, Mathf.Exp(-0.75f*Time.deltaTime));
+
 		Vector2 delta = Vector2.zero;
 
 		Vector2 targetPos = this.target.position;
@@ -92,27 +103,24 @@ public class CameraController : MonoBehaviour {
 
 		if(this.focusRight) {
 			upperX += this.horizontalZone;
-			targetPos.x += offset * this.horizontalOffset;
+			targetPos.x += this.offset * this.horizontalOffset + this.currentTargetVelocity.x * 1f;
 		} else if(this.focusLeft) {
 			lowerX -= this.horizontalZone;
-			targetPos.x += offset * this.horizontalOffset;
+			targetPos.x += this.offset * this.horizontalOffset + this.currentTargetVelocity.x * 1f;
 		} else {
 			lowerX -= this.horizontalZone / 2f;
 			upperX += this.horizontalZone / 2f;
 		}
 
-		Vector2 targetVelocity = (targetPos - this.lastTargetPosition) / Time.deltaTime;
-		this.lastTargetPosition = targetPos;
+		Vector2 targetViewPos = this.cam.WorldToViewportPoint(targetPos);
 
-		Vector2 targetViewPos = this.cam.WorldToViewportPoint(targetPos);	
+		Debug.DrawLine(new Vector3(targetPos.x, -100), new Vector3(targetPos.x, 100), Color.red);
+		Debug.DrawLine(this.cam.ViewportToWorldPoint(new Vector3(lowerX, 0, 10)), this.cam.ViewportToWorldPoint(new Vector3(lowerX, 1, 10)), Color.green);
+		Debug.DrawLine(this.cam.ViewportToWorldPoint(new Vector3(upperX, 0, 10)), this.cam.ViewportToWorldPoint(new Vector3(upperX, 1, 10)), Color.green);
 
-		// Debug.DrawLine(new Vector3(targetPos.x, -100), new Vector3(targetPos.x, 100), Color.red);
-		// Debug.DrawLine(this.cam.ViewportToWorldPoint(new Vector3(lowerX, 0, 10)), this.cam.ViewportToWorldPoint(new Vector3(lowerX, 1, 10)), Color.green);
-		// Debug.DrawLine(this.cam.ViewportToWorldPoint(new Vector3(upperX, 0, 10)), this.cam.ViewportToWorldPoint(new Vector3(upperX, 1, 10)), Color.green);
-
-		// Debug.DrawLine(new Vector3(-100, this.followY ? this.targetY : targetPos.y), new Vector3(100, this.followY ? this.targetY : targetPos.y), Color.red);
-		// Debug.DrawLine(new Vector3(-100, this.targetY + this.verticalZoneWorld, 0), new Vector3(100, this.targetY + this.verticalZoneWorld, 0), Color.blue);
-		// Debug.DrawLine(new Vector3(-100, this.targetY - this.verticalZoneWorld, 0), new Vector3(100, this.targetY - this.verticalZoneWorld, 0), Color.blue);
+		Debug.DrawLine(new Vector3(-100, this.followY ? this.targetY : targetPos.y), new Vector3(100, this.followY ? this.targetY : targetPos.y), Color.red);
+		Debug.DrawLine(new Vector3(-100, this.targetY + this.verticalZoneWorld, 0), new Vector3(100, this.targetY + this.verticalZoneWorld, 0), Color.blue);
+		Debug.DrawLine(new Vector3(-100, this.targetY - this.verticalZoneWorld, 0), new Vector3(100, this.targetY - this.verticalZoneWorld, 0), Color.blue);
 
 		if(targetViewPos.x < lowerX || targetViewPos.x > upperX) {
 			delta.x += (targetPos.x - currentPos.x) * this.horizontalSpeed;

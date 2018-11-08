@@ -97,6 +97,8 @@ public class Player : Actor {
 			this.cameraController.targetY = this.transform.position.y;
 		}
 
+		this.cameraController.targetVelocity = this.velocity;// + this.inheritedVelocity;
+
 		// misc:
 
 		ResetInput();
