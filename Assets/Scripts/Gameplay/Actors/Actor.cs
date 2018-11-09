@@ -99,6 +99,8 @@ public abstract class Actor : MonoBehaviour {
 			this.rigid.position += this.inheritedVelocity * Time.deltaTime;
 		}
 
+		bool newGroundNormal = false;
+
 		// handle horizontal movement:
 
 		this.wallSliding = false;
@@ -142,7 +144,11 @@ public abstract class Actor : MonoBehaviour {
 				this.grounded = true;
 				this.lastWasWall = false;
 				this.groundFrames = 0;
-				this.groundNormal = normal;
+
+				if(!newGroundNormal) {
+					this.groundNormal = normal;
+					newGroundNormal = true;
+				}
 
 				normal.x = 0;
 			} else if(Mathf.Abs(normal.y) < MIN_GROUND_NORMAL_Y && !this.grounded) {
@@ -203,7 +209,11 @@ public abstract class Actor : MonoBehaviour {
 				this.grounded = true;
 				this.lastWasWall = false;
 				this.groundFrames = 0;
-				this.groundNormal = normal;
+				
+				if(!newGroundNormal) {
+					this.groundNormal = normal;
+					newGroundNormal = true;
+				}
 
 				normal.x = 0;
 			}

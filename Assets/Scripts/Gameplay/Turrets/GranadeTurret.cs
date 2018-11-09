@@ -67,14 +67,14 @@ public class GranadeTurret : Turret {
         
             if(Time.time - this.lockedTime > this.lockingTime) {
                 float targetAngle = 0;
-                if(CanBeReached(this.lockedEnemy.transform.position, out targetAngle)) {
+                CanBeReached(this.lockedEnemy.transform.position, out targetAngle, true);
                     FireOnLocked(targetAngle);
-                } else {
-                    // failed to shoot on locked target...
-                    // TODO: lock failed animation
+                // } else {
+                //     // failed to shoot on locked target...
+                //     // TODO: lock failed animation
 
-                    this.lastFireTime = Time.time - this.lastFireTime + this.fireTimeAfterLockFailure;
-                }
+                //     this.lastFireTime = Time.time - this.lastFireTime + this.fireTimeAfterLockFailure;
+                // }
                 
                 this.lockedEnemy = null;
             }
@@ -123,7 +123,7 @@ public class GranadeTurret : Turret {
         
     }
 
-    private bool CanBeReached(Vector2 target, out float reachAngle) {
+    private bool CanBeReached(Vector2 target, out float reachAngle, bool force = false) {
         Vector2 delta = target - new Vector2(this.transform.position.x, this.transform.position.y);
         bool flip = delta.x < 0;
         delta.x = Mathf.Abs(delta.x);
@@ -132,8 +132,12 @@ public class GranadeTurret : Turret {
 
         float underRoot = this.speed*this.speed*this.speed*this.speed - g * (g * delta.x * delta.x + 2 * delta.y * speed * speed);
         if(underRoot < 0) {
-            reachAngle = 0;
-            return false;
+            if(force) {
+                underRoot = 0;
+            } else {
+                reachAngle = 0;
+                return false;
+            }
         }
 
 
@@ -145,6 +149,10 @@ public class GranadeTurret : Turret {
         }
         float angle = Mathf.Min(angle1, angle2);
         reachAngle = angle;
+
+        if(force) {
+            return true;
+        }
 
         float cos = Mathf.Cos(angle);
         float sin = Mathf.Sin(angle);

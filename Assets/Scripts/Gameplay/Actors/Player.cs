@@ -132,7 +132,7 @@ public class Player : Actor {
 	}
 
 	private void HandleInput() {
-		if(Input.GetKeyDown(KeyCode.Space)) {
+		if(Input.GetButtonDown("Jump")) {
 			this.jump = true;
 			
 			this.jumpFrames = 0;
