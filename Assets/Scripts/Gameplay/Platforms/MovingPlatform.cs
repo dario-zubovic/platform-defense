@@ -12,17 +12,17 @@ public class MovingPlatform : Platform {
 		}
 	}
 
-	public Vector2 velocity {
-		get {
-			return this.speed * (this.ping ? 1f : -1f);
-		}
-	}
-
 	private Vector3 start, end;
 	private bool ping;
 	private float startTime;
 
 	private Vector2 speed;
+
+	private Vector2 velocity {
+		get {
+			return this.speed * (this.ping ? 1f : -1f);
+		}
+	}
 
 	public void Start() {
 		this.start = this.transform.position;
@@ -47,5 +47,9 @@ public class MovingPlatform : Platform {
 			this.ping ? this.end : this.start,
 			t
 		);
+	}
+
+	public override void Contact(Actor actor, RaycastHit2D hit, bool vertical) {
+		actor.SetInheritedVelocity(this.velocity);
 	}
 }

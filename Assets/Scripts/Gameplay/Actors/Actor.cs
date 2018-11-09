@@ -209,7 +209,7 @@ public abstract class Actor : MonoBehaviour {
 				this.grounded = true;
 				this.lastWasWall = false;
 				this.groundFrames = 0;
-				
+
 				if(!newGroundNormal) {
 					this.groundNormal = normal;
 					newGroundNormal = true;
@@ -247,6 +247,22 @@ public abstract class Actor : MonoBehaviour {
 		AfterMovementPhase();
 	}
 
+	public void AddToVelocity(Vector2 vel) {
+		this.velocity += vel;
+	}
+
+	public Vector2 GetVelocity() {
+		return this.velocity;
+	}
+
+	public void SetVelocity(Vector2 vel) {
+		this.velocity = vel;
+	}
+
+	public void SetInheritedVelocity(Vector2 v) {
+		this.inheritedVelocity = v;
+	}
+
 	// called from FixedUpdate before any movement is resolved
 	protected virtual void BeforeMovementPhase() {
 		
@@ -263,21 +279,17 @@ public abstract class Actor : MonoBehaviour {
 	}
 
 	protected virtual void HandlePlatformVertical(RaycastHit2D hit, Platform platform) {
+		platform.Contact(this, hit, true);
+
 		HandlePlatformBothDirs(hit, platform);
 	}
 
 	protected virtual void HandlePlatformHorizontal(RaycastHit2D hit, Platform platform) {
+		platform.Contact(this, hit, false);
+
 		HandlePlatformBothDirs(hit, platform);
 	}
 
 	protected virtual void HandlePlatformBothDirs(RaycastHit2D hit, Platform platform) {
-		switch(platform.type) {
-			case PlatformType.Moving:
-				this.inheritedVelocity = ((MovingPlatform)platform).velocity;
-				break;
-			case PlatformType.Disappearing:
-				((DisappearingPlatform)platform).Disappear();
-				break;
-		}
 	}
 }

@@ -35,13 +35,8 @@ public class DisappearingPlatform : Platform {
 		this.overlapResults = new Collider2D[16];
 	}
 
-	public void Disappear() {
-		if(this.started) {
-			return;
-		}
-
-		this.started = true;
-		this.startTime = Time.time;
+	public override void Contact(Actor actor, RaycastHit2D hit, bool vertical) {
+		Disappear();
 	}
 
 	public void Update() {
@@ -87,5 +82,14 @@ public class DisappearingPlatform : Platform {
 				this.shouldAppear = false;
 			}
 		}
+	}
+
+	private void Disappear() {
+		if(this.started) {
+			return;
+		}
+
+		this.started = true;
+		this.startTime = Time.time;
 	}
 }

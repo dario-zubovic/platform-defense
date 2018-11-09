@@ -10,9 +10,12 @@ public abstract class Platform : MonoBehaviour {
 	public void Awake() {
 		this.tag = "Platform";
 	}
+
+	public abstract void Contact(Actor actor, RaycastHit2D hit, bool vertical);
 }
 
 public enum PlatformType {
 	Moving,
 	Disappearing,
+	Trampoline,
 }
