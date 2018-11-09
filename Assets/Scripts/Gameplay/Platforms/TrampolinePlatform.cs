@@ -23,5 +23,6 @@ public class TrampolinePlatform : Platform {
 		}
 
 		actor.SetVelocity(v);
+		actor.ignoreGround = true;
 	}
 }

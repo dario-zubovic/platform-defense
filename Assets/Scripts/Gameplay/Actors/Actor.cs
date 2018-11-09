@@ -36,6 +36,11 @@ public abstract class Actor : MonoBehaviour {
 
 	protected bool facingRight;
 
+	public bool ignoreGround {
+		get;
+		set;
+	}
+
 	// inputs:
 	protected Vector2 input;
 
@@ -140,7 +145,11 @@ public abstract class Actor : MonoBehaviour {
 			RaycastHit2D hit = this.castResults[i];
 			Vector2 normal = hit.normal;
 
-			if(normal.y >= MIN_GROUND_NORMAL_Y) {
+			if(hit.collider.tag == "Platform") {
+				HandlePlatformHorizontal(hit, hit.collider.gameObject.GetComponent<Platform>());
+			}
+
+			if(normal.y >= MIN_GROUND_NORMAL_Y && !this.ignoreGround) {
 				this.grounded = true;
 				this.lastWasWall = false;
 				this.groundFrames = 0;
@@ -158,10 +167,6 @@ public abstract class Actor : MonoBehaviour {
 				this.wallNormalX = normal.x;
 	
 				normal.y = 0;
-			}
-
-			if(hit.collider.tag == "Platform") {
-				HandlePlatformHorizontal(hit, hit.collider.gameObject.GetComponent<Platform>());
 			}
 
 			float p = Vector2.Dot(velocity, normal);
@@ -205,7 +210,11 @@ public abstract class Actor : MonoBehaviour {
 			RaycastHit2D hit = this.castResults[i];
 			Vector2 normal = hit.normal;
 
-			if(normal.y >= MIN_GROUND_NORMAL_Y) {
+			if(hit.collider.tag == "Platform") {
+				HandlePlatformVertical(hit, hit.collider.gameObject.GetComponent<Platform>());
+			}
+
+			if(normal.y >= MIN_GROUND_NORMAL_Y && !this.ignoreGround) {
 				this.grounded = true;
 				this.lastWasWall = false;
 				this.groundFrames = 0;
@@ -216,10 +225,6 @@ public abstract class Actor : MonoBehaviour {
 				}
 
 				normal.x = 0;
-			}
-
-			if(hit.collider.tag == "Platform") {
-				HandlePlatformVertical(hit, hit.collider.gameObject.GetComponent<Platform>());
 			}
 
 			float p = Vector2.Dot(this.velocity, normal);
@@ -233,6 +238,8 @@ public abstract class Actor : MonoBehaviour {
 		}
 
 		this.rigid.position += deltaY.normalized * dist;
+
+		this.ignoreGround = false;
 
 		// facing & cam:
 
