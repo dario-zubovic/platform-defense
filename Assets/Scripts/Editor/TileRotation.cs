@@ -30,15 +30,15 @@ public static class TileRotation {
 			return;
 		}
 
-		Vector3Int pos = GridSelection.position.position;
+		foreach(Vector3Int pos in GridSelection.position.allPositionsWithin) {
+			TileBase tile = tilemap.GetTile(pos);
+			if(tile == null) {
+				continue;
+			}
 
-		TileBase tile = tilemap.GetTile(pos);
-		if(tile == null) {
-			return;
+			Matrix4x4 matrix = tilemap.GetTransformMatrix(pos);
+			matrix = matrix * Matrix4x4.Rotate(Quaternion.Euler(0, 0, 90));
+			tilemap.SetTransformMatrix(pos, matrix);
 		}
-
-		Matrix4x4 matrix = tilemap.GetTransformMatrix(pos);
-		matrix = matrix * Matrix4x4.Rotate(Quaternion.Euler(0, 0, 90));
-		tilemap.SetTransformMatrix(pos, matrix);
 	}
 }
