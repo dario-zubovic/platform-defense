@@ -12,11 +12,16 @@ public class TrampolinePlatform : Platform {
 	}
 
 	public override void Contact(Actor actor, RaycastHit2D hit, bool vertical) {
-		if(hit.normal.y < 0.5f) {
+		if(!vertical || hit.normal.y < 0.5f) {
 			return;
 		}
 
-		Vector2 v = Vector2.Reflect(actor.GetVelocity(), Vector2.up);
+		Vector2 v = actor.GetVelocity();
+		if(v.y > -0.2f) {
+			return;
+		}
+
+		v = Vector2.Reflect(v, Vector2.up);
 
 		if(v.y < this.minVerticalSpeed) {
 			v.y = this.minVerticalSpeed;
