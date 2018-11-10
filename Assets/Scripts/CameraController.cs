@@ -112,10 +112,10 @@ public class CameraController : MonoBehaviour {
 
 		if(this.focusRight) {
 			upperX += this.horizontalZone;
-			targetPos.x += this.offset * this.horizontalOffset + this.horizontalVelocityOffset;
+			targetPos.x += this.offset * this.horizontalOffset;// + this.horizontalVelocityOffset;
 		} else if(this.focusLeft) {
 			lowerX -= this.horizontalZone;
-			targetPos.x += this.offset * this.horizontalOffset + this.horizontalVelocityOffset;
+			targetPos.x += this.offset * this.horizontalOffset;// + this.horizontalVelocityOffset;
 		} else {
 			lowerX -= this.horizontalZone / 2f;
 			upperX += this.horizontalZone / 2f;
