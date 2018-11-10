@@ -16,9 +16,15 @@ public class CameraController : MonoBehaviour {
 		set;
 	}
 
+	private Vector2 _targetVelocity;
 	public Vector2 targetVelocity {
-		get;
-		set;
+		get {
+			return this._targetVelocity;
+		}
+		set {
+			this._targetVelocity = value;
+			this.lastTargetUpdateTime = Time.time;
+		}
 	}
 
 	private Bounds _bounds;
@@ -45,9 +51,9 @@ public class CameraController : MonoBehaviour {
 	private Transform target;
 	private bool followY;
 	private bool focusRight, focusLeft;
-	private Vector2 currentTargetVelocity;
 
-	private Vector3 velocity;
+	private float lastTargetUpdateTime;
+	private float horizontalVelocityOffset;
 
 	public void Awake() {
 		this.cam = this.gameObject.GetComponent<Camera>();
@@ -66,8 +72,8 @@ public class CameraController : MonoBehaviour {
 			this.targetY = target.transform.position.y;
 		}
 
-		this.currentTargetVelocity = Vector2.zero;
 		this.targetVelocity = Vector2.zero;
+		this.horizontalVelocityOffset = 0;
 	}
 
 	public void SetFocus(bool right, bool left) {
@@ -88,14 +94,17 @@ public class CameraController : MonoBehaviour {
 			return;
 		}
 
-		if(this.targetVelocity.x > 0.1f && Mathf.Sign(this.targetVelocity.x) != Mathf.Sign(this.currentTargetVelocity.x)) {
-			this.currentTargetVelocity = Vector2.zero;
-		}
-		this.currentTargetVelocity = Vector2.Lerp(this.targetVelocity, this.currentTargetVelocity, Mathf.Exp(-3f*Time.deltaTime));
 
 		Vector2 delta = Vector2.zero;
 
 		Vector2 targetPos = this.target.position;
+		targetPos += this.targetVelocity * (Time.time - this.lastTargetUpdateTime);
+
+		if(Mathf.Sign(this.targetVelocity.x) != Mathf.Sign(this.horizontalVelocityOffset)) {
+			this.horizontalVelocityOffset = 0;
+		} 
+		this.horizontalVelocityOffset = 0.85f * this.horizontalVelocityOffset + 0.15f * this.targetVelocity.x;
+
 		Vector2 currentPos = this.transform.position;
 
 		float lowerX = 0.5f;
@@ -103,10 +112,10 @@ public class CameraController : MonoBehaviour {
 
 		if(this.focusRight) {
 			upperX += this.horizontalZone;
-			targetPos.x += this.offset * this.horizontalOffset + Mathf.Clamp(this.currentTargetVelocity.x, -8, 8f) * 0.5f;
+			targetPos.x += this.offset * this.horizontalOffset + this.horizontalVelocityOffset;
 		} else if(this.focusLeft) {
 			lowerX -= this.horizontalZone;
-			targetPos.x += this.offset * this.horizontalOffset + Mathf.Clamp(this.currentTargetVelocity.x, -8, 8f) * 0.5f;
+			targetPos.x += this.offset * this.horizontalOffset + this.horizontalVelocityOffset;
 		} else {
 			lowerX -= this.horizontalZone / 2f;
 			upperX += this.horizontalZone / 2f;

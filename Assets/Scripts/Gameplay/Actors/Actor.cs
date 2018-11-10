@@ -15,7 +15,7 @@ public abstract class Actor : MonoBehaviour {
 	public float wallSlideDamping = 0.9f;
 
 	// constants:
-	private const float LOOK_AHEAD_DIST = 0.01f;
+	private const float LOOK_AHEAD_DIST = 0.025f;
 	private const float MIN_GROUND_NORMAL_Y = 0.65f;
 
 	// state:
@@ -165,8 +165,6 @@ public abstract class Actor : MonoBehaviour {
 				this.lastWasWall = true;
 				this.groundFrames = 0;
 				this.wallNormalX = normal.x;
-	
-				normal.y = 0;
 			}
 
 			float p = Vector2.Dot(velocity, normal);

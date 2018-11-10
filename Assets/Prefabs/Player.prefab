@@ -127,6 +127,7 @@ MonoBehaviour:
   jumpAheadFrames: 8
   wallJumpAngle: 60
   wallJumpDuration: 0.1
+  rend: {fileID: 212528446063231092}
 --- !u!212 &212528446063231092
 SpriteRenderer:
   m_ObjectHideFlags: 1

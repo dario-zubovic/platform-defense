@@ -14,6 +14,9 @@ public class Player : Actor {
 	public float wallJumpAngle;
 	public float wallJumpDuration = 0.2f;
 
+	[Header("Visual")]
+	public SpriteRenderer rend;
+
 	// properties:
 
 	public bool canDoubleJump {
@@ -35,6 +38,10 @@ public class Player : Actor {
 	private CameraController cameraController;
 	private Level level;
 
+	// visuals:
+
+	private float lastFixedUpdateTime; 
+
 	protected override void Init() {
 		this.level = GameObject.FindObjectOfType<Level>();
 		this.cameraController = GameObject.FindObjectOfType<CameraController>();
@@ -48,6 +55,11 @@ public class Player : Actor {
 
 	public void Update() {
 		HandleInput();
+
+		Vector2 localPos = this.rend.transform.localPosition;
+		localPos.x = Mathf.Abs(this.velocity.x) * (Time.time - this.lastFixedUpdateTime);
+		localPos.y = this.velocity.y * (Time.time - this.lastFixedUpdateTime);
+		this.rend.transform.localPosition = localPos;
 	}
 
 	public void OnTriggerEnter2D(Collider2D trigger) {
@@ -105,6 +117,8 @@ public class Player : Actor {
 		
 		this.jumpFrames++;
 		this.groundFrames++;
+
+		this.lastFixedUpdateTime = Time.time;
 	}
 
 	private void Jump() {

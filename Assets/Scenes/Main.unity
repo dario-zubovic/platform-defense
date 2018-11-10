@@ -3154,7 +3154,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 733334027}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.5, y: 6.5, z: 0}
+  m_LocalPosition: {x: 22.94, y: 6.96, z: 0}
   m_LocalScale: {x: 4, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3715,11 +3715,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4690780412106920, guid: 6999900d543fdc7429d3d09d6d1471bd, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -12.9
+      value: 5.15
       objectReference: {fileID: 0}
     - target: {fileID: 4690780412106920, guid: 6999900d543fdc7429d3d09d6d1471bd, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 6.6
+      value: 27.3
       objectReference: {fileID: 0}
     - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
         type: 2}
@@ -7815,7 +7815,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1551635586}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.5, y: 16.5, z: 0}
+  m_LocalPosition: {x: 16.19, y: 16.5, z: 0}
   m_LocalScale: {x: 4, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7832,7 +7832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 232105728c8e42e4581da031a269a936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localDestination: {x: -4, y: 0, z: 0}
+  localDestination: {x: -2, y: 0, z: 0}
   travelTime: 1
 --- !u!1 &1551698145
 GameObject:
