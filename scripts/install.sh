@@ -2,10 +2,10 @@
 
 # butler
 echo "Downloading butler..."
-curl -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+wget https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default -O butler.zip
 echo `md5sum butler.zip`
 unzip butler.zip -d ./
-chmod +x ./butler
+sudo chmod +x ./butler
 
 # unity
 echo "Downloading Unity..."
