@@ -1,0 +1,18 @@
+language: csharp
+
+before_install:
+  - sudo chmod a+x ./scripts/install.sh
+  - sudo chmod a+x ./scripts/build.sh
+  - sudo chmod a+x ./scripts/deploy.sh
+  - sudo apt-get update
+  - sudo apt-get install -y unzip
+
+install:
+  - ./scripts/install.sh
+
+script:
+  - ./scripts/build.sh
+
+deploy:
+  provider: script
+  script: bash scripts/deploy.sh
