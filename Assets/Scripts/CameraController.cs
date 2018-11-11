@@ -7,9 +7,11 @@ using UnityEngine.U2D;
 public class CameraController : MonoBehaviour {
 	public float horizontalZone;
 	public float verticalZone;
+	public float verticalZoneLowerMultiplier;
 	public float lookInFront;
 	public float horizontalSpeed;
 	public float verticalSpeed;
+	public float verticalOffset;
 
 	public float targetY {
 		get;
@@ -129,19 +131,21 @@ public class CameraController : MonoBehaviour {
 
 		Debug.DrawLine(new Vector3(-100, this.followY ? this.targetY : targetPos.y), new Vector3(100, this.followY ? this.targetY : targetPos.y), Color.red);
 		Debug.DrawLine(new Vector3(-100, this.targetY + this.verticalZoneWorld, 0), new Vector3(100, this.targetY + this.verticalZoneWorld, 0), Color.blue);
-		Debug.DrawLine(new Vector3(-100, this.targetY - this.verticalZoneWorld, 0), new Vector3(100, this.targetY - this.verticalZoneWorld, 0), Color.blue);
+		Debug.DrawLine(new Vector3(-100, this.targetY - this.verticalZoneWorld * this.verticalZoneLowerMultiplier, 0), new Vector3(100, this.targetY - this.verticalZoneWorld * this.verticalZoneLowerMultiplier, 0), Color.blue);
 
 		if(targetViewPos.x < lowerX || targetViewPos.x > upperX) {
 			delta.x += (targetPos.x - currentPos.x) * this.horizontalSpeed;
 		}
+
+		delta.y += verticalOffset;
 
 		if(this.followY) {
 			delta.y += (targetPos.y - currentPos.y) * this.verticalSpeed;
 		} else {
 			if(targetPos.y > this.targetY + this.verticalZoneWorld) {
 				this.targetY += (targetPos.y - this.targetY - this.verticalZoneWorld) * this.verticalSpeed;
-			} else if(targetPos.y < this.targetY - this.verticalZoneWorld) {
-				this.targetY += (targetPos.y - this.targetY + this.verticalZoneWorld) * this.verticalSpeed;
+			} else if(targetPos.y < this.targetY - this.verticalZoneWorld * this.verticalZoneLowerMultiplier) {
+				this.targetY += (targetPos.y - this.targetY + this.verticalZoneWorld * this.verticalZoneLowerMultiplier) * this.verticalSpeed;
 			}
 
 			delta.y += (this.targetY - currentPos.y) * this.verticalSpeed;
