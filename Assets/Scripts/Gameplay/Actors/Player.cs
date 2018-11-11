@@ -8,6 +8,8 @@ public class Player : Actor {
 
 	[Header("Jump")]
 	public float jumpSpeed;
+	public float jumpExtendSpeed;
+	public float jumpExtendTime;
 	public int coyoteFrames, jumpAheadFrames;
 
 	[Header("Wall jump")]
@@ -27,11 +29,13 @@ public class Player : Actor {
 	// state:
 
 	private bool dead;
+	private bool didDoubleJump;
+	private float jumpTime;
 
 	// inputs:
 
 	private bool jump;
-	private bool didDoubleJump;
+	private bool holdingJump;
 
 	// misc:
 
@@ -94,6 +98,8 @@ public class Player : Actor {
 			} else if(this.jump && this.canDoubleJump && !this.didDoubleJump) { // double jump
 				this.didDoubleJump = true;
 				Jump();
+			} else if(this.holdingJump) {
+				ExtendJump();
 			}
 		}
 	}
@@ -132,8 +138,20 @@ public class Player : Actor {
 			this.velocity.y = this.jumpSpeed;
 		}
 
+		this.jumpTime = Time.time;
+
 		this.jumpFrames += 100;
 		this.groundFrames += 100;
+	}
+
+	private void ExtendJump() {
+		if(Time.time - this.jumpTime > this.jumpExtendTime) {
+			return;
+		}
+
+		float d = 1f - (Time.time - this.jumpTime) / this.jumpExtendTime;
+
+		this.velocity.y += this.jumpExtendSpeed * d;
 	}
 
 	private void Die() {
@@ -153,6 +171,8 @@ public class Player : Actor {
 		} else {
 			this.jump = false;
 		}
+
+		this.holdingJump = Input.GetButton("Jump");
 
 		this.input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 	}
