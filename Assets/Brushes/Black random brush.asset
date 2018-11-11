@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d80edd6caba93514eb01722041fe50b4, type: 3}
+  m_Name: Black random brush
+  m_EditorClassIdentifier: 
+  m_Cells:
+  - m_Tile: {fileID: 0}
+    m_Matrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Pivot: {x: 0, y: 0, z: 0}
+  randomTiles:
+  - {fileID: 11400000, guid: d47938e70229dd5429df65a68aaf086a, type: 2}
+  - {fileID: 11400000, guid: e868f6f43fb18e44b9ef612b6e34e321, type: 2}
+  - {fileID: 11400000, guid: eb8763703cd4c0547993106a7a00bfbb, type: 2}
+  - {fileID: 11400000, guid: 3623acc9614c89847a5925021deea17b, type: 2}
+  - {fileID: 11400000, guid: a250b671c2e4a0948aa680472d3d80fd, type: 2}
+  - {fileID: 11400000, guid: da63cfe4dfe82d64f822551a0b1dbe33, type: 2}
+  - {fileID: 11400000, guid: d968ae0d2e7e17b44bb9dd0d13df45fb, type: 2}
+  - {fileID: 11400000, guid: cf60cb1b5f0b79344ad3085763551dd7, type: 2}
+  - {fileID: 11400000, guid: 0228f3129aaab844f9794f02fb0843e2, type: 2}
+  - {fileID: 11400000, guid: ade3f644778c067498b7154c67ef57d2, type: 2}
+  - {fileID: 11400000, guid: 441c6c58e66bec647823f89aa582509d, type: 2}
+  - {fileID: 11400000, guid: 299a059a805675a4e88f749d00b3a0cd, type: 2}
+  - {fileID: 11400000, guid: a0cc086c38d60c144a439ded4bd42415, type: 2}
+  - {fileID: 11400000, guid: 5545c9a8b2325474f817ae8caaba445a, type: 2}
+  - {fileID: 11400000, guid: e47698e4d18211543b4a359f00e9ed4a, type: 2}
