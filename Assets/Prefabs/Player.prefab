@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc371263a22f9f84ea58d625c1617e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 12
   airAccelerationTime: 0.1
   groundFriction: 0.3
   wallSlideDamping: 0.75

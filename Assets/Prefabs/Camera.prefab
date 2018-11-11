@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4890491846070772}
   - component: {fileID: 20633778599490696}
   - component: {fileID: 81082047118569778}
-  - component: {fileID: 114943879971296032}
+  - component: {fileID: 114611625763299232}
   - component: {fileID: 114466034651662460}
   m_Layer: 0
   m_Name: Camera
@@ -52,7 +52,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -67,7 +67,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 60
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -106,7 +106,7 @@ MonoBehaviour:
   lookInFront: 0.025
   horizontalSpeed: 1.875
   verticalSpeed: 3.75
---- !u!114 &114943879971296032
+--- !u!114 &114611625763299232
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,8 +118,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AssetsPPU: 8
-  m_RefResolutionX: 320
-  m_RefResolutionY: 180
+  m_RefResolutionX: 420
+  m_RefResolutionY: 240
   m_UpscaleRT: 0
   m_PixelSnapping: 0
   m_CropFrameX: 0

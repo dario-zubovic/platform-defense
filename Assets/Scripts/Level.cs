@@ -43,12 +43,12 @@ public class Level : MonoBehaviour {
 		this.cameraController.SetTarget(this.player.transform, false);
 	}
 
-#if UNITY_EDITOR
+// #if UNITY_EDITOR
     
-	public void OnDrawGizmosSelected() {
-        Gizmos.color = Color.green;
-		Gizmos.DrawWireCube(this.levelBounds.center, this.levelBounds.extents);	
-	}
+// 	public void OnDrawGizmosSelected() {
+//         Gizmos.color = Color.green;
+// 		Gizmos.DrawWireCube(this.levelBounds.center, this.levelBounds.extents);	
+// 	}
 
-#endif
+// #endif
 }
