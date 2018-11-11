@@ -122,9 +122,9 @@ MonoBehaviour:
   airAccelerationTime: 0.09
   groundFriction: 0.3
   wallSlideDamping: 0.75
-  jumpSpeed: 16
-  jumpExtendSpeed: 1.75
-  jumpExtendTime: 0.25
+  jumpSpeed: 13
+  jumpExtendSpeed: 2
+  jumpExtendTime: 0.3
   coyoteFrames: 8
   jumpAheadFrames: 8
   wallJumpAngle: 60

@@ -13,6 +13,10 @@ public class CameraController : MonoBehaviour {
 	public float verticalSpeed;
 	public float verticalOffset;
 
+	[Header("Bg")]
+	public Transform background;
+	public Vector2 parallaxMul;
+
 	public float targetY {
 		get;
 		set;
@@ -57,6 +61,9 @@ public class CameraController : MonoBehaviour {
 	private float lastTargetUpdateTime;
 	private float horizontalVelocityOffset;
 
+	private Vector2 startPosition;
+	private Vector3 backgroundStartPosition;
+
 	public void Awake() {
 		this.cam = this.gameObject.GetComponent<Camera>();
 		this.pixelPerfectCamera = this.gameObject.GetComponent<PixelPerfectCamera>();
@@ -65,6 +72,9 @@ public class CameraController : MonoBehaviour {
 
 		this.horizontalOffset = this.cam.ViewportToWorldPoint(new Vector3(0.5f + this.lookInFront, 0.5f)).x - this.cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f)).x;
 		this.verticalZoneWorld = this.cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f + this.verticalZone)).y - this.cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f)).y;
+	
+		this.startPosition = this.transform.position;
+		this.backgroundStartPosition = this.background.position;
 	}
 
 	public void SetTarget(Transform target, bool followY) {
@@ -153,5 +163,13 @@ public class CameraController : MonoBehaviour {
 
 		Vector3 pos = this.transform.position + new Vector3(delta.x, delta.y) * Time.deltaTime;
 		this.transform.position = this.bounds.ClosestPoint(pos);
+
+		Vector3 bgLocalPos = this.backgroundStartPosition;
+
+		Vector2 d = new Vector2(this.transform.position.x, this.transform.position.y) - this.startPosition;
+		bgLocalPos.x += d.x * this.parallaxMul.x;
+		bgLocalPos.y += d.y * this.parallaxMul.y;
+
+		this.background.position = bgLocalPos;
 	}
 }

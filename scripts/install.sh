@@ -13,7 +13,6 @@ curl https://beta.unity3d.com/download/dad990bf2728/UnitySetup-2018.2.7f1
 sudo chmod +x ./UnitySetup-2018.2.7f1
 echo y | sudo ./UnitySetup-2018.2.7f1 --unattended --install-location=./Editor --verbose --download-location=/tmp/unity --components=Unity,WebGL
 mkdir -p $HOME/.local/share/unity3d/Certificates/
-sudo chown -R $USER:$USER Unity-2018.2.7f1
 sudo chown -R $USER:$USER ./Editor
 
 # misc

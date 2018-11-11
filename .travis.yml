@@ -6,7 +6,7 @@ before_install:
   - sudo chmod a+x ./scripts/build.sh
   - sudo chmod a+x ./scripts/deploy.sh
   - sudo apt-get update
-  - sudo apt-get install -y unzip libgtk2.0-0 libsoup2.4-1 libarchive13 libgconf-2-4 p7zip-full gtk2.0 libnss3 tar zip gzip cpio
+  - sudo apt-get install -y unzip libgtk2.0-0 libsoup2.4-1 libarchive13 libgconf-2-4 p7zip-full gtk2.0 libnss3 tar zip gzip cpio xz-utils
 
 install:
   - ./scripts/install.sh
