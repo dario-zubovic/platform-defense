@@ -3,7 +3,6 @@
 # butler
 echo "Downloading butler..."
 wget https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default -O butler.zip
-echo `md5sum butler.zip`
 unzip butler.zip -d ./
 sudo chmod +x ./butler
 
