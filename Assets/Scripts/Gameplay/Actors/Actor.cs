@@ -146,7 +146,10 @@ public abstract class Actor : MonoBehaviour {
 			Vector2 normal = hit.normal;
 
 			if(hit.collider.tag == "Platform") {
-				HandlePlatformHorizontal(hit, hit.collider.gameObject.GetComponent<Platform>());
+				bool skip = HandlePlatformHorizontal(hit, hit.collider.gameObject.GetComponent<Platform>());
+				if(skip) {
+					continue;
+				}
 			}
 
 			if(normal.y >= MIN_GROUND_NORMAL_Y && !this.ignoreGround) {
@@ -209,7 +212,10 @@ public abstract class Actor : MonoBehaviour {
 			Vector2 normal = hit.normal;
 
 			if(hit.collider.tag == "Platform") {
-				HandlePlatformVertical(hit, hit.collider.gameObject.GetComponent<Platform>());
+				bool skip = HandlePlatformVertical(hit, hit.collider.gameObject.GetComponent<Platform>());
+				if(skip) {
+					continue;
+				}
 			}
 
 			if(normal.y >= MIN_GROUND_NORMAL_Y && !this.ignoreGround) {
@@ -283,18 +289,23 @@ public abstract class Actor : MonoBehaviour {
 		
 	}
 
-	protected virtual void HandlePlatformVertical(RaycastHit2D hit, Platform platform) {
+	protected virtual bool HandlePlatformVertical(RaycastHit2D hit, Platform platform) {
 		platform.Contact(this, hit, true);
 
-		HandlePlatformBothDirs(hit, platform);
+		return HandlePlatformBothDirs(hit, platform);
 	}
 
-	protected virtual void HandlePlatformHorizontal(RaycastHit2D hit, Platform platform) {
+	protected virtual bool HandlePlatformHorizontal(RaycastHit2D hit, Platform platform) {
 		platform.Contact(this, hit, false);
 
-		HandlePlatformBothDirs(hit, platform);
+		return HandlePlatformBothDirs(hit, platform);
 	}
 
-	protected virtual void HandlePlatformBothDirs(RaycastHit2D hit, Platform platform) {
+	protected virtual bool HandlePlatformBothDirs(RaycastHit2D hit, Platform platform) {
+		if(platform.type == PlatformType.OneWay) {
+			return ((OneWayPlatform)platform).skip;
+		}
+	
+		return false; // don't skip
 	}
 }

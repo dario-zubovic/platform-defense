@@ -18,4 +18,5 @@ public enum PlatformType {
 	Moving,
 	Disappearing,
 	Trampoline,
+	OneWay,
 }
