@@ -129,7 +129,7 @@ public class Player : Actor {
 
 	private void Jump() {
 		if(this.lastWasWall) { // wall jump
-			this.velocity.x += Mathf.Sign(this.wallNormalX) * Mathf.Cos(this.wallJumpAngle * Mathf.Deg2Rad) * this.jumpSpeed;
+			this.velocity.x = Mathf.Sign(this.wallNormalX) * Mathf.Cos(this.wallJumpAngle * Mathf.Deg2Rad) * this.jumpSpeed;
 			this.velocity.y = Mathf.Sin(this.wallJumpAngle * Mathf.Deg2Rad) * this.jumpSpeed;
 		
 			this.forceMoveTimer = this.wallJumpDuration;
