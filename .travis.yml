@@ -1,18 +1,18 @@
-os: osx
-language: csharp
+# os: osx
+# language: csharp
 
-before_install:
-  - sudo chmod a+x ./scripts/install.sh
-  - sudo chmod a+x ./scripts/build.sh
-  - sudo chmod a+x ./scripts/deploy.sh
+# before_install:
+#   - sudo chmod a+x ./scripts/install.sh
+#   - sudo chmod a+x ./scripts/build.sh
+#   - sudo chmod a+x ./scripts/deploy.sh
 
-install:
-  - ./scripts/install.sh
+# install:
+#   - ./scripts/install.sh
 
-script:
-  - ./scripts/build.sh
+# script:
+#   - ./scripts/build.sh
 
-deploy:
-  provider: script
-  script: bash scripts/deploy.sh
-  skip_cleanup: true
+# deploy:
+#   provider: script
+#   script: bash scripts/deploy.sh
+#   skip_cleanup: truea
