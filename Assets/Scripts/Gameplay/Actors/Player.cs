@@ -17,7 +17,7 @@ public class Player : Actor {
 	public float wallJumpDuration = 0.2f;
 
 	[Header("Visual")]
-	public SpriteRenderer rend;
+	public PlayerAnimator animator;
 
 	// properties:
 
@@ -36,6 +36,10 @@ public class Player : Actor {
 
 	private bool jump;
 	private bool holdingJump;
+
+	// animation state:
+
+	private bool jumped, wallJumped;
 
 	// misc:
 
@@ -60,10 +64,10 @@ public class Player : Actor {
 	public void Update() {
 		HandleInput();
 
-		Vector2 localPos = this.rend.transform.localPosition;
+		Vector2 localPos = this.animator.transform.localPosition;
 		localPos.x = Mathf.Abs(this.velocity.x) * (Time.time - this.lastFixedUpdateTime);
 		localPos.y = this.velocity.y * (Time.time - this.lastFixedUpdateTime);
-		this.rend.transform.localPosition = localPos;
+		this.animator.transform.localPosition = localPos;
 	}
 
 	public void OnTriggerEnter2D(Collider2D trigger) {
@@ -73,6 +77,8 @@ public class Player : Actor {
 	}
 
 	protected override void BeforeMovementPhase() {
+		ResetAnimation();
+
 		if(this.dead) {
 			ResetInput();
 			this.jumpFrames = 100;
@@ -117,6 +123,10 @@ public class Player : Actor {
 
 		this.cameraController.targetVelocity = this.velocity;// + this.inheritedVelocity;
 
+		// animation:
+
+		UpdateAnimation();
+
 		// misc:
 
 		ResetInput();
@@ -134,8 +144,12 @@ public class Player : Actor {
 		
 			this.forceMoveTimer = this.wallJumpDuration;
 			this.forceMoveX = Mathf.Sign(this.wallNormalX);
+
+			this.wallJumped = true;
 		} else {
 			this.velocity.y = this.jumpSpeed;
+		
+			this.jumped = true;
 		}
 
 		this.jumpTime = Time.time;
@@ -152,6 +166,15 @@ public class Player : Actor {
 		float d = 1f - (Time.time - this.jumpTime) / this.jumpExtendTime;
 
 		this.velocity.y += this.jumpExtendSpeed * d;
+	}
+
+	private void ResetAnimation() {
+		this.jumped = false;
+		this.wallJumped = false;
+	}
+
+	private void UpdateAnimation() {
+		this.animator.Refresh(this.velocity, this.grounded, this.wallSliding, this.jumped, this.wallJumped);
 	}
 
 	private void Die() {
@@ -187,7 +210,7 @@ public class Player : Actor {
 
 		if(this.input.y > 0.2f) {
 			this.input.y = (this.input.y - 0.2f) * 1.25f; 
-		} else if(this.input.x < -0.2f) {
+		} else if(this.input.y < -0.2f) {
 			this.input.y = (this.input.y + 0.2f) * 1.25f; 
 		} else {
 			this.input.y = 0;

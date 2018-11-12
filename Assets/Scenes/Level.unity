@@ -669,7 +669,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -3865,7 +3865,7 @@ Tilemap:
   - first: {x: -4, y: -2, z: 0}
     second:
       m_TileIndex: 8
-      m_TileSpriteIndex: 79
+      m_TileSpriteIndex: 88
       m_TileMatrixIndex: 3
       m_TileColorIndex: 62
       m_ObjectToInstantiate: {fileID: 0}
@@ -5350,7 +5350,7 @@ Tilemap:
   - first: {x: 47, y: 9, z: 0}
     second:
       m_TileIndex: 87
-      m_TileSpriteIndex: 83
+      m_TileSpriteIndex: 87
       m_TileMatrixIndex: 3
       m_TileColorIndex: 62
       m_ObjectToInstantiate: {fileID: 0}
@@ -6727,7 +6727,7 @@ Tilemap:
   - first: {x: 28, y: 20, z: 0}
     second:
       m_TileIndex: 66
-      m_TileSpriteIndex: 78
+      m_TileSpriteIndex: 85
       m_TileMatrixIndex: 3
       m_TileColorIndex: 62
       m_ObjectToInstantiate: {fileID: 0}
@@ -7582,7 +7582,7 @@ Tilemap:
   - first: {x: -3, y: 30, z: 0}
     second:
       m_TileIndex: 11
-      m_TileSpriteIndex: 77
+      m_TileSpriteIndex: 84
       m_TileMatrixIndex: 3
       m_TileColorIndex: 62
       m_ObjectToInstantiate: {fileID: 0}
@@ -7708,7 +7708,7 @@ Tilemap:
   - first: {x: 11, y: 30, z: 0}
     second:
       m_TileIndex: 4
-      m_TileSpriteIndex: 72
+      m_TileSpriteIndex: 83
       m_TileMatrixIndex: 3
       m_TileColorIndex: 62
       m_ObjectToInstantiate: {fileID: 0}
@@ -8311,7 +8311,7 @@ Tilemap:
   - first: {x: 10, y: 39, z: 0}
     second:
       m_TileIndex: 65
-      m_TileSpriteIndex: 76
+      m_TileSpriteIndex: 79
       m_TileMatrixIndex: 3
       m_TileColorIndex: 62
       m_ObjectToInstantiate: {fileID: 0}
@@ -9529,22 +9529,22 @@ Tilemap:
     m_Data: {fileID: 21300308, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 21302812, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 7
     m_Data: {fileID: 21300410, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
   - m_RefCount: 5
     m_Data: {fileID: 21301758, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
   - m_RefCount: 7
     m_Data: {fileID: 21300408, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 21300834, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300932, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21303416, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21301008, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
   - m_RefCount: 8
     m_Data: {fileID: 21300510, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
   - m_RefCount: 8
@@ -9552,17 +9552,17 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 21300836, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 21301868, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+    m_Data: {fileID: 21302812, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300932, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21303416, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
   - m_RefCount: 11
     m_Data: {fileID: 21301516, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21301868, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21301008, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
   - m_RefCount: 6
     m_Data: {fileID: 21301732, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
   - m_RefCount: 7
