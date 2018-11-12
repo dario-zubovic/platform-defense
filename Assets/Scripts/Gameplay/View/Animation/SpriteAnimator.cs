@@ -39,10 +39,10 @@ public abstract class SpriteAnimator : MonoBehaviour {
 
         if(resetFrames) {
             this.frame = 0;
+        }
 
-            if(resetTime) {
-                this.lastFrameChangeTime = -100;
-            }
+        if(resetTime) {
+            this.lastFrameChangeTime = -100;
         }
     }
 }

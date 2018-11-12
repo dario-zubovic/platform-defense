@@ -25,6 +25,10 @@ public class PlayerAnimator : SpriteAnimator {
             this.idleAnimName = "Idle2";
         } else if(Input.GetKeyUp(KeyCode.Alpha3)) {
             this.idleAnimName = "Idle3";
+        } else if(Input.GetKeyUp(KeyCode.Alpha4)) {
+            this.idleAnimName = "Idle4";
+        } else if(Input.GetKeyUp(KeyCode.Alpha5)) {
+            this.idleAnimName = "Idle5";
         }
 
         if(Input.GetKeyUp(KeyCode.Alpha9)) {
@@ -132,8 +136,6 @@ public class PlayerAnimator : SpriteAnimator {
                 }
                 break;
         }
-
-        Debug.Log(this.state + " " + velocity);  
 
 
         // set active animation according to state:
