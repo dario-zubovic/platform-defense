@@ -175,6 +175,23 @@ public class Player : Actor {
 		this.holdingJump = Input.GetButton("Jump");
 
 		this.input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+		// deadzone (20%):
+		if(this.input.x > 0.2f) {
+			this.input.x = (this.input.x - 0.2f) * 1.25f; 
+		} else if(this.input.x < -0.2f) {
+			this.input.x = (this.input.x + 0.2f) * 1.25f; 
+		} else {
+			this.input.x = 0;
+		}
+
+		if(this.input.y > 0.2f) {
+			this.input.y = (this.input.y - 0.2f) * 1.25f; 
+		} else if(this.input.x < -0.2f) {
+			this.input.y = (this.input.y + 0.2f) * 1.25f; 
+		} else {
+			this.input.y = 0;
+		}
 	}
 
 	private void ResetInput() {

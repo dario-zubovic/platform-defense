@@ -27,6 +27,11 @@ public class OneWayPlatform : Platform {
             skip = true;
             return;
         }
+
+        if((hit.centroid - hit.point).y < 1.3f) {
+            skip = true;
+            return;
+        }
         
         skip = false;
     }
