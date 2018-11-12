@@ -9,11 +9,10 @@ sudo chmod +x ./butler
 
 # unity
 echo "Downloading Unity..."
-curl https://beta.unity3d.com/download/dad990bf2728/UnitySetup-2018.2.7f1
-sudo chmod +x ./UnitySetup-2018.2.7f1
-echo y | sudo ./UnitySetup-2018.2.7f1 --unattended --install-location=./Editor --verbose --download-location=./unitydownload --components=Unity,WebGL
-mkdir -p $HOME/.local/share/unity3d/Certificates/
-sudo chown -R $USER:$USER ./Editor
+curl https://netstorage.unity3d.com/unity/65e0713a5949/MacEditorInstaller/Unity-2018.2.15f1.pkg -o unity.pkg
+curl https://netstorage.unity3d.com/unity/65e0713a5949/MacEditorTargetInstaller/UnitySetup-WebGL-Support-for-Editor-2018.2.15f1.pkg -o webglsupport.pkg
+sudo installer -dumplog -package unity.pkg -target /
+sudo installer -dumplog -package webglsupport.pkg -target /
 
 # misc
 mkdir ~/PD
