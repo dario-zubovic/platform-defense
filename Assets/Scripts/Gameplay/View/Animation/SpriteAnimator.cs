@@ -13,8 +13,6 @@ public abstract class SpriteAnimator : MonoBehaviour {
 
     public void Awake() {
         this.rend = this.gameObject.GetComponent<SpriteRenderer>();
-
-        this.activeAnimation = this.animations[0];
     }
 
     public void Update() {
