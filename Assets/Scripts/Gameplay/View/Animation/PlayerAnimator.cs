@@ -14,7 +14,7 @@ public class PlayerAnimator : SpriteAnimator {
     
     private JumpPhase jumpPhase; 
 
-    private string idleAnimName = "Idle1"; // DEBUG, remove this
+    private string idleAnimName = "Idle4"; // DEBUG, remove this
     private string wallslideAnimName = "Wallslide2"; // DEBUG, remove this
 
 

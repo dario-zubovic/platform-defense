@@ -13,7 +13,7 @@ public class SpriteAnimationPreview : Editor  {
     public override void OnPreviewGUI(Rect r, GUIStyle background) {
         SpriteAnimation target = (SpriteAnimation)this.target;
 
-        if(target.frames.Count == 0) {
+        if(target == null || target.frames == null || target.frames.Count == 0) {
             return;
         }
 
