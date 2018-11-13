@@ -29,6 +29,10 @@ public class PlayerAnimator : SpriteAnimator {
             this.idleAnimName = "Idle4";
         } else if(Input.GetKeyUp(KeyCode.Alpha5)) {
             this.idleAnimName = "Idle5";
+        } else if(Input.GetKeyUp(KeyCode.Alpha6)) {
+            this.idleAnimName = "Idle6";
+        } else if(Input.GetKeyUp(KeyCode.Alpha7)) {
+            this.idleAnimName = "Idle7";
         }
 
         if(Input.GetKeyUp(KeyCode.Alpha9)) {
@@ -62,7 +66,7 @@ public class PlayerAnimator : SpriteAnimator {
                         } else {
                             this.state = State.Idle;
                         }
-                    } else if(wallSliding) {
+                    } else if(wallSliding && velocity.y < 0) {
                         this.state = State.WallSlide;
                     }
                 }
@@ -72,7 +76,7 @@ public class PlayerAnimator : SpriteAnimator {
                 {
                     if(jumped || (!grounded && Mathf.Abs(velocity.y) > this.fallSpeedThreshold)) {
                         this.state = State.Jump;
-                    } else if (wallSliding) {
+                    } else if (wallSliding && velocity.y < 0) {
                         this.state = State.WallSlide;
                     } else if(Mathf.Abs(velocity.x) < this.runningHorizontalSpeedThreshold) {
                         this.state = State.Idle;
