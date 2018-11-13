@@ -40,6 +40,7 @@ public class Player : Actor {
 	// animation state:
 
 	private bool jumped, wallJumped;
+	public bool bounced { get; set; }
 
 	// misc:
 
@@ -127,9 +128,9 @@ public class Player : Actor {
 
 		if(Mathf.Abs(this.input.y) > 0.5f && this.velocity.magnitude < 0.1f) {
 			if(this.input.y > 0) {
-				this.cameraController.lookOffset = Vector2.up * 5f;
+				this.cameraController.lookOffset = Vector2.up * 7f;
 			} else {
-				this.cameraController.lookOffset = Vector2.down * 20f;
+				this.cameraController.lookOffset = Vector2.down * 18f;
 			}
 		} else {
 			this.cameraController.lookOffset = Vector2.zero;
@@ -183,10 +184,11 @@ public class Player : Actor {
 	private void ResetAnimation() {
 		this.jumped = false;
 		this.wallJumped = false;
+		this.bounced = false;
 	}
 
 	private void UpdateAnimation() {
-		this.animator.Refresh(this.velocity, this.input, this.grounded, this.wallSliding, this.jumped, this.wallJumped);
+		this.animator.Refresh(this.velocity, this.input, this.grounded, this.wallSliding, this.jumped, this.wallJumped, this.bounced);
 	}
 
 	private void Die() {

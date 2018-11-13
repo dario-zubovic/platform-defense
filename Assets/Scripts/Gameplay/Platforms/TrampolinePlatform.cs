@@ -29,5 +29,10 @@ public class TrampolinePlatform : Platform {
 
 		actor.SetVelocity(v);
 		actor.ignoreGround = true;
+
+		Player player = actor as Player;
+		if(player != null) {
+			player.bounced = true;
+		}
 	}
 }

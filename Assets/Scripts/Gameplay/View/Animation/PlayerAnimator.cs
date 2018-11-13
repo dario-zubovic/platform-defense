@@ -8,6 +8,8 @@ public class PlayerAnimator : SpriteAnimator {
     public float jumpMidPointSpeedThreshold;
     public float jumpDownSlowSpeedThreshold;
 
+    public ParticleSystem bounceParticles;
+
     private State state;
     
     private JumpPhase jumpPhase; 
@@ -16,7 +18,7 @@ public class PlayerAnimator : SpriteAnimator {
     private string wallslideAnimName = "Wallslide2"; // DEBUG, remove this
 
 
-    public void Refresh(Vector2 velocity, Vector2 input, bool grounded, bool wallSliding, bool jumped, bool wallJumped) {
+    public void Refresh(Vector2 velocity, Vector2 input, bool grounded, bool wallSliding, bool jumped, bool wallJumped, bool bounced) {
         // DEBUG, remove this:
 
         if(Input.GetKeyUp(KeyCode.Alpha1)) {
@@ -173,6 +175,11 @@ public class PlayerAnimator : SpriteAnimator {
                         break;
                 }
                 break;
+        }
+
+        // misc:
+        if(bounced) {
+            this.bounceParticles.Play();
         }
     }
 
