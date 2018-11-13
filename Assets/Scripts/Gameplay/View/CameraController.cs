@@ -44,6 +44,11 @@ public class CameraController : MonoBehaviour {
 		}
 	}
 
+	public Vector2 lookOffset {
+		get;
+		set;
+	}
+
 	private Camera cam;
 	private PixelPerfectCamera pixelPerfectCamera;
 
@@ -132,6 +137,8 @@ public class CameraController : MonoBehaviour {
 			lowerX -= this.horizontalZone / 2f;
 			upperX += this.horizontalZone / 2f;
 		}
+
+		targetPos += this.lookOffset;
 
 		Vector2 targetViewPos = this.cam.WorldToViewportPoint(targetPos);
 

@@ -105,7 +105,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.4}
+  m_Offset: {x: 0, y: -0.48}
   m_Size: {x: 1.15, y: 2.5}
   m_Direction: 0
 --- !u!114 &114072124484704190
@@ -161,7 +161,7 @@ MonoBehaviour:
   coyoteFrames: 8
   jumpAheadFrames: 8
   wallJumpAngle: 60
-  wallJumpDuration: 0.1
+  wallJumpDuration: 0.125
   animator: {fileID: 114072124484704190}
 --- !u!212 &212528446063231092
 SpriteRenderer:

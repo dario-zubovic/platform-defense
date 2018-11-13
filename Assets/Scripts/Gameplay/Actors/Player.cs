@@ -111,6 +111,8 @@ public class Player : Actor {
 	}
 
 	protected override void AfterMovementPhase() {
+		// camera:
+
 		if(this.facingRight) {
 			this.cameraController.SetFocus(false, true);
 		} else {
@@ -122,6 +124,12 @@ public class Player : Actor {
 		}
 
 		this.cameraController.targetVelocity = this.velocity;// + this.inheritedVelocity;
+
+		if(Mathf.Abs(this.input.y) > 0.5f && this.velocity.magnitude < 0.1f) {
+			this.cameraController.lookOffset = Vector2.up * 10f * Mathf.Sign(this.input.y);
+		} else {
+			this.cameraController.lookOffset = Vector2.zero;
+		}
 
 		// animation:
 
@@ -174,7 +182,7 @@ public class Player : Actor {
 	}
 
 	private void UpdateAnimation() {
-		this.animator.Refresh(this.velocity, this.grounded, this.wallSliding, this.jumped, this.wallJumped);
+		this.animator.Refresh(this.velocity, this.input, this.grounded, this.wallSliding, this.jumped, this.wallJumped);
 	}
 
 	private void Die() {
@@ -199,22 +207,9 @@ public class Player : Actor {
 
 		this.input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-		// deadzone (20%):
-		if(this.input.x > 0.2f) {
-			this.input.x = (this.input.x - 0.2f) * 1.25f; 
-		} else if(this.input.x < -0.2f) {
-			this.input.x = (this.input.x + 0.2f) * 1.25f; 
-		} else {
-			this.input.x = 0;
-		}
-
-		if(this.input.y > 0.2f) {
-			this.input.y = (this.input.y - 0.2f) * 1.25f; 
-		} else if(this.input.y < -0.2f) {
-			this.input.y = (this.input.y + 0.2f) * 1.25f; 
-		} else {
-			this.input.y = 0;
-		}
+		// deadzone (30%):
+		this.input.x = Mathf.Abs(this.input.x) > 0.3f ? this.input.x : 0;
+		this.input.y = Mathf.Abs(this.input.y) > 0.3f ? this.input.y : 0; 
 	}
 
 	private void ResetInput() {

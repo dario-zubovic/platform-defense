@@ -251,10 +251,11 @@ public abstract class Actor : MonoBehaviour {
 
 		// facing & cam:
 
-		if(this.velocity.x > 0.01f && !facingRight) {
+		float dir = this.forceMoveTimer > 0 ? this.velocity.x : this.input.x;
+		if(dir > 0.05f && !facingRight) {
 			this.facingRight = true;
 			this.transform.eulerAngles = new Vector3(0, 0, 0);
-		} else if(this.velocity.x < -0.01f && facingRight) {
+		} else if(dir < -0.05f && facingRight) {
 			this.facingRight = false;
 			this.transform.eulerAngles = new Vector3(0, 180f, 0);
 		}

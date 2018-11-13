@@ -16,7 +16,7 @@ public class PlayerAnimator : SpriteAnimator {
     private string wallslideAnimName = "Wallslide2"; // DEBUG, remove this
 
 
-    public void Refresh(Vector2 velocity, bool grounded, bool wallSliding, bool jumped, bool wallJumped) {
+    public void Refresh(Vector2 velocity, Vector2 input, bool grounded, bool wallSliding, bool jumped, bool wallJumped) {
         // DEBUG, remove this:
 
         if(Input.GetKeyUp(KeyCode.Alpha1)) {
@@ -51,7 +51,7 @@ public class PlayerAnimator : SpriteAnimator {
                     if(jumped || (!grounded && Mathf.Abs(velocity.y) > this.fallSpeedThreshold)) {
                         this.state = State.Jump;
                     } else {
-                        if(Mathf.Abs(velocity.x) > this.runningHorizontalSpeedThreshold) {
+                        if(Mathf.Abs(input.x) > 0.4f) {
                             this.state = State.Run;
                         }
                     }
@@ -61,7 +61,7 @@ public class PlayerAnimator : SpriteAnimator {
             case State.Jump:
                 {
                     if(grounded) {
-                        if(Mathf.Abs(velocity.x) > this.runningHorizontalSpeedThreshold) {
+                        if(Mathf.Abs(input.x) > 0.4f) {
                             this.state = State.Run;
                         } else {
                             this.state = State.Idle;
@@ -78,7 +78,7 @@ public class PlayerAnimator : SpriteAnimator {
                         this.state = State.Jump;
                     } else if (wallSliding && velocity.y < 0) {
                         this.state = State.WallSlide;
-                    } else if(Mathf.Abs(velocity.x) < this.runningHorizontalSpeedThreshold) {
+                    } else if(Mathf.Abs(input.x) <= 0.4f) {
                         this.state = State.Idle;
                     }
                 }
