@@ -12,6 +12,8 @@ public abstract class Actor : MonoBehaviour {
 	[Range(0, 1f)]
 	public float groundFriction = 0.05f;
 	[Range(0, 1f)]
+	public float airDrag = 0.05f;
+	[Range(0, 1f)]
 	public float wallSlideDamping = 0.9f;
 
 	// constants:
@@ -130,6 +132,8 @@ public abstract class Actor : MonoBehaviour {
 					ref this.velocityXRef,
 					this.airAccelerationTime
 				);
+			} else {
+				this.velocity.x *= 1f - this.airDrag;
 			}
 
 			moveVector = Vector2.right * this.velocity.x * Time.deltaTime;
