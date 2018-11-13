@@ -126,7 +126,11 @@ public class Player : Actor {
 		this.cameraController.targetVelocity = this.velocity;// + this.inheritedVelocity;
 
 		if(Mathf.Abs(this.input.y) > 0.5f && this.velocity.magnitude < 0.1f) {
-			this.cameraController.lookOffset = Vector2.up * 10f * Mathf.Sign(this.input.y);
+			if(this.input.y > 0) {
+				this.cameraController.lookOffset = Vector2.up * 5f;
+			} else {
+				this.cameraController.lookOffset = Vector2.down * 20f;
+			}
 		} else {
 			this.cameraController.lookOffset = Vector2.zero;
 		}

@@ -17,9 +17,17 @@ public class CameraController : MonoBehaviour {
 	public Transform background;
 	public Vector2 parallaxMul;
 
+	[Header("Drama effect")]
+	public Gradient dramaColors;
+
+	private float _targetY;
 	public float targetY {
-		get;
-		set;
+		get {
+			return this._targetY + this.lookOffset.y;
+		}
+		set {
+			this._targetY = value;
+		}
 	}
 
 	private Vector2 _targetVelocity;
@@ -69,9 +77,16 @@ public class CameraController : MonoBehaviour {
 	private Vector2 startPosition;
 	private Vector3 backgroundStartPosition;
 
+	// drama:
+	private Color defaultClearColor;
+	private float dramaStartTime;
+	private float dramaDuration;
+
 	public void Awake() {
 		this.cam = this.gameObject.GetComponent<Camera>();
 		this.pixelPerfectCamera = this.gameObject.GetComponent<PixelPerfectCamera>();
+		
+		this.defaultClearColor = this.cam.backgroundColor;
 
 		this.cameraExtents = new Vector2(this.pixelPerfectCamera.refResolutionX, this.pixelPerfectCamera.refResolutionY) / this.pixelPerfectCamera.assetsPPU * 0.5f;
 
@@ -111,6 +126,7 @@ public class CameraController : MonoBehaviour {
 			return;
 		}
 
+		HandleDramaEffect();
 
 		Vector2 delta = Vector2.zero;
 
@@ -178,5 +194,26 @@ public class CameraController : MonoBehaviour {
 		bgLocalPos.y += d.y * this.parallaxMul.y;
 
 		this.background.position = bgLocalPos;
+	}
+
+	public void StartDrama(float duration) {
+		this.background.gameObject.SetActive(false);
+	
+		this.dramaStartTime = Time.realtimeSinceStartup;
+		this.dramaDuration = duration;
+	}
+
+	public void StopDrama() {
+		this.dramaStartTime = -100;
+		this.background.gameObject.SetActive(true);
+	}
+
+	private void HandleDramaEffect() {
+		if(Time.realtimeSinceStartup - this.dramaStartTime > this.dramaDuration) {
+			return;
+		}
+
+		float d = (Time.realtimeSinceStartup - this.dramaStartTime) / this.dramaDuration;
+		this.cam.backgroundColor = this.dramaColors.Evaluate(d);
 	}
 }

@@ -83,7 +83,7 @@ public abstract class Actor : MonoBehaviour {
 		this.groundFrames = 100;
 		this.jumpFrames = 100;
 		this.forceMoveTimer = 0f;
-		this.facingRight = true;
+		this.facingRight = false;
 	}
 
 	public void FixedUpdate() {

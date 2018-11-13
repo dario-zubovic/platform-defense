@@ -32,8 +32,14 @@ public class Level : MonoBehaviour {
 	}
 
 	private IEnumerator WaitForRespawn() {
-		yield return new WaitForSeconds(this.dramaTime);
+		Time.timeScale = 0.025f;
+		this.cameraController.StartDrama(this.dramaTime);
+
+		yield return new WaitForSecondsRealtime(this.dramaTime);
 		
+		Time.timeScale = 1f;
+		this.cameraController.StopDrama();
+
 		this.cameraController.SetFocus(false, false);
 		this.cameraController.SetTarget(this.respawn, true);
 

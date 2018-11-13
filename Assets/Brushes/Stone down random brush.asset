@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d80edd6caba93514eb01722041fe50b4, type: 3}
+  m_Name: Stone down random brush
+  m_EditorClassIdentifier: 
+  m_Cells:
+  - m_Tile: {fileID: 0}
+    m_Matrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Pivot: {x: 0, y: 0, z: 0}
+  randomTiles:
+  - {fileID: 11400000, guid: 28b57df712fec174f8c34ba5f47d8131, type: 2}
+  - {fileID: 11400000, guid: d71da5f6cd66a2f47a888770f1c95030, type: 2}
+  - {fileID: 11400000, guid: 16878d129efe6d442ac138c15a8a434d, type: 2}
+  - {fileID: 11400000, guid: 09c8cc80c25fc194aa133efa08a067ce, type: 2}
+  - {fileID: 11400000, guid: bf8b63f54e4dcd24399c563c23023591, type: 2}
+  - {fileID: 11400000, guid: 76ff237c484459849b2c5f862dc5f7eb, type: 2}
+  - {fileID: 11400000, guid: 63d13a1eca915184cbee524929ec988f, type: 2}
+  - {fileID: 11400000, guid: b77373d50d7a5934cbac818c0e3832b6, type: 2}
+  - {fileID: 11400000, guid: ffc488e830474ab46a42b111b98e696f, type: 2}
+  - {fileID: 11400000, guid: 82a59d75739b3284c9796fd9f0d132f8, type: 2}
+  - {fileID: 11400000, guid: 5f33a07d83b9b824abc9aadfa4d40dae, type: 2}
+  - {fileID: 11400000, guid: 67c13453db0d24940a3ac2cca92746b7, type: 2}
+  - {fileID: 11400000, guid: 4e40832da8b455f41a7b4b08ecfc5781, type: 2}
+  - {fileID: 11400000, guid: 4fbece39fb7cae44e8b21acbe3778131, type: 2}
+  - {fileID: 11400000, guid: a730acedbf959e440a2af0d417494f28, type: 2}
+  - {fileID: 11400000, guid: 1e1ab307f4222f546afc2594d375f1ec, type: 2}
+  - {fileID: 11400000, guid: 802c035451a4f7a4a9f48fbc647738e0, type: 2}
