@@ -81,6 +81,11 @@ public class CameraController : MonoBehaviour {
 	private Color defaultClearColor;
 	private float dramaStartTime;
 	private float dramaDuration;
+	private bool isDrama {
+		get {
+			return Time.realtimeSinceStartup - this.dramaStartTime <= this.dramaDuration;
+		}
+	}
 
 	public void Awake() {
 		this.cam = this.gameObject.GetComponent<Camera>();
@@ -162,15 +167,15 @@ public class CameraController : MonoBehaviour {
 		Debug.DrawLine(this.cam.ViewportToWorldPoint(new Vector3(lowerX, 0, 10)), this.cam.ViewportToWorldPoint(new Vector3(lowerX, 1, 10)), Color.green);
 		Debug.DrawLine(this.cam.ViewportToWorldPoint(new Vector3(upperX, 0, 10)), this.cam.ViewportToWorldPoint(new Vector3(upperX, 1, 10)), Color.green);
 
-		Debug.DrawLine(new Vector3(-100, this.followY ? this.targetY : targetPos.y), new Vector3(100, this.followY ? this.targetY : targetPos.y), Color.red);
-		Debug.DrawLine(new Vector3(-100, this.targetY + this.verticalZoneWorld, 0), new Vector3(100, this.targetY + this.verticalZoneWorld, 0), Color.blue);
-		Debug.DrawLine(new Vector3(-100, this.targetY - this.verticalZoneWorld * this.verticalZoneLowerMultiplier, 0), new Vector3(100, this.targetY - this.verticalZoneWorld * this.verticalZoneLowerMultiplier, 0), Color.blue);
+		Debug.DrawLine(new Vector3(-10000, this.followY ? this.targetY : targetPos.y), new Vector3(10000, this.followY ? this.targetY : targetPos.y), Color.red);
+		Debug.DrawLine(new Vector3(-10000, this.targetY + this.verticalZoneWorld, 0), new Vector3(10000, this.targetY + this.verticalZoneWorld, 0), Color.blue);
+		Debug.DrawLine(new Vector3(-10000, this.targetY - this.verticalZoneWorld * this.verticalZoneLowerMultiplier, 0), new Vector3(10000, this.targetY - this.verticalZoneWorld * this.verticalZoneLowerMultiplier, 0), Color.blue);
 
 		if(targetViewPos.x < lowerX || targetViewPos.x > upperX) {
 			delta.x += (targetPos.x - currentPos.x) * this.horizontalSpeed;
 		}
 
-		delta.y += verticalOffset;
+		delta.y += this.verticalOffset;
 
 		if(this.followY) {
 			delta.y += (targetPos.y - currentPos.y) * this.verticalSpeed;
@@ -184,16 +189,12 @@ public class CameraController : MonoBehaviour {
 			delta.y += (this.targetY - currentPos.y) * this.verticalSpeed;
 		}
 
+		if(this.isDrama) {
+			delta *= 10f;
+		}
+
 		Vector3 pos = this.transform.position + new Vector3(delta.x, delta.y) * Time.deltaTime;
-		this.transform.position = this.bounds.ClosestPoint(pos);
-
-		Vector3 bgLocalPos = this.backgroundStartPosition;
-
-		Vector2 d = new Vector2(this.transform.position.x, this.transform.position.y) - this.startPosition;
-		bgLocalPos.x += d.x * this.parallaxMul.x;
-		bgLocalPos.y += d.y * this.parallaxMul.y;
-
-		this.background.position = bgLocalPos;
+		MoveTo(pos);
 	}
 
 	public void StartDrama(float duration) {
@@ -201,19 +202,45 @@ public class CameraController : MonoBehaviour {
 	
 		this.dramaStartTime = Time.realtimeSinceStartup;
 		this.dramaDuration = duration;
+
+		// Vector2 targetPos = new Vector2(
+		// 	this.transform.position.x,
+		// 	this.target.position.y + this.verticalOffset * Time.deltaTime
+		// );
+
+		// if(this.followY
+		// 	|| targetPos.y > this.targetY + this.verticalZoneWorld
+		// 	|| targetPos.y < this.targetY - this.verticalZoneWorld * this.verticalZoneLowerMultiplier) {
+			
+		// 	MoveTo(targetPos);
+		// }
 	}
 
 	public void StopDrama() {
 		this.dramaStartTime = -100;
 		this.background.gameObject.SetActive(true);
+
+		this.cam.backgroundColor = this.defaultClearColor;
 	}
 
 	private void HandleDramaEffect() {
-		if(Time.realtimeSinceStartup - this.dramaStartTime > this.dramaDuration) {
+		if(!this.isDrama) {
 			return;
 		}
 
 		float d = (Time.realtimeSinceStartup - this.dramaStartTime) / this.dramaDuration;
 		this.cam.backgroundColor = this.dramaColors.Evaluate(d);
+	}
+
+	private void MoveTo(Vector2 pos) {
+		this.transform.position = this.bounds.ClosestPoint(new Vector3(pos.x, pos.y, this.transform.position.z));
+	
+		Vector3 bgLocalPos = this.backgroundStartPosition;
+
+		Vector2 d = new Vector2(this.transform.position.x, this.transform.position.y) - this.startPosition;
+		bgLocalPos.x += d.x * this.parallaxMul.x;
+		bgLocalPos.y += d.y * this.parallaxMul.y;
+
+		this.background.position = bgLocalPos;
 	}
 }
