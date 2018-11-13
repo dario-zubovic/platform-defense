@@ -52,7 +52,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.019607844, g: 0.015686275, b: 0.039215688, a: 0}
+  m_BackGroundColor: {r: 0.3529412, g: 0.41960788, b: 0.427451, a: 1}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -107,7 +107,38 @@ MonoBehaviour:
   lookInFront: 0.025
   horizontalSpeed: 2.8125
   verticalSpeed: 4
-  verticalOffset: 27.5
+  verticalOffset: 21
+  background: {fileID: 0}
+  parallaxMul: {x: 0.6, y: 0.4}
+  dramaColors:
+    serializedVersion: 2
+    key0: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
+    key1: {r: 0.5377358, g: 0, b: 0, a: 1}
+    key2: {r: 0.3773585, g: 0, b: 0, a: 0}
+    key3: {r: 0.1792453, g: 0, b: 0, a: 0}
+    key4: {r: 0.1792453, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 16384
+    ctime1: 32768
+    ctime2: 49151
+    ctime3: 65535
+    ctime4: 65535
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 1
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
 --- !u!114 &114611625763299232
 MonoBehaviour:
   m_ObjectHideFlags: 1
