@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 50195554437292352}
   m_Layer: 10
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Actor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,6 +151,7 @@ MonoBehaviour:
   moveSpeed: 3
   airAccelerationTime: 0.1
   groundFriction: 0.3
+  airDrag: 0.05
   wallSlideDamping: 0.75
   health: 40
   moveRight: 0

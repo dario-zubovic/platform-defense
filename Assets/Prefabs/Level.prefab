@@ -49,7 +49,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1453799141476302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.3, y: 5.15, z: 0}
+  m_LocalPosition: {x: -1, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4860112708235118}
@@ -82,9 +82,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   respawn: {fileID: 4690780412106920}
   dramaTime: 1.5
-  respawnTime: 5
+  respawnTime: 2
   levelBounds:
-    m_Center: {x: 6.3, y: 14.37, z: 0}
-    m_Extent: {x: 99.5, y: 63.76, z: 10000}
+    m_Center: {x: 74, y: 49, z: 0}
+    m_Extent: {x: 156, y: 120, z: 10000}
   playerPrefab: {fileID: 114283241772092774, guid: 8d36c620834c0ac4da28957bbea817b8,
+    type: 2}
+  dropTokenPrefab: {fileID: 114296206931165516, guid: e82809307e4706548be8de8c5dca9d63,
     type: 2}
