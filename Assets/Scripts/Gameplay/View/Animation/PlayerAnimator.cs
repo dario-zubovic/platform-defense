@@ -14,37 +14,14 @@ public class PlayerAnimator : SpriteAnimator {
     
     private JumpPhase jumpPhase; 
 
-    private string idleAnimName = "Idle4"; // DEBUG, remove this
-    private string wallslideAnimName = "Wallslide2"; // DEBUG, remove this
+    private string idleAnimName = "Idle"; // DEBUG, remove this
 
 
     public void Refresh(Vector2 velocity, Vector2 input, bool grounded, bool wallSliding, bool jumped, bool wallJumped, bool bounced) {
-        // DEBUG, remove this:
-
-        if(Input.GetKeyUp(KeyCode.Alpha1)) {
-            this.idleAnimName = "Idle1";
-        } else if(Input.GetKeyUp(KeyCode.Alpha2)) {
-            this.idleAnimName = "Idle2";
-        } else if(Input.GetKeyUp(KeyCode.Alpha3)) {
-            this.idleAnimName = "Idle3";
-        } else if(Input.GetKeyUp(KeyCode.Alpha4)) {
-            this.idleAnimName = "Idle4";
-        } else if(Input.GetKeyUp(KeyCode.Alpha5)) {
-            this.idleAnimName = "Idle5";
-        } else if(Input.GetKeyUp(KeyCode.Alpha6)) {
-            this.idleAnimName = "Idle6";
-        } else if(Input.GetKeyUp(KeyCode.Alpha7)) {
-            this.idleAnimName = "Idle7";
-        }
-
-        if(Input.GetKeyUp(KeyCode.Alpha9)) {
-            this.wallslideAnimName = "Wallslide1";
-        } else if(Input.GetKeyUp(KeyCode.Alpha0)) {
-            this.wallslideAnimName = "Wallslide2";
-        }
 
         // change state if needed:
 
+        bool wasIdle = this.state == State.Idle;
         bool wasWallJumping = false;
 
         switch(this.state) {
@@ -112,7 +89,19 @@ public class PlayerAnimator : SpriteAnimator {
         switch(this.state) {
             case State.Idle:
                 {
-
+                    if(!wasIdle) {
+                        this.idleAnimName = "Idle";
+                    } else {
+                        if(this.idleAnimName == "IdleCapeWave") {
+                            if(this.frame == 0) {
+                                this.idleAnimName = "Idle";
+                            }
+                        } else {
+                            if(this.frame == 0 && Random.value < 0.02f) {
+                                this.idleAnimName = "IdleCapeWave";
+                            }
+                        }
+                    }
                 }
                 break;
 
@@ -154,7 +143,7 @@ public class PlayerAnimator : SpriteAnimator {
                 SetActive("Run");
                 break;
             case State.WallSlide:
-                SetActive(this.wallslideAnimName);
+                SetActive("Wallslide2");
                 break;
             case State.WallJump:
                 SetActive("Walljump");

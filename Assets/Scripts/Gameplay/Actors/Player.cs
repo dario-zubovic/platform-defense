@@ -32,10 +32,13 @@ public class Player : Actor {
 	private bool didDoubleJump;
 	private float jumpTime;
 
+	private bool building;
+
 	// inputs:
 
 	private bool jump;
 	private bool holdingJump;
+	private bool build;
 
 	// animation state:
 
@@ -46,6 +49,8 @@ public class Player : Actor {
 
 	private CameraController cameraController;
 	private Level level;
+
+	private TurretStand onStand;
 
 	// visuals:
 
@@ -74,6 +79,14 @@ public class Player : Actor {
 	public void OnTriggerEnter2D(Collider2D trigger) {
 		if(trigger.tag == "Spikes") {
 			Die();
+		} else if(trigger.tag == "TurretStand") {
+			this.onStand = trigger.gameObject.GetComponent<TurretStand>();
+		}
+	}
+
+	public void OnTriggerExit2D(Collider2D trigger) {
+		if(trigger.tag == "TurretStand") {
+			this.onStand = null;
 		}
 	}
 
@@ -112,6 +125,10 @@ public class Player : Actor {
 	}
 
 	protected override void AfterMovementPhase() {
+		// build:
+
+		HandleBuild();
+
 		// camera:
 
 		if(this.facingRight) {
@@ -181,6 +198,12 @@ public class Player : Actor {
 		this.velocity.y += this.jumpExtendSpeed * d;
 	}
 
+	private void HandleBuild() {
+		if(!this.build) {
+			return;
+		}
+	}
+
 	private void ResetAnimation() {
 		this.jumped = false;
 		this.wallJumped = false;
@@ -211,6 +234,8 @@ public class Player : Actor {
 
 		this.holdingJump = Input.GetButton("Jump");
 
+		this.build = Input.GetButtonDown("Build");
+
 		this.input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
 		// deadzone (30%):
@@ -220,5 +245,6 @@ public class Player : Actor {
 
 	private void ResetInput() {
 		this.jump = false;
+		this.build = false;
 	}
 }

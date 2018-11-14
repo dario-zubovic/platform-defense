@@ -4,11 +4,25 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public abstract class SpriteAnimator : MonoBehaviour {
     public List<SpriteAnimation> animations;
+
+    public int frame {
+        get;
+        private set;
+    }
     
+    public string animationName {
+        get {
+            if(this.activeAnimation == null) {
+                return null;
+            }
+
+            return this.activeAnimation.name;
+        }
+    }
+
     private SpriteRenderer rend;
 
     private SpriteAnimation activeAnimation;
-    private int frame;
     private float lastFrameChangeTime;
 
     public void Awake() {
