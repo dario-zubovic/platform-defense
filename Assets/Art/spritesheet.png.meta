@@ -1931,7 +1931,7 @@ TextureImporter:
     21303852: spritesheet_1926
     21303854: spritesheet_1927
     21303856: spritesheet_1928
-    21303858: spritesheet_1929
+    21303858: turret_stand
     21303860: spritesheet_1930
     21303862: spritesheet_1931
     21303864: spritesheet_1932
@@ -40735,13 +40735,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_1929
+      name: turret_stand
       rect:
         serializedVersion: 2
         x: 232
-        y: 88
-        width: 8
-        height: 8
+        y: 80
+        width: 24
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -40750,46 +40750,6 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: b3971722cd0c7014da09aafe467b5fd5
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spritesheet_1930
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 88
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 15fda6206d8735849a5b7d503e931c35
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spritesheet_1931
-      rect:
-        serializedVersion: 2
-        x: 248
-        y: 88
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c6625a492ec6e146b87c6fbd04daed4
       vertices: []
       indices: 
       edges: []
@@ -41650,66 +41610,6 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 8a31d959e958da945b3c22a0d5a44495
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spritesheet_1979
-      rect:
-        serializedVersion: 2
-        x: 232
-        y: 80
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d368c6368b90e9f4b9a35fa90a84d38b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spritesheet_1980
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 80
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cd532710753ebe949a9f1427d12197d1
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spritesheet_1981
-      rect:
-        serializedVersion: 2
-        x: 248
-        y: 80
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c91a4fa4bdbb21e4fac895e894dde227
       vertices: []
       indices: 
       edges: []

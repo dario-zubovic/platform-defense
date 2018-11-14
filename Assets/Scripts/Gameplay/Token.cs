@@ -51,7 +51,7 @@ public class Token : MonoBehaviour {
     }
 
     public void MoveTo(Vector3 pos) {
-        StartCoroutine(Move(this.transform.position, pos, 0.1f));
+        StartCoroutine(Move(this.transform.position, pos, 0.05f));
     }
 
     public void OnTriggerEnter2D(Collider2D coll) {

@@ -20,7 +20,7 @@ TagManager:
   - NoCollision
   - Enemy
   - Projectile
-  - 
+  - NoTokenDrop
   - 
   - 
   - 

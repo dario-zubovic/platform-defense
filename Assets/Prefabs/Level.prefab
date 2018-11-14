@@ -86,6 +86,9 @@ MonoBehaviour:
   levelBounds:
     m_Center: {x: 74, y: 49, z: 0}
     m_Extent: {x: 156, y: 120, z: 10000}
+  tokenCollisionMask:
+    serializedVersion: 2
+    m_Bits: 4097
   playerPrefab: {fileID: 114283241772092774, guid: 8d36c620834c0ac4da28957bbea817b8,
     type: 2}
   dropTokenPrefab: {fileID: 114296206931165516, guid: e82809307e4706548be8de8c5dca9d63,

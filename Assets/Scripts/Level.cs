@@ -135,18 +135,14 @@ public class Level : MonoBehaviour {
 	}
 
 	private Vector2 FindDropTokenSafeLocation(Token token) {
-		Collider2D coll = token.gameObject.GetComponent<Collider2D>();
-		ContactFilter2D filter2D = new ContactFilter2D();
-		filter2D.layerMask = this.tokenCollisionMask;
 		Collider2D[] results = new Collider2D[8];
 
 		Vector2 startPos = token.transform.position;
 
 		for(int i = 0; i < 64; i++) {
 			Vector2 pos = startPos + Random.insideUnitCircle * 6f;
-			token.transform.position = pos;
 
-			int c = Physics2D.OverlapCollider(coll, filter2D, results);
+			int c = Physics2D.OverlapCircleNonAlloc(pos, 0.5f, results, this.tokenCollisionMask);
 			if(c == 0) {
 				return pos;
 			}
