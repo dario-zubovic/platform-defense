@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114789140873926752}
   m_Layer: 9
   m_Name: TurretStand
-  m_TagString: Untagged
+  m_TagString: TurretStand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,6 +124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indicator: {fileID: 1198155714412014}
+  turretPrefab: {fileID: 114679687268375168, guid: a23c12630460a944199dfc6f4049f2cd,
+    type: 2}
 --- !u!212 &212347911049959914
 SpriteRenderer:
   m_ObjectHideFlags: 1

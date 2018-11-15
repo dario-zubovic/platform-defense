@@ -16,6 +16,10 @@ public class Level : MonoBehaviour {
 	public Player playerPrefab;
 	public Token dropTokenPrefab;
 
+	[Header("Enemies and waves")]
+	public Transform[] enemySpawns;
+	public WaveDescription[] waves;
+
 	private CameraController cameraController;
 	private Player player;
 
@@ -36,6 +40,8 @@ public class Level : MonoBehaviour {
 		this.player.Spawn(this.respawn.position);
 		this.cameraController.SetTarget(this.player.transform, false);
 		this.cameraController.bounds = this.levelBounds;
+
+		StartCoroutine(SpawnWaves());
 	}
 
 	public void PlayerDied() {
@@ -50,6 +56,15 @@ public class Level : MonoBehaviour {
 		if(spawnNew) {
 			StartCoroutine(SpawnNewToken());
 		}
+	}
+
+	public bool TakeToken() {
+		if(this.collectedTokens == 0) {
+			return false;
+		}
+
+		this.collectedTokens--;
+		return true;
 	}
 
 	private IEnumerator WaitForRespawn() {
@@ -151,6 +166,23 @@ public class Level : MonoBehaviour {
 		return startPos;
 	}
 
+	private IEnumerator SpawnWaves() {
+		float lastSpawnTime = Time.time;
+
+		WaitForSeconds delay = new WaitForSeconds(0.5f);
+
+		foreach(WaveDescription wave in this.waves) {
+			while(Time.time - lastSpawnTime < wave.delay) {
+				yield return delay;
+			}
+
+			StartCoroutine(wave.wave.Spawn(this));
+			lastSpawnTime = Time.time;
+		}
+
+		yield return null;
+	}
+
 #if UNITY_EDITOR
     
 	public void OnDrawGizmosSelected() {
@@ -159,4 +191,10 @@ public class Level : MonoBehaviour {
 	}
 
 #endif
+}
+
+[System.Serializable]
+public class WaveDescription {
+	public float delay;
+	public EnemyWave wave;
 }

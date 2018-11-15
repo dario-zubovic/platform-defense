@@ -61,7 +61,7 @@ struct v2f
     float4 vertex   : SV_POSITION;
     fixed4 color    : COLOR;
     float2 texcoord : TEXCOORD0;
-	float2 worldPos : TEXCOORD1;
+	// float2 worldPos : TEXCOORD1;
     UNITY_VERTEX_OUTPUT_STEREO
 };
 
@@ -82,7 +82,7 @@ v2f SpriteVert(appdata_t IN)
     OUT.texcoord = IN.texcoord;
     OUT.color = IN.color * _Color * _RendererColor;
 
-	OUT.worldPos = mul(unity_ObjectToWorld, IN.vertex);
+	// OUT.worldPos = mul(unity_ObjectToWorld, IN.vertex);
 
     #ifdef PIXELSNAP_ON
     OUT.vertex = UnityPixelSnap (OUT.vertex);
@@ -108,20 +108,9 @@ fixed4 SampleSpriteTexture (float2 uv)
 }
 
 fixed4 SpriteFrag(v2f IN) : SV_Target {
-	float2 coord = IN.texcoord;
-
-	float2 snap = float2(
-		floor(IN.worldPos.x * 8) * 0.125,
-		floor(IN.worldPos.y * 8) * 0.125
-	);
-
-	float n = snoise(snap + _Time.x * 5);
-
-	if( n > -0.5 &&  fmod( snap.x + snap.y + _Time.y + n * 0.2, 4 ) < 0.5 ) {
-		coord.x += _MainTex_TexelSize.x;
-	}
-
-    fixed4 c = SampleSpriteTexture (coord) * IN.color;
+	// float n = snoise(IN.worldPos * 0.1 + _Time.x) * 0.005;
+    // fixed4 c = SampleSpriteTexture (IN.texcoord + float2(n, 0)) * IN.color;
+    fixed4 c = SampleSpriteTexture (IN.texcoord) * IN.color;
     c.rgb *= c.a;
     return c;
 }

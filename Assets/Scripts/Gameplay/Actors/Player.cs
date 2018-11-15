@@ -202,6 +202,12 @@ public class Player : Actor {
 		if(!this.build) {
 			return;
 		}
+
+		if(this.onStand == null) {
+
+		} else {
+			this.onStand.Build();
+		}
 	}
 
 	private void ResetAnimation() {

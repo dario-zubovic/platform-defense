@@ -100,13 +100,17 @@ public class GranadeTurret : Turret {
         this.sortedOverlapResults.Clear();
 
 		for(int i = 0; i < c; i++) {
+            if(this.sortedOverlapResults.ContainsKey(this.overlapResults[i].transform.position.x)) {
+                continue;
+            }
+
             this.sortedOverlapResults.Add(this.overlapResults[i].transform.position.x, this.overlapResults[i].gameObject);
 		}
 
         GameObject targetGo = null;
 
         float reachAngle;
-        for(int i = 0; i < c; i++) {
+        for(int i = 0; i < sortedOverlapResults.Count; i++) {
             if(CanBeReached(this.sortedOverlapResults.Values[i].transform.position, out reachAngle)) {
                 targetGo = this.sortedOverlapResults.Values[i];
                 break;
@@ -177,8 +181,9 @@ public class GranadeTurret : Turret {
             newPos.y += this.transform.position.y;
 
             // Debug.DrawLine(previousPos, newPos, Color.red, 0.1f);
-
-            if(Physics2D.Raycast(previousPos, newPos - previousPos, (newPos - previousPos).magnitude, this.wallLayer).collider != null) {
+            
+            Collider2D overlap = Physics2D.Raycast(previousPos, newPos - previousPos, (newPos - previousPos).magnitude, this.wallLayer).collider;
+            if(overlap != null && !overlap.isTrigger) {
                 return false;
             }
 

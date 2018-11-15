@@ -181,8 +181,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   blastRadius: 3
-  minDamage: 5
-  maxDamage: 50
+  minDamage: 2
+  maxDamage: 7
   aim: {fileID: 4500668323292032}
   aimRends:
   - {fileID: 212947797732419386}
