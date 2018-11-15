@@ -294,7 +294,7 @@ Prefab:
     - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
         type: 2}
       propertyPath: waves.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4860112708235118, guid: 6999900d543fdc7429d3d09d6d1471bd, type: 2}
       propertyPath: m_LocalPosition.x
@@ -331,13 +331,35 @@ Prefab:
     - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
         type: 2}
       propertyPath: waves.Array.data[0].delay
-      value: 10
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
         type: 2}
       propertyPath: waves.Array.data[0].wave
       value: 
       objectReference: {fileID: 11400000, guid: 811f8bdbd09db5f40a4e947d4c539944,
+        type: 2}
+    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
+        type: 2}
+      propertyPath: waves.Array.data[1].delay
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
+        type: 2}
+      propertyPath: waves.Array.data[1].wave
+      value: 
+      objectReference: {fileID: 11400000, guid: c63b63c8f9963164cbf13df8ca3f9f25,
+        type: 2}
+    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
+        type: 2}
+      propertyPath: waves.Array.data[2].delay
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
+        type: 2}
+      propertyPath: waves.Array.data[2].wave
+      value: 
+      objectReference: {fileID: 11400000, guid: a331c745810a4254d937ff79a38c8ced,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6999900d543fdc7429d3d09d6d1471bd, type: 2}

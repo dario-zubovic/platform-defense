@@ -176,7 +176,7 @@ public class Level : MonoBehaviour {
 				yield return delay;
 			}
 
-			StartCoroutine(wave.wave.Spawn(this));
+			yield return wave.wave.Spawn(this);
 			lastSpawnTime = Time.time;
 		}
 

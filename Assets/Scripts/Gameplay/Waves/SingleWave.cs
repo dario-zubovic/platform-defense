@@ -13,6 +13,11 @@ public class SingleWave : EnemyWave {
     public float health;
     public float speed = 3f;
 
+    public IEnumerator SpawnDelayed(float delay, Level level) {
+        yield return new WaitForSeconds(delay);
+        yield return Spawn(level);
+    }
+
     public override IEnumerator Spawn(Level level) {
         WaitForSeconds wait = new WaitForSeconds(this.period);
 
