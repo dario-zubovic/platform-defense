@@ -49755,6 +49755,12 @@ Prefab:
       propertyPath: m_TagString
       value: TurretStand
       objectReference: {fileID: 0}
+    - target: {fileID: 114789140873926752, guid: 049fc01f502bbfe40a6831567d05b13d,
+        type: 2}
+      propertyPath: turretPrefab
+      value: 
+      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
   m_IsPrefabAsset: 0
@@ -49866,6 +49872,12 @@ Prefab:
       propertyPath: m_TagString
       value: TurretStand
       objectReference: {fileID: 0}
+    - target: {fileID: 114789140873926752, guid: 049fc01f502bbfe40a6831567d05b13d,
+        type: 2}
+      propertyPath: turretPrefab
+      value: 
+      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
   m_IsPrefabAsset: 0
@@ -50879,6 +50891,12 @@ Prefab:
       propertyPath: m_TagString
       value: TurretStand
       objectReference: {fileID: 0}
+    - target: {fileID: 114789140873926752, guid: 049fc01f502bbfe40a6831567d05b13d,
+        type: 2}
+      propertyPath: turretPrefab
+      value: 
+      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
   m_IsPrefabAsset: 0
@@ -50982,6 +51000,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114789140873926752, guid: 049fc01f502bbfe40a6831567d05b13d,
+        type: 2}
+      propertyPath: turretPrefab
+      value: 
+      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
   m_IsPrefabAsset: 0
@@ -51542,6 +51566,12 @@ Prefab:
       propertyPath: m_TagString
       value: TurretStand
       objectReference: {fileID: 0}
+    - target: {fileID: 114789140873926752, guid: 049fc01f502bbfe40a6831567d05b13d,
+        type: 2}
+      propertyPath: turretPrefab
+      value: 
+      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
   m_IsPrefabAsset: 0
@@ -53608,6 +53638,12 @@ Prefab:
       propertyPath: m_TagString
       value: TurretStand
       objectReference: {fileID: 0}
+    - target: {fileID: 114789140873926752, guid: 049fc01f502bbfe40a6831567d05b13d,
+        type: 2}
+      propertyPath: turretPrefab
+      value: 
+      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
   m_IsPrefabAsset: 0
@@ -54047,6 +54083,12 @@ Prefab:
       propertyPath: m_TagString
       value: TurretStand
       objectReference: {fileID: 0}
+    - target: {fileID: 114789140873926752, guid: 049fc01f502bbfe40a6831567d05b13d,
+        type: 2}
+      propertyPath: turretPrefab
+      value: 
+      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
   m_IsPrefabAsset: 0
@@ -54661,6 +54703,12 @@ Prefab:
       propertyPath: m_TagString
       value: TurretStand
       objectReference: {fileID: 0}
+    - target: {fileID: 114789140873926752, guid: 049fc01f502bbfe40a6831567d05b13d,
+        type: 2}
+      propertyPath: turretPrefab
+      value: 
+      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
   m_IsPrefabAsset: 0
@@ -54831,6 +54879,12 @@ Prefab:
       propertyPath: m_TagString
       value: TurretStand
       objectReference: {fileID: 0}
+    - target: {fileID: 114789140873926752, guid: 049fc01f502bbfe40a6831567d05b13d,
+        type: 2}
+      propertyPath: turretPrefab
+      value: 
+      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
   m_IsPrefabAsset: 0
@@ -55047,6 +55101,12 @@ Prefab:
       propertyPath: m_TagString
       value: TurretStand
       objectReference: {fileID: 0}
+    - target: {fileID: 114789140873926752, guid: 049fc01f502bbfe40a6831567d05b13d,
+        type: 2}
+      propertyPath: turretPrefab
+      value: 
+      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
   m_IsPrefabAsset: 0
@@ -55635,6 +55695,12 @@ Prefab:
       propertyPath: m_TagString
       value: TurretStand
       objectReference: {fileID: 0}
+    - target: {fileID: 114789140873926752, guid: 049fc01f502bbfe40a6831567d05b13d,
+        type: 2}
+      propertyPath: turretPrefab
+      value: 
+      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
   m_IsPrefabAsset: 0
@@ -56340,6 +56406,12 @@ Prefab:
       propertyPath: m_TagString
       value: TurretStand
       objectReference: {fileID: 0}
+    - target: {fileID: 114789140873926752, guid: 049fc01f502bbfe40a6831567d05b13d,
+        type: 2}
+      propertyPath: turretPrefab
+      value: 
+      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
   m_IsPrefabAsset: 0
@@ -61480,6 +61552,12 @@ Prefab:
       propertyPath: m_TagString
       value: TurretStand
       objectReference: {fileID: 0}
+    - target: {fileID: 114789140873926752, guid: 049fc01f502bbfe40a6831567d05b13d,
+        type: 2}
+      propertyPath: turretPrefab
+      value: 
+      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
   m_IsPrefabAsset: 0

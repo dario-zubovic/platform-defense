@@ -97,9 +97,11 @@ public class Level : MonoBehaviour {
 		this.player.Spawn(respawnPoint.position);
 		this.cameraController.SetTarget(this.player.transform, false);
 
-		this.checkpoint.lives--;
-		if(this.checkpoint.lives == 0) {
-			GameObject.Destroy(this.checkpoint.gameObject); // TODO: pool
+		if(this.checkpoint != null) {
+			this.checkpoint.lives--;
+			if(this.checkpoint.lives == 0) {
+				GameObject.Destroy(this.checkpoint.gameObject); // TODO: pool
+			}
 		}
 	}
 
