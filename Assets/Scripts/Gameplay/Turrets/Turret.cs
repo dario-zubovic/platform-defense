@@ -13,11 +13,14 @@ public abstract class Turret : MonoBehaviour {
 
 	protected Collider2D[] overlapResults;
 
+    private SortedList<float, GameObject> sortedOverlapResults;
+
 	protected float lastFireTime;
 	private float lastAimTime;
 
 	public void Awake() {
 		this.overlapResults = new Collider2D[128];
+        this.sortedOverlapResults = new SortedList<float, GameObject>(this.overlapResults.Length);
 
 		this.lastFireTime = Time.time;
 	
@@ -36,25 +39,34 @@ public abstract class Turret : MonoBehaviour {
 
 	protected abstract void Fire(Enemy target);
 
-	protected virtual void FindTarget() {
+	protected void FindTarget() {
 		int c = Physics2D.OverlapCircleNonAlloc(this.transform.position, this.radius, this.overlapResults, this.enemyLayers);
 		
-		GameObject leftMostGo = null;
-		float leftMost = float.MaxValue;
+        this.sortedOverlapResults.Clear();
 
 		for(int i = 0; i < c; i++) {
-			if(this.overlapResults[i].transform.position.x < leftMost) {
-				leftMost = this.overlapResults[i].transform.position.x;
-				leftMostGo = this.overlapResults[i].gameObject;
-			}
+            if(this.sortedOverlapResults.ContainsKey(this.overlapResults[i].transform.position.x)) {
+                continue;
+            }
+
+            this.sortedOverlapResults.Add(this.overlapResults[i].transform.position.x, this.overlapResults[i].gameObject);
 		}
 
-		if(leftMostGo == null) {
+		Enemy selected = Filter(this.sortedOverlapResults);
+		if(selected == null) {
 			return;
 		}
 
-		Fire(leftMostGo.GetComponent<Enemy>());
+		Fire(selected);
 		this.lastFireTime = Time.time;
+	}
+
+	protected virtual Enemy Filter(SortedList<float, GameObject> sortedOverlapResults) {
+		if(sortedOverlapResults.Count == 0) {
+			return null;
+		}
+
+		return sortedOverlapResults[0].GetComponent<Enemy>();
 	}
 
 	private void Aim() {

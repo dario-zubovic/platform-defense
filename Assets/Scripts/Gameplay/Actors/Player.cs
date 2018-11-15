@@ -204,7 +204,9 @@ public class Player : Actor {
 		}
 
 		if(this.onStand == null) {
-
+			if(this.grounded && this.velocity.magnitude < 0.1f) {
+				this.level.BuildCheckpoint(this.transform.position);
+			}
 		} else {
 			this.onStand.Build();
 		}
@@ -234,13 +236,13 @@ public class Player : Actor {
 			this.jump = true;
 			
 			this.jumpFrames = 0;
-		} else {
-			this.jump = false;
+		}
+
+		if(Input.GetButtonDown("Build")) {
+			this.build = true;
 		}
 
 		this.holdingJump = Input.GetButton("Jump");
-
-		this.build = Input.GetButtonDown("Build");
 
 		this.input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 

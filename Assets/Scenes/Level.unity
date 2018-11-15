@@ -361,6 +361,12 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: a331c745810a4254d937ff79a38c8ced,
         type: 2}
+    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
+        type: 2}
+      propertyPath: checkpointPrefab
+      value: 
+      objectReference: {fileID: 114054977072073986, guid: d2437105d125dee4f847988bae4c286c,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6999900d543fdc7429d3d09d6d1471bd, type: 2}
   m_IsPrefabAsset: 0
@@ -56800,6 +56806,21 @@ Prefab:
       propertyPath: background
       value: 
       objectReference: {fileID: 1807346550}
+    - target: {fileID: 114466034651662460, guid: 680386abc7733e7439a3f7f3ff3ef128,
+        type: 2}
+      propertyPath: dramaColors.key0.r
+      value: 0.5372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466034651662460, guid: 680386abc7733e7439a3f7f3ff3ef128,
+        type: 2}
+      propertyPath: dramaColors.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466034651662460, guid: 680386abc7733e7439a3f7f3ff3ef128,
+        type: 2}
+      propertyPath: dramaColors.key0.b
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 680386abc7733e7439a3f7f3ff3ef128, type: 2}
   m_IsPrefabAsset: 0

@@ -15,6 +15,7 @@ public class Level : MonoBehaviour {
 	[Header("Prefabs")]
 	public Player playerPrefab;
 	public Token dropTokenPrefab;
+	public Checkpoint checkpointPrefab;
 
 	[Header("Enemies and waves")]
 	public Transform[] enemySpawns;
@@ -26,6 +27,8 @@ public class Level : MonoBehaviour {
 	private int collectedTokens = 0;
 	private List<Token> tokens;
 	private List<Token> droppedTokens;
+
+	private Checkpoint checkpoint;
 
 	public void Awake() {
 		this.cameraController = Camera.main.GetComponent<CameraController>();
@@ -67,6 +70,14 @@ public class Level : MonoBehaviour {
 		return true;
 	}
 
+	public void BuildCheckpoint(Vector2 position) {
+		if(this.checkpoint != null && this.checkpoint.gameObject != null) {
+			GameObject.Destroy(this.checkpoint.gameObject); // TODO: pool
+		}
+
+		this.checkpoint = GameObject.Instantiate<Checkpoint>(this.checkpointPrefab, position, Quaternion.identity);
+	}
+
 	private IEnumerator WaitForRespawn() {
 		Time.timeScale = 0.025f;
 		this.cameraController.StartDrama(this.dramaTime);
@@ -76,13 +87,20 @@ public class Level : MonoBehaviour {
 		Time.timeScale = 1f;
 		this.cameraController.StopDrama();
 
+		Transform respawnPoint = this.checkpoint == null ? this.respawn : this.checkpoint.transform;
+
 		this.cameraController.SetFocus(false, false);
-		this.cameraController.SetTarget(this.respawn, true);
+		this.cameraController.SetTarget(respawnPoint, true);
 
 		yield return new WaitForSeconds(this.respawnTime - this.dramaTime);
-
-		this.player.Spawn(this.respawn.position);
+		
+		this.player.Spawn(respawnPoint.position);
 		this.cameraController.SetTarget(this.player.transform, false);
+
+		this.checkpoint.lives--;
+		if(this.checkpoint.lives == 0) {
+			GameObject.Destroy(this.checkpoint.gameObject); // TODO: pool
+		}
 	}
 
 	private IEnumerator SpawnNewToken() {

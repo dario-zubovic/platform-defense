@@ -20,13 +20,13 @@ public class GranadeTurret : Turret {
     
     private const int PROJECTILE_CHECK_SUBDIVISIONS = 16;
 
-    private SortedList<float, GameObject> sortedOverlapResults;
+    private RaycastHit2D[] raycastResults;
     
     private Enemy lockedEnemy;
     private float lockedTime;
 
     protected override void Init() {
-        this.sortedOverlapResults = new SortedList<float, GameObject>(this.overlapResults.Length);
+        this.raycastResults = new RaycastHit2D[16];
     }
 
     public void Update() {
@@ -94,37 +94,23 @@ public class GranadeTurret : Turret {
         projectile.maxDamage = this.maxDamage;
     }
 
-	protected override void FindTarget() {
-		int c = Physics2D.OverlapCircleNonAlloc(this.transform.position, this.radius, this.overlapResults, this.enemyLayers);
-		
-        this.sortedOverlapResults.Clear();
-
-		for(int i = 0; i < c; i++) {
-            if(this.sortedOverlapResults.ContainsKey(this.overlapResults[i].transform.position.x)) {
-                continue;
-            }
-
-            this.sortedOverlapResults.Add(this.overlapResults[i].transform.position.x, this.overlapResults[i].gameObject);
-		}
-
+	protected override Enemy Filter(SortedList<float, GameObject> sortedOverlapResults) {
         GameObject targetGo = null;
 
         float reachAngle;
         for(int i = 0; i < sortedOverlapResults.Count; i++) {
-            if(CanBeReached(this.sortedOverlapResults.Values[i].transform.position, out reachAngle)) {
-                targetGo = this.sortedOverlapResults.Values[i];
+            if(CanBeReached(sortedOverlapResults.Values[i].transform.position, out reachAngle)) {
+                targetGo = sortedOverlapResults.Values[i];
                 break;
             }
         }
         // this.targetAngle = reachAngle;
 
 		if(targetGo == null) {
-			return;
+			return null;
 		}
 
-		Fire(targetGo.GetComponent<Enemy>());
-		this.lastFireTime = Time.time;
-        
+		return targetGo.GetComponent<Enemy>();
     }
 
     private bool CanBeReached(Vector2 target, out float reachAngle, bool force = false) {
@@ -182,9 +168,11 @@ public class GranadeTurret : Turret {
 
             // Debug.DrawLine(previousPos, newPos, Color.red, 0.1f);
             
-            Collider2D overlap = Physics2D.Raycast(previousPos, newPos - previousPos, (newPos - previousPos).magnitude, this.wallLayer).collider;
-            if(overlap != null && !overlap.isTrigger) {
-                return false;
+            int c = Physics2D.RaycastNonAlloc(previousPos, newPos - previousPos, this.raycastResults, (newPos - previousPos).magnitude, this.wallLayer);
+            for(int j = 0; j < c; j++) {
+                if(this.raycastResults[j].collider != null && !this.raycastResults[j].collider.isTrigger) {
+                    return false;
+                }
             }
 
             previousPos = newPos;
