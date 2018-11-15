@@ -8,6 +8,8 @@ public class GroundEnemy : Enemy {
     public bool moveRight;
 
     protected override void Init() {
+        base.Init();
+        
         this.input = this.moveRight ? Vector2.right : Vector2.left;
     }
 }

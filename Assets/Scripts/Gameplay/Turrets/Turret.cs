@@ -33,6 +33,14 @@ public abstract class Turret : MonoBehaviour {
 		}
 	}
 
+	public virtual void ShowInfo() {
+		CircleDrawer.instance.Draw(this.transform.position, this.radius);
+	}
+
+	public virtual void HideInfo() {
+		CircleDrawer.instance.DontDraw();
+	}
+
 	protected virtual void Init() {
 
 	}

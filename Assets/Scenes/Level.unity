@@ -1496,6 +1496,25 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &137024532 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1957980537540826, guid: 680386abc7733e7439a3f7f3ff3ef128,
+    type: 2}
+  m_PrefabInternal: {fileID: 1620674614}
+--- !u!114 &137024533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 137024532}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3917c4230d8350943bba16709a5c4909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: 6e3c5d107bee4c54d8d4d8a76c7234ef, type: 3}
+  color: {r: 0, g: 0.42352942, b: 0.17010511, a: 1}
+  thickness: 0.125
 --- !u!1 &145403987
 GameObject:
   m_ObjectHideFlags: 0
@@ -49876,7 +49895,7 @@ Prefab:
         type: 2}
       propertyPath: turretPrefab
       value: 
-      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+      objectReference: {fileID: 114679687268375168, guid: a23c12630460a944199dfc6f4049f2cd,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
@@ -50895,7 +50914,7 @@ Prefab:
         type: 2}
       propertyPath: turretPrefab
       value: 
-      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+      objectReference: {fileID: 114679687268375168, guid: a23c12630460a944199dfc6f4049f2cd,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
@@ -51004,7 +51023,7 @@ Prefab:
         type: 2}
       propertyPath: turretPrefab
       value: 
-      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+      objectReference: {fileID: 114679687268375168, guid: a23c12630460a944199dfc6f4049f2cd,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
@@ -51570,7 +51589,7 @@ Prefab:
         type: 2}
       propertyPath: turretPrefab
       value: 
-      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+      objectReference: {fileID: 114679687268375168, guid: a23c12630460a944199dfc6f4049f2cd,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
@@ -55105,7 +55124,7 @@ Prefab:
         type: 2}
       propertyPath: turretPrefab
       value: 
-      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+      objectReference: {fileID: 114679687268375168, guid: a23c12630460a944199dfc6f4049f2cd,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
@@ -55699,7 +55718,7 @@ Prefab:
         type: 2}
       propertyPath: turretPrefab
       value: 
-      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+      objectReference: {fileID: 114679687268375168, guid: a23c12630460a944199dfc6f4049f2cd,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
@@ -56410,7 +56429,7 @@ Prefab:
         type: 2}
       propertyPath: turretPrefab
       value: 
-      objectReference: {fileID: 114041776508011184, guid: a4f57336870f555428d0b81874117f61,
+      objectReference: {fileID: 114679687268375168, guid: a23c12630460a944199dfc6f4049f2cd,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}

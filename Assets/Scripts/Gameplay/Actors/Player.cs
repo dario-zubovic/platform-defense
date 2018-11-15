@@ -81,11 +81,15 @@ public class Player : Actor {
 			Die();
 		} else if(trigger.tag == "TurretStand") {
 			this.onStand = trigger.gameObject.GetComponent<TurretStand>();
+			this.onStand.Hover();
 		}
 	}
 
 	public void OnTriggerExit2D(Collider2D trigger) {
 		if(trigger.tag == "TurretStand") {
+			if(this.onStand != null) {
+				this.onStand.Unhover();
+			}
 			this.onStand = null;
 		}
 	}

@@ -31,7 +31,7 @@ public class SingleWave : EnemyWave {
 
     private void SpawnEnemy(Transform spawnPoint) {
         Enemy enemy = GameObject.Instantiate<Enemy>(this.enemyPrefab, spawnPoint.transform.position, Quaternion.identity);
-        enemy.health = this.health;
+        enemy.startHealth = this.health;
         enemy.moveSpeed = this.speed;
     }
 }
