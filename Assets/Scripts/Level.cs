@@ -177,7 +177,7 @@ public class Level : MonoBehaviour {
 		for(int i = 0; i < 64; i++) {
 			Vector2 pos = startPos + Random.insideUnitCircle * 6f;
 
-			int c = Physics2D.OverlapCircleNonAlloc(pos, 0.5f, results, this.tokenCollisionMask);
+			int c = Physics2D.OverlapCircleNonAlloc(pos, 0.8f, results, this.tokenCollisionMask);
 			if(c == 0) {
 				return pos;
 			}

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4313786394005288}
   - component: {fileID: 212176327919146342}
   - component: {fileID: 58428986647427306}
+  - component: {fileID: 114113306950375884}
   - component: {fileID: 114296206931165516}
   m_Layer: 0
   m_Name: DroppedPickup
@@ -36,8 +37,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1330057200359086}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19, y: 11, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -54,9 +55,23 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.05, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.75
+--- !u!114 &114113306950375884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1330057200359086}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e6ca8ad85f7734b82011c4c8dc982e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delta: {x: 0, y: 0.5, z: 0}
+  time: 1.5
+  smooth: 1
 --- !u!114 &114296206931165516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,8 +85,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight: 0
   delay: 0
-  isStarting: 1
+  isStarting: 0
   isDropToken: 1
+  dropTokenPingPong: {fileID: 114113306950375884}
 --- !u!212 &212176327919146342
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -107,7 +123,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21303666, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
+  m_Sprite: {fileID: 21304262, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -5,7 +5,9 @@ public class Token : MonoBehaviour {
     public float weight;
     public float delay;
     public bool isStarting;
+
     public bool isDropToken;
+    public PingPongMove dropTokenPingPong;
 
     public bool isActive {
         get;
@@ -63,6 +65,11 @@ public class Token : MonoBehaviour {
             return;
         }
 
+        Player player = coll.gameObject.GetComponent<Player>();
+        if(player.isDead) {
+            return;
+        }
+
         this.lastPickupTime = Time.time;
         Hide();
         this.level.Pickup(this.isDropToken == false);
@@ -74,6 +81,8 @@ public class Token : MonoBehaviour {
             this.transform.position = Vector3.Lerp(start, destination, (Time.time - startTime) / duration);
             yield return null;
         }
+
+        this.dropTokenPingPong.enabled = true;
     }
 
     private void Hide() {

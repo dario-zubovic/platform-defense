@@ -27,6 +27,8 @@ public class GranadeTurret : Turret {
 
     protected override void Init() {
         this.raycastResults = new RaycastHit2D[16];
+
+        // this.radius = this.speed * this.speed / Mathf.Abs(Physics2D.gravity.y) * 2;
     }
 
     public void Update() {

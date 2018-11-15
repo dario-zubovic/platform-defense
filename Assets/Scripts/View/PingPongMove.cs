@@ -7,7 +7,7 @@ public class PingPongMove : MonoBehaviour {
 
     private Vector3 start, end;
 
-    public void Awake() {
+    public void Start() {
         this.start = this.transform.position;
         this.end = this.start + this.delta;
     }

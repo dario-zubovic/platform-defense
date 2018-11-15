@@ -148,15 +148,15 @@ MonoBehaviour:
     m_Bits: 1024
   lockingTime: 0.5
   fireTimeAfterLockFailure: 0.5
-  speed: 18
+  speed: 15
   projectilePrefab: {fileID: 114773302148741600, guid: eb774f591b29abe46ab065830e0745f6,
     type: 2}
   wallLayer:
     serializedVersion: 2
     m_Bits: 1
   blastRadius: 3
-  minDamage: 2
-  maxDamage: 7
+  minDamage: 1
+  maxDamage: 5
   aim: {fileID: 4500668323292032}
   aimRends:
   - {fileID: 212947797732419386}

@@ -26,6 +26,12 @@ public class Player : Actor {
 		set;
 	}
 
+	public bool isDead {
+		get {
+			return this.dead;
+		}
+	}
+
 	// state:
 
 	private bool dead;
