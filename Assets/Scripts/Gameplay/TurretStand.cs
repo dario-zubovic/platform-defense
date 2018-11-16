@@ -3,6 +3,7 @@ using UnityEngine;
 public class TurretStand : MonoBehaviour {
     public GameObject indicator;
     public Turret turretPrefab;
+    public SpriteRenderer standSprite;
 
     private Level level;
     private Turret turret;
@@ -21,6 +22,8 @@ public class TurretStand : MonoBehaviour {
         }
 
         this.indicator.SetActive(false);
+        this.standSprite.enabled = false;
+
         this.turret = GameObject.Instantiate<Turret>(this.turretPrefab, this.transform.position, Quaternion.identity);    
         
         this.turret.ShowInfo();

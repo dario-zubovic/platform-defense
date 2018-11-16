@@ -126,6 +126,7 @@ MonoBehaviour:
   indicator: {fileID: 1198155714412014}
   turretPrefab: {fileID: 114679687268375168, guid: a23c12630460a944199dfc6f4049f2cd,
     type: 2}
+  standSprite: {fileID: 212358215520914118}
 --- !u!212 &212347911049959914
 SpriteRenderer:
   m_ObjectHideFlags: 1
