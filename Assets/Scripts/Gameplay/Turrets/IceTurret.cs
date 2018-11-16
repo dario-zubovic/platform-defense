@@ -22,7 +22,7 @@ public class IceTurret : Turret {
     protected override void Fire(Enemy target) {
         Vector2 dir = (target.transform.position - this.transform.position).normalized;
         SlowdownProjectile projectile = GameObject.Instantiate<SlowdownProjectile>(this.projectilePrefab, this.transform.position, Quaternion.identity);
-        projectile.rigid.isKinematic = true;
+        projectile.rigid.gravityScale = 0f;
         projectile.rigid.velocity = this.speed * dir;
         projectile.blastRadius = this.blastRadius;
         projectile.minDuration = this.minDuration;
@@ -60,4 +60,15 @@ public class IceTurret : Turret {
 
         return true;
     }
+
+#if UNITY_EDITOR
+    
+	public override void OnDrawGizmosSelected() {
+		base.OnDrawGizmosSelected();
+
+        Gizmos.color = new Color(0.9f, 0.5f, 0f, 1f);
+		Gizmos.DrawWireSphere(this.transform.position + Vector3.right * this.radius, this.blastRadius);
+    }
+
+#endif
 }

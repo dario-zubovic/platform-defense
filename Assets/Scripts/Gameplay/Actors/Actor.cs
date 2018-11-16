@@ -53,7 +53,7 @@ public abstract class Actor : MonoBehaviour {
 	private RaycastHit2D[] castResults;
 
 	// modifiers:
-	public float speedMultipler = 1f;
+	[HideInInspector] public float speedMultipler = 1f;
 
 	public void Awake() {
 		this.rigid = this.gameObject.GetComponent<Rigidbody2D>();

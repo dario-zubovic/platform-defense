@@ -21,7 +21,7 @@ public class WaveyGrass : MonoBehaviour {
 
 	public void Update() {
 		this.speed = Mathf.Lerp(this.speed, this.targetSpeed, 0.075f);
-		this.targetSpeed *= 0.995f;
+		this.targetSpeed *= 0.99f;
 
 		float targetSkew = this.speed * Mathf.Sin(this.frequency * (Time.time - this.lastTime));
 		this.skew = Mathf.Lerp(this.skew, targetSkew, 0.075f);
