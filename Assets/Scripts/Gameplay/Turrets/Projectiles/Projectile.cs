@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Projectile : MonoBehaviour {
+public abstract class Projectile : MonoBehaviour {
     public Rigidbody2D rigid;
     public LayerMask enemyLayers;
 
@@ -9,21 +9,8 @@ public class Projectile : MonoBehaviour {
         get;
         set;
     }
-    
-    public float minDamage {
-        get;
-        set;
-    }
-    public float maxDamage {
-        get;
-        set;
-    }
 
     private bool exploaded;
-
-    public void Awake() {
-
-    }
 
     public void OnCollisionEnter2D(Collision2D coll) {
         if(this.exploaded) {
@@ -33,12 +20,12 @@ public class Projectile : MonoBehaviour {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, this.blastRadius, this.enemyLayers);
         
         for(int i = 0; i < colliders.Length; i++) {
-            colliders[i].gameObject.GetComponent<Enemy>().TakeDamage(
-                Mathf.Lerp(this.maxDamage, this.minDamage, Vector2.Distance(this.transform.position, colliders[i].transform.position) / this.blastRadius)
-            );
+            AffectEnemy(colliders[i].gameObject.GetComponent<Enemy>(), Vector2.Distance(this.transform.position, colliders[i].gameObject.transform.position) / this.blastRadius);
         }
 
         this.exploaded = true;
         GameObject.Destroy(this.gameObject); // TODO: pool
     }
+
+    protected abstract void AffectEnemy(Enemy enemy, float dist);
 }

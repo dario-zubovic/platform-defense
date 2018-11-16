@@ -70,6 +70,8 @@ inline float4 UnityFlipSprite(in float3 pos, in fixed2 flip)
     return float4(pos.xy * flip, pos.z, 1.0);
 }
 
+float _Skew;
+
 v2f SpriteVert(appdata_t IN)
 {
     v2f OUT;
@@ -77,7 +79,12 @@ v2f SpriteVert(appdata_t IN)
     UNITY_SETUP_INSTANCE_ID (IN);
     UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
 
-    OUT.vertex = UnityFlipSprite(IN.vertex, _Flip);
+    float4x4 transformMatrix = float4x4(
+        1,_Skew,0,0,
+        0,1,0,0,
+        0,0,1,0,
+        0,0,0,1);
+    OUT.vertex = UnityFlipSprite(mul(transformMatrix, IN.vertex), _Flip);
     OUT.vertex = UnityObjectToClipPos(OUT.vertex);
     OUT.texcoord = IN.texcoord;
     OUT.color = IN.color * _Color * _RendererColor;

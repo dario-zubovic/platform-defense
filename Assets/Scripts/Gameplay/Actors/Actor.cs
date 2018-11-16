@@ -52,6 +52,9 @@ public abstract class Actor : MonoBehaviour {
 	private ContactFilter2D contactFilter;
 	private RaycastHit2D[] castResults;
 
+	// modifiers:
+	public float speedMultipler = 1f;
+
 	public void Awake() {
 		this.rigid = this.gameObject.GetComponent<Rigidbody2D>();
 
@@ -117,7 +120,7 @@ public abstract class Actor : MonoBehaviour {
 			this.velocity.x *= 1f - this.groundFriction;
 
 			if(Mathf.Abs(this.input.x) > 0.1f) {
-				this.velocity.x = this.input.x * this.moveSpeed;
+				this.velocity.x = this.input.x * this.moveSpeed * this.speedMultipler;
 			}
 
 			moveVector = new Vector2(this.groundNormal.y, -this.groundNormal.x) * this.velocity.x * Time.deltaTime;

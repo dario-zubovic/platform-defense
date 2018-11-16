@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 212407749754394854}
   - component: {fileID: 114679687268375168}
   m_Layer: 0
-  m_Name: GranadeTurret
+  m_Name: GrenadeTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

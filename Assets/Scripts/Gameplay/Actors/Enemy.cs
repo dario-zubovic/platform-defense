@@ -12,8 +12,12 @@ public abstract class Enemy : Actor {
 
     private float health;
 
+    private List<EnemyEffect> effects;
+
     protected override void Init() {
         this.health = this.startHealth;
+
+        this.effects = new List<EnemyEffect>(64);
     }
 
     public void Update() {
@@ -25,6 +29,43 @@ public abstract class Enemy : Actor {
 
         if(this.health < 0) {
             GameObject.Destroy(this.gameObject);
+        }
+    }
+    
+    public void AddEffect(EnemyEffect effect) {
+        this.effects.Add(effect);
+    }
+    
+	protected override void BeforeMovementPhase() {
+        HandleEffects();
+    }
+
+    private void HandleEffects() {
+        // reset all modifiers:
+        this.speedMultipler = 1f;
+
+        // apply all effects and remove expired ones:
+        int c = this.effects.Count;
+        for(int i = 0; i < c; i++) {
+            if(!this.effects[i].isActive) {
+                this.effects.RemoveAt(i);
+                i--;
+                c--;
+                continue;
+            }
+
+            if(this.effects[i].isLateEffect) {
+                continue;
+            }
+
+            this.effects[i].Apply(this);
+        }
+
+        // apply late effect:
+        for(int i = 0; i < this.effects.Count; i++) {
+            if(this.effects[i].isLateEffect) {
+                this.effects[i].Apply(this);
+            }
         }
     }
 }

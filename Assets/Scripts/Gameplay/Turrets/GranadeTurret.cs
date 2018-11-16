@@ -9,7 +9,7 @@ public class GranadeTurret : Turret {
 
     [Header("Projectile")]
     public float speed;
-    public Projectile projectilePrefab; // TODO: pool
+    public Grenade projectilePrefab; // TODO: pool
     public LayerMask wallLayer;
     public float blastRadius;
     public float minDamage, maxDamage;
@@ -89,7 +89,7 @@ public class GranadeTurret : Turret {
     }
 
     private void FireOnLocked(float targetAngle) {
-        Projectile projectile = GameObject.Instantiate<Projectile>(this.projectilePrefab, this.transform.position, Quaternion.identity);
+        Grenade projectile = GameObject.Instantiate<Grenade>(this.projectilePrefab, this.transform.position, Quaternion.identity);
         projectile.rigid.velocity = this.speed * new Vector2(Mathf.Cos(targetAngle), Mathf.Sin(targetAngle));
         projectile.blastRadius = this.blastRadius;
         projectile.minDamage = this.minDamage;
