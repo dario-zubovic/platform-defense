@@ -14,15 +14,19 @@ public class PlayerAnimator : SpriteAnimator {
     
     private JumpPhase jumpPhase; 
 
-    private string idleAnimName = "Idle"; // DEBUG, remove this
+    private string idleAnimName = "Idle";
 
 
-    public void Refresh(Vector2 velocity, Vector2 input, bool grounded, bool wallSliding, bool jumped, bool wallJumped, bool bounced) {
+    public void Refresh(Vector2 velocity, Vector2 input, bool grounded, bool wallSliding, bool jumped, bool wallJumped, bool bounced, bool dead) {
 
         // change state if needed:
 
         bool wasIdle = this.state == State.Idle;
         bool wasWallJumping = false;
+
+        if(this.state == State.Dead && !dead) {
+            this.state = State.Idle;
+        }
 
         switch(this.state) {
             case State.Idle:
@@ -81,6 +85,11 @@ public class PlayerAnimator : SpriteAnimator {
                     this.state = State.Jump;
                 }
                 break;
+        }
+        
+
+        if(dead && this.state != State.Dead) {
+            this.state = State.Dead;
         }
 
 
@@ -178,6 +187,7 @@ public class PlayerAnimator : SpriteAnimator {
         WallSlide,
         WallJump,
         Jump,
+        Dead,
     }
 
     private enum JumpPhase {

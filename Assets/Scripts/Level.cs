@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Level : MonoBehaviour {
 	[Header("Spawn")]
@@ -16,6 +17,9 @@ public class Level : MonoBehaviour {
 	public Player playerPrefab;
 	public Token dropTokenPrefab;
 	public Checkpoint checkpointPrefab;
+
+	[Header("UI")]
+	public Text nextWaveText;
 
 	[Header("Enemies and waves")]
 	public Transform[] enemySpawns;
@@ -192,9 +196,12 @@ public class Level : MonoBehaviour {
 		WaitForSeconds delay = new WaitForSeconds(0.5f);
 
 		foreach(WaveDescription wave in this.waves) {
+			this.nextWaveText.enabled = true;
 			while(Time.time - lastSpawnTime < wave.delay) {
+				this.nextWaveText.text = Mathf.RoundToInt(wave.delay - Time.time + lastSpawnTime).ToString();
 				yield return delay;
 			}
+			this.nextWaveText.enabled = false;
 
 			yield return wave.wave.Spawn(this);
 			lastSpawnTime = Time.time;

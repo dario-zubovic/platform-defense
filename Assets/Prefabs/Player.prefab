@@ -166,6 +166,7 @@ MonoBehaviour:
   jumpMidPointSpeedThreshold: 5
   jumpDownSlowSpeedThreshold: 20
   bounceParticles: {fileID: 198081279172821964}
+  bloodParticles: {fileID: 0}
 --- !u!114 &114283241772092774
 MonoBehaviour:
   m_ObjectHideFlags: 1
