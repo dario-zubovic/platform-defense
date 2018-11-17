@@ -9,6 +9,11 @@ public abstract class Turret : MonoBehaviour {
 	[Header("Generic settings")]
 	public LayerMask enemyLayers;
 
+	[Header("Visuals")]
+	public Transform barrel;
+	public float slewHomeWait;
+	public float slewHomeTime;
+
 	private const float AIM_TIME = 0.1f;
 
 	protected Collider2D[] overlapResults;
@@ -18,6 +23,8 @@ public abstract class Turret : MonoBehaviour {
 	protected float lastFireTime;
 	private float lastAimTime;
 
+	private float lastBarrelAngle;
+
 	public void Awake() {
 		this.overlapResults = new Collider2D[128];
         this.sortedOverlapResults = new SortedList<float, GameObject>(this.overlapResults.Length);
@@ -25,6 +32,17 @@ public abstract class Turret : MonoBehaviour {
 		this.lastFireTime = Time.time;
 	
 		Init();
+	}
+
+	public virtual void Update() {
+		if(Time.time - this.lastFireTime > this.slewHomeWait) {
+			float t = (Time.time - this.lastFireTime - this.slewHomeWait) / this.slewHomeTime;
+			if(t <= 1) {
+				float oldAngle = this.lastBarrelAngle;
+				SetBarrelRotation(Mathf.Lerp(oldAngle, 0, t));
+				this.lastBarrelAngle = oldAngle;
+			}
+		}
 	}
 
 	public virtual void FixedUpdate() {
@@ -65,6 +83,7 @@ public abstract class Turret : MonoBehaviour {
 			return;
 		}
 
+		RotateBarrelTo(selected);
 		Fire(selected);
 		this.lastFireTime = Time.time;
 	}
@@ -75,6 +94,26 @@ public abstract class Turret : MonoBehaviour {
 		}
 
 		return sortedOverlapResults[0].GetComponent<Enemy>();
+	}
+
+	protected void RotateBarrelTo(Enemy target) {
+		if(this.barrel == null) {
+			return;
+		}
+
+		Vector2 delta = target.transform.position - this.transform.position;
+
+		float angle = Mathf.Atan2(delta.y, delta.x);
+		SetBarrelRotation(angle);
+	}
+
+	protected void SetBarrelRotation(float angle) {
+		this.lastBarrelAngle = angle;
+
+		angle *= Mathf.Rad2Deg;
+		bool flip = angle > -90 && angle < 90;
+		this.barrel.localScale = new Vector3(flip ? -1 : 1, 1, 1);
+		this.barrel.localEulerAngles = new Vector3(0, 0, angle + (flip ? 0 : 180));
 	}
 
 	private void Aim() {

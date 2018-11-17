@@ -275,7 +275,7 @@ Prefab:
     - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
         type: 2}
       propertyPath: waves.Array.data[0].delay
-      value: 90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
         type: 2}

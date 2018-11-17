@@ -90,6 +90,8 @@ public class PlayerAnimator : SpriteAnimator {
 
         if(dead && this.state != State.Dead) {
             this.state = State.Dead;
+
+            this.bounceParticles.Stop();
         }
 
 

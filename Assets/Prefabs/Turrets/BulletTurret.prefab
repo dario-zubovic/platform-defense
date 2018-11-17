@@ -116,6 +116,9 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 1024
+  barrel: {fileID: 4672236959816550}
+  slewHomeWait: 3
+  slewHomeTime: 2
   wallLayer:
     serializedVersion: 2
     m_Bits: 1

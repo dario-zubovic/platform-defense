@@ -31,7 +31,9 @@ public class GranadeTurret : Turret {
         // this.radius = this.speed * this.speed / Mathf.Abs(Physics2D.gravity.y) * 2;
     }
 
-    public void Update() {
+    public override void Update() {
+        base.Update();
+        
         if(this.lockedEnemy == null) {
             foreach(var rend in this.aimRends) {
                 Color c = rend.color;

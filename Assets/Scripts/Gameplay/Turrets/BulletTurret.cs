@@ -12,7 +12,8 @@ public class BulletTurret : Turret {
         this.raycastResults = new RaycastHit2D[32];
     }
 
-    public void Update() {
+    public override void Update() {
+        base.Update();
     }
 
     protected override void Fire(Enemy target) {
