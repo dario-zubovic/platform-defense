@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f263309ed0550034a93751cdeef3d854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 0.02
+  multiplier: 0.035
   frequency: 4
 --- !u!212 &212011124738753140
 SpriteRenderer:

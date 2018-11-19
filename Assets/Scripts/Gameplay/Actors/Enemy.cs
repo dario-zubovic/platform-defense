@@ -27,7 +27,7 @@ public abstract class Enemy : Actor {
     public void TakeDamage(float damage) {        
         this.health -= damage;
 
-        if(this.health < 0) {
+        if(this.health <= 0) {
             GameObject.Destroy(this.gameObject);
         }
     }

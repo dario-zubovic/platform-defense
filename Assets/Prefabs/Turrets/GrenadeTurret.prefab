@@ -159,7 +159,7 @@ MonoBehaviour:
     m_Bits: 1
   blastRadius: 3
   minDamage: 1
-  maxDamage: 5
+  maxDamage: 3
   aim: {fileID: 4500668323292032}
   aimRends:
   - {fileID: 212947797732419386}

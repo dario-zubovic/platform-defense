@@ -66,7 +66,9 @@ public abstract class Actor : MonoBehaviour {
 		this.castResults = new RaycastHit2D[32];
 
 		this.gameObject.tag = "Actor";
+	}
 
+	public void Start() {
 		Init();
 	}
 
