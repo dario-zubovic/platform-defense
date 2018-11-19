@@ -25,6 +25,7 @@ public abstract class CustomDialog : MonoBehaviour {
 
     public void Update() {
         HandleMove();
+        HandleShortcuts();
 
         if(Input.GetButtonDown("Jump")) {
             if(this.selected == this.buttons.Length - 1) {
@@ -66,6 +67,58 @@ public abstract class CustomDialog : MonoBehaviour {
             }
         }
         
+        Select(this.selected);
+    }
+
+    private void HandleShortcuts() {
+        if(Input.GetKeyDown(KeyCode.Alpha0) || Input.GetKeyDown(KeyCode.Keypad0)) {
+            Close();
+            return;
+        }
+        
+        int s = -1;
+
+        if(Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1)) {
+            s = 0;
+        } else if(Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2)) {
+            s = 1;
+        } else if(Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3)) {
+            s = 2;
+        } else if(Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4)) {
+            s = 3;
+        } else if(Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Keypad5)) {
+            s = 4;
+        } else if(Input.GetKeyDown(KeyCode.Alpha6) || Input.GetKeyDown(KeyCode.Keypad6)) {
+            s = 5;
+        } else if(Input.GetKeyDown(KeyCode.Alpha7) || Input.GetKeyDown(KeyCode.Keypad7)) {
+            s = 6;
+        } else if(Input.GetKeyDown(KeyCode.Alpha8) || Input.GetKeyDown(KeyCode.Keypad8)) {
+            s = 7;
+        } else if(Input.GetKeyDown(KeyCode.Alpha9) || Input.GetKeyDown(KeyCode.Keypad9)) {
+            s = 8;
+        }
+
+        if(s == -1) {
+            return;
+        }
+
+        int c = -1;
+        for(int i = 0; i < this.buttons.Length - 1; i++) {
+            if(!this.buttons[i].gameObject.activeSelf) {
+                continue;
+            }
+
+            c++;
+            if(c == s) {
+                Select(c);
+                Pressed(this.selected);
+                return;
+            }
+        }
+    }
+
+    private void Select(int id) {
+        this.selected = id;
         this.selection.position = this.activeButton.position;
         this.lastMoveTime = Time.time;
     }

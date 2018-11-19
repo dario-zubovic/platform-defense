@@ -30,6 +30,8 @@ public abstract class Turret : MonoBehaviour {
         this.sortedOverlapResults = new SortedList<float, GameObject>(this.overlapResults.Length);
 
 		this.lastFireTime = Time.time;
+
+		SetBarrelRotation(0);
 	
 		Init();
 	}
@@ -108,6 +110,10 @@ public abstract class Turret : MonoBehaviour {
 	}
 
 	protected void SetBarrelRotation(float angle) {
+		if(this.barrel == null) {
+			return;
+		}
+		
 		this.lastBarrelAngle = angle;
 
 		angle *= Mathf.Rad2Deg;
