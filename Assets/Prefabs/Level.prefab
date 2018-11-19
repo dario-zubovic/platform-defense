@@ -153,6 +153,8 @@ MonoBehaviour:
     type: 2}
   checkpointPrefab: {fileID: 114054977072073986, guid: d2437105d125dee4f847988bae4c286c,
     type: 2}
+  nextWaveText: {fileID: 0}
+  tokensText: {fileID: 0}
   enemySpawns:
   - {fileID: 4725832031765786}
   - {fileID: 4823307234264248}

@@ -20,6 +20,7 @@ public class Level : MonoBehaviour {
 
 	[Header("UI")]
 	public Text nextWaveText;
+	public Text tokensText;
 
 	[Header("Enemies and waves")]
 	public Transform[] enemySpawns;
@@ -58,7 +59,7 @@ public class Level : MonoBehaviour {
 	}
 
 	public void Pickup(bool spawnNew) {
-		this.collectedTokens++;
+		ChangeTokensNum(1);
 
 		if(spawnNew) {
 			StartCoroutine(SpawnNewToken());
@@ -70,7 +71,7 @@ public class Level : MonoBehaviour {
 			return false;
 		}
 
-		this.collectedTokens--;
+		ChangeTokensNum(-1);
 		return true;
 	}
 
@@ -80,6 +81,11 @@ public class Level : MonoBehaviour {
 		}
 
 		this.checkpoint = GameObject.Instantiate<Checkpoint>(this.checkpointPrefab, position, Quaternion.identity);
+	}
+
+	private void ChangeTokensNum(int delta) {
+		this.collectedTokens += delta;
+		this.tokensText.text = this.collectedTokens.ToString();
 	}
 
 	private IEnumerator WaitForRespawn() {
@@ -161,6 +167,7 @@ public class Level : MonoBehaviour {
 
 		int leftovers = Mathf.CeilToInt(this.collectedTokens / 2f);
 		this.collectedTokens = 0;
+		ChangeTokensNum(0);
 
 		for(int i = 0; i < leftovers; i++) {
 			Token token = GameObject.Instantiate<Token>(this.dropTokenPrefab, this.player.transform.position, Quaternion.identity); // TODO: pool

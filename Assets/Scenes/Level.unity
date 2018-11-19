@@ -274,8 +274,28 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
         type: 2}
+      propertyPath: nextWaveText
+      value: 
+      objectReference: {fileID: 1427379202}
+    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
+        type: 2}
+      propertyPath: tokensText
+      value: 
+      objectReference: {fileID: 319634653}
+    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
+        type: 2}
       propertyPath: waves.Array.data[0].delay
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
+        type: 2}
+      propertyPath: waves.Array.data[1].delay
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
+        type: 2}
+      propertyPath: waves.Array.data[2].delay
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
         type: 2}
@@ -285,37 +305,16 @@ Prefab:
         type: 2}
     - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
         type: 2}
-      propertyPath: waves.Array.data[1].delay
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
-        type: 2}
       propertyPath: waves.Array.data[1].wave
       value: 
       objectReference: {fileID: 11400000, guid: c63b63c8f9963164cbf13df8ca3f9f25,
         type: 2}
     - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
         type: 2}
-      propertyPath: waves.Array.data[2].delay
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
-        type: 2}
       propertyPath: waves.Array.data[2].wave
       value: 
       objectReference: {fileID: 11400000, guid: a331c745810a4254d937ff79a38c8ced,
         type: 2}
-    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
-        type: 2}
-      propertyPath: checkpointPrefab
-      value: 
-      objectReference: {fileID: 114054977072073986, guid: d2437105d125dee4f847988bae4c286c,
-        type: 2}
-    - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
-        type: 2}
-      propertyPath: nextWaveText
-      value: 
-      objectReference: {fileID: 1427379202}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6999900d543fdc7429d3d09d6d1471bd, type: 2}
   m_IsPrefabAsset: 0
@@ -24381,7 +24380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 32, y: 0}
   m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &319634653
@@ -24410,13 +24409,15 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 64
-    m_Alignment: 2
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 99
+  m_Text: '0
+
+'
 --- !u!222 &319634654
 CanvasRenderer:
   m_ObjectHideFlags: 0
