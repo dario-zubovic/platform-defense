@@ -275,7 +275,7 @@ Prefab:
     - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
         type: 2}
       propertyPath: waves.Array.data[0].delay
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 114513091482176266, guid: 6999900d543fdc7429d3d09d6d1471bd,
         type: 2}
@@ -53772,17 +53772,6 @@ Prefab:
     - target: {fileID: 4462830011774910, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114789140873926752, guid: 049fc01f502bbfe40a6831567d05b13d,
-        type: 2}
-      propertyPath: turretPrefab
-      value: 
-      objectReference: {fileID: 114679687268375168, guid: a23c12630460a944199dfc6f4049f2cd,
-        type: 2}
-    - target: {fileID: 212358215520914118, guid: 049fc01f502bbfe40a6831567d05b13d,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 049fc01f502bbfe40a6831567d05b13d, type: 2}

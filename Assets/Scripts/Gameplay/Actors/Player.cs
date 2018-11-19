@@ -26,6 +26,11 @@ public class Player : Actor {
 		set;
 	}
 
+	public bool locked {
+		get;
+		set;
+	}
+
 	public bool isDead {
 		get {
 			return this.dead;
@@ -37,8 +42,6 @@ public class Player : Actor {
 	private bool dead;
 	private bool didDoubleJump;
 	private float jumpTime;
-
-	private bool building;
 
 	// inputs:
 
@@ -218,7 +221,7 @@ public class Player : Actor {
 				this.level.BuildCheckpoint(this.transform.position);
 			}
 		} else {
-			this.onStand.Build();
+			this.onStand.Build(this);
 		}
 	}
 
@@ -242,6 +245,14 @@ public class Player : Actor {
 	}
 
 	private void HandleInput() {
+		if(this.locked) {
+			this.jump = false;
+			this.holdingJump = false;
+			this.build = false;
+			this.input = Vector2.zero;
+			return;
+		}
+
 		if(Input.GetButtonDown("Jump")) {
 			this.jump = true;
 			

@@ -57,6 +57,9 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 1024
+  barrel: {fileID: 0}
+  slewHomeWait: 0
+  slewHomeTime: 0
   speed: 10
   projectilePrefab: {fileID: 114371218778764414, guid: 99391706d7a07484e86fb0994694dca8,
     type: 2}
@@ -64,9 +67,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   blastRadius: 3
-  minDuration: 3
-  maxDuration: 5
-  amount: 0.75
+  minDuration: 1
+  maxDuration: 3
+  amount: 0.15
 --- !u!212 &212227355510574208
 SpriteRenderer:
   m_ObjectHideFlags: 1

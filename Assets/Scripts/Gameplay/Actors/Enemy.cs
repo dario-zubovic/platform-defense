@@ -61,6 +61,9 @@ public abstract class Enemy : Actor {
             this.effects[i].Apply(this);
         }
 
+        // normalize modifiers
+        this.speedMultipler = Mathf.Max(0f, this.speedMultipler);
+
         // apply late effect:
         for(int i = 0; i < this.effects.Count; i++) {
             if(this.effects[i].isLateEffect) {
