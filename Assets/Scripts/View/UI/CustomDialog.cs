@@ -42,6 +42,8 @@ public abstract class CustomDialog : MonoBehaviour {
 
     protected abstract void Close();
 
+    protected abstract void SelectionChanged(int selection);
+
     private void HandleMove() {
         if(Time.time - this.lastMoveTime < MOVE_DELAY) {
             return;
@@ -121,5 +123,7 @@ public abstract class CustomDialog : MonoBehaviour {
         this.selected = id;
         this.selection.position = this.activeButton.position;
         this.lastMoveTime = Time.time;
+
+        SelectionChanged(id);
     }
 }

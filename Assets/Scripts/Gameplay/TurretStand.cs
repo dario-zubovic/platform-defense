@@ -19,6 +19,7 @@ public class TurretStand : MonoBehaviour {
 
     public void Build(Player player) {
         if(this.turret != null) {
+            this.turret.Build(player);
             return;
         }
 
@@ -41,6 +42,10 @@ public class TurretStand : MonoBehaviour {
             this.turret.HideInfo();
             return;
         }
+
+        if(this.buildDialog.gameObject.activeSelf) {
+            CloseBuildDialog();
+        }
     }
 
     public void BuildTurret(int id) {
@@ -57,11 +62,22 @@ public class TurretStand : MonoBehaviour {
         this.indicator.SetActive(false); // turn off indicator for good
     }
 
+    public void PreviewTurret(int id) {
+        if(id >= this.turretPrefabs.Length) {
+    		CircleDrawer.instance.DontDraw();
+            return;
+        }
+
+        CircleDrawer.instance.Draw(this.transform.position, this.turretPrefabs[id].radius);
+    }
+
     public void CloseBuildDialog() {
         StartCoroutine(UnlockPlayer());
 
         this.indicator.SetActive(true);
         this.buildDialog.gameObject.SetActive(false);
+        
+        CircleDrawer.instance.DontDraw();
     }
 
     private IEnumerator UnlockPlayer() {

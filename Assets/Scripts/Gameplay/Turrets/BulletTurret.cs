@@ -16,6 +16,12 @@ public class BulletTurret : Turret {
         base.Update();
     }
 
+    public override void ShowInfo() {
+        base.ShowInfo();
+
+        this.turretInfo.SetStats(this.damage.ToString("0.0"), this.fireRate.ToString("0.0") + "s");
+    }
+
     protected override void Fire(Enemy target) {
         target.TakeDamage(this.damage);
     }

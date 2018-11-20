@@ -10,4 +10,8 @@ public class BuildTurretDialog : CustomDialog {
     protected override void Close() {
         this.stand.CloseBuildDialog();
     }
+
+    protected override void SelectionChanged(int selection) {
+        this.stand.PreviewTurret(selection);
+    }
 }
