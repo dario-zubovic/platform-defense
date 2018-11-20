@@ -728,18 +728,6 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 1024
-  damageUpgrades:
-  - 1.5
-  - 2.5
-  - 4
-  fireRateUpgrades:
-  - 0.8
-  - 0.5
-  - 0.1
-  rangeUpgrades:
-  - 8
-  - 10
-  - 15
   turretInfo: {fileID: 114499948958326772}
   upgradeDialog: {fileID: 114587340054098818}
   barrel: {fileID: 4672236959816550}
@@ -749,6 +737,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   damage: 1
+  damageUpgrades:
+  - 1.5
+  - 2.5
+  - 4
+  fireRateUpgrades:
+  - 0.8
+  - 0.5
+  - 0.1
+  rangeUpgrades:
+  - 9
+  - 12
+  - 16
 --- !u!114 &114414809476261344
 MonoBehaviour:
   m_ObjectHideFlags: 1

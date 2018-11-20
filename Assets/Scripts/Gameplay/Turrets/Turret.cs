@@ -9,11 +9,6 @@ public abstract class Turret : MonoBehaviour {
 	[Header("Generic settings")]
 	public LayerMask enemyLayers;
 
-	[Header("Upgrades")]
-	public float[] damageUpgrades;
-	public float[] fireRateUpgrades;
-	public float[] rangeUpgrades;
-
 	[Header("Visuals")]
 	public TurretInfo turretInfo;
 	public UpgradeTurretDialog upgradeDialog;
@@ -33,11 +28,6 @@ public abstract class Turret : MonoBehaviour {
 	private float lastBarrelAngle;
 
 	private Player player;
-
-	// upgrades:
-	private int damageLevel = -1;
-	private int fireRateLevel = -1;
-	private int rangeLevel = -1;
 
 	public void Awake() {
 		this.overlapResults = new Collider2D[128];
@@ -98,24 +88,13 @@ public abstract class Turret : MonoBehaviour {
 		this.upgradeDialog.gameObject.SetActive(true);
 	}
 
-    public void Upgrade(int id) {
-
+    public virtual void Upgrade(int id) {
 	}
 
-    public void PreviewUpgrade(int id) {
-		this.turretInfo.ResetTempStats();
-		CircleDrawer.instance.DisableSecondary();
-
-		if(id == 0) {
-			this.turretInfo.SetTempStat(0, this.damageUpgrades[this.damageLevel + 1].ToString("0.0"));
-		} else if(id == 1) {
-			this.turretInfo.SetTempStat(1, this.fireRateUpgrades[this.fireRateLevel + 1].ToString("0.0") + "s");
-		} else if(id == 2) {
-			CircleDrawer.instance.DrawSecondary(this.rangeUpgrades[this.rangeLevel + 1]);
-		}
+    public virtual void PreviewUpgrade(int id) {
 	}
     
-	public void CloseUpgradeDialog() {
+	public virtual void CloseUpgradeDialog() {
         StartCoroutine(UnlockPlayer());
 
 		this.turretInfo.ResetTempStats();
@@ -194,7 +173,7 @@ public abstract class Turret : MonoBehaviour {
 		FindTarget();
 	}
 
-    private IEnumerator UnlockPlayer() {
+    protected IEnumerator UnlockPlayer() {
         yield return null;
 
         this.player.locked = false;

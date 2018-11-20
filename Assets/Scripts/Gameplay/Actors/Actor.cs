@@ -36,7 +36,7 @@ public abstract class Actor : MonoBehaviour {
 	protected float forceMoveTimer = 0f;
 	protected float forceMoveX;
 
-	protected bool facingRight;
+	protected bool facingRight = true;
 
 	public bool ignoreGround {
 		get;
