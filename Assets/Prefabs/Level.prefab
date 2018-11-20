@@ -155,6 +155,7 @@ MonoBehaviour:
     type: 2}
   nextWaveText: {fileID: 0}
   tokensText: {fileID: 0}
+  goldText: {fileID: 0}
   enemySpawns:
   - {fileID: 4725832031765786}
   - {fileID: 4823307234264248}

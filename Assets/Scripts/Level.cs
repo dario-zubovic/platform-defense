@@ -102,7 +102,7 @@ public class Level : MonoBehaviour {
 
 	private void ChangeGoldNum(int delta) {
 		this.collectedGold += delta;
-		// this.goldText.text = this.collectedGold.ToString();
+		this.goldText.text = this.collectedGold.ToString();
 	}
 
 	private IEnumerator WaitForRespawn() {

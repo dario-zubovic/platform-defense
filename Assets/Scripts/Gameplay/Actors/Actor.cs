@@ -149,9 +149,9 @@ public abstract class Actor : MonoBehaviour {
 
 		int c;
 		
-		if(dist > MIN_MOVE_DIST) {
-			this.wallSliding = false;
+		this.wallSliding = false;
 
+		if(dist > MIN_MOVE_DIST) {
 			c = this.rigid.Cast(moveVector, this.contactFilter, this.castResults, dist + LOOK_AHEAD_DIST);
 
 			for(int i = 0; i < c; i++) {
