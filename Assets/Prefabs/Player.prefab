@@ -166,7 +166,6 @@ MonoBehaviour:
   jumpMidPointSpeedThreshold: 5
   jumpDownSlowSpeedThreshold: 20
   bounceParticles: {fileID: 198081279172821964}
-  bloodParticles: {fileID: 0}
 --- !u!114 &114283241772092774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,6 +182,7 @@ MonoBehaviour:
   groundFriction: 0.3
   airDrag: 0.075
   wallSlideDamping: 0.75
+  speedMultipler: 1
   jumpSpeed: 13.3
   jumpExtendSpeed: 2
   jumpExtendTime: 0.3
@@ -4815,7 +4815,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -5
   m_Sprite: {fileID: 21302340, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

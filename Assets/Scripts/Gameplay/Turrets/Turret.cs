@@ -88,6 +88,10 @@ public abstract class Turret : MonoBehaviour {
 	}
 
     public void Build(Player player) {
+		if(this.turretInfo == null) {
+			return;
+		}
+
 		this.player = player;
 		this.player.locked = true;
 		
