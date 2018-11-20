@@ -17,6 +17,7 @@ public class BulletTurret : Turret {
 	private int damageLevel = -1;
 	private int fireRateLevel = -1;
 	private int rangeLevel = -1;
+    private int turretLevel = 0;
 
     protected override void Init() {
         this.raycastResults = new RaycastHit2D[32];
@@ -61,6 +62,14 @@ public class BulletTurret : Turret {
             if(this.rangeLevel == this.rangeUpgrades.Length - 1) {
                 this.upgradeDialog.buttons[2].gameObject.SetActive(false);
             }
+        }
+
+        this.turretLevel++;
+        this.turretInfo.SetLevel(this.turretLevel);
+        if(this.turretLevel == 4) {
+            this.upgradeDialog.buttons[0].gameObject.SetActive(false);
+            this.upgradeDialog.buttons[1].gameObject.SetActive(false);
+            this.upgradeDialog.buttons[2].gameObject.SetActive(false);
         }
 
         CloseUpgradeDialog();
