@@ -17,6 +17,7 @@ public abstract class Actor : MonoBehaviour {
 	public float wallSlideDamping = 0.9f;
 
 	// constants:
+	private const float MIN_MOVE_DIST = 0.01f;
 	private const float LOOK_AHEAD_DIST = 0.05f;
 	private const float MIN_GROUND_NORMAL_Y = 0.65f;
 
@@ -114,8 +115,6 @@ public abstract class Actor : MonoBehaviour {
 
 		// handle horizontal movement:
 
-		this.wallSliding = false;
-
 		Vector2 moveVector;
 
 		if(this.grounded) {
@@ -146,49 +145,56 @@ public abstract class Actor : MonoBehaviour {
 		this.forceMoveTimer -= Time.deltaTime;
 
 		float dist = moveVector.magnitude;
+		float originalDist = dist;
 
-		int c = this.rigid.Cast(moveVector, this.contactFilter, this.castResults, dist + LOOK_AHEAD_DIST);
+		int c;
+		
+		if(dist > MIN_MOVE_DIST) {
+			this.wallSliding = false;
 
-		for(int i = 0; i < c; i++) {
-			RaycastHit2D hit = this.castResults[i];
-			Vector2 normal = hit.normal;
+			c = this.rigid.Cast(moveVector, this.contactFilter, this.castResults, dist + LOOK_AHEAD_DIST);
 
-			if(hit.collider.tag == "Platform") {
-				bool skip = HandlePlatformHorizontal(hit, hit.collider.gameObject.GetComponent<Platform>());
-				if(skip) {
-					continue;
+			for(int i = 0; i < c; i++) {
+				RaycastHit2D hit = this.castResults[i];
+				Vector2 normal = hit.normal;
+
+				if(hit.collider.CompareTag("Platform")) {
+					bool skip = HandlePlatformHorizontal(hit, hit.collider.gameObject.GetComponent<Platform>());
+					if(skip) {
+						continue;
+					}
+				}
+
+				if(normal.y >= MIN_GROUND_NORMAL_Y && !this.ignoreGround) {
+					this.grounded = true;
+					this.lastWasWall = false;
+					this.groundFrames = 0;
+
+					if(!newGroundNormal) {
+						this.groundNormal = normal;
+						newGroundNormal = true;
+					}
+
+					normal.x = 0;
+				} else if(Mathf.Abs(normal.y) < MIN_GROUND_NORMAL_Y && !this.grounded) {
+					this.wallSliding = true;
+					this.lastWasWall = true;
+					this.groundFrames = 0;
+					this.wallNormalX = normal.x;
+				}
+
+				float p = Vector2.Dot(velocity, normal);
+				if(p < 0) {
+					this.velocity -= p * normal;
+				}
+
+				if(hit.distance - LOOK_AHEAD_DIST < dist) {
+					dist = hit.distance - LOOK_AHEAD_DIST;
 				}
 			}
 
-			if(normal.y >= MIN_GROUND_NORMAL_Y && !this.ignoreGround) {
-				this.grounded = true;
-				this.lastWasWall = false;
-				this.groundFrames = 0;
-
-				if(!newGroundNormal) {
-					this.groundNormal = normal;
-					newGroundNormal = true;
-				}
-
-				normal.x = 0;
-			} else if(Mathf.Abs(normal.y) < MIN_GROUND_NORMAL_Y && !this.grounded) {
-				this.wallSliding = true;
-				this.lastWasWall = true;
-				this.groundFrames = 0;
-				this.wallNormalX = normal.x;
-			}
-
-			float p = Vector2.Dot(velocity, normal);
-			if(p < 0) {
-				this.velocity -= p * normal;
-			}
-
-			if(hit.distance - LOOK_AHEAD_DIST < dist) {
-				dist = hit.distance - LOOK_AHEAD_DIST;
-			}
+			this.rigid.position += moveVector / originalDist * dist;
 		}
-
-		this.rigid.position += moveVector.normalized * dist;
 
 		// gravity:
 
@@ -199,57 +205,60 @@ public abstract class Actor : MonoBehaviour {
 		MidMovementPhase();
 
 		// handle vertical movement:
-		
-		this.grounded = false;
 
 		if(this.wallSliding && this.velocity.y < 0 && Mathf.Sign(input.x) == -Mathf.Sign(this.wallNormalX) && Mathf.Abs(input.x) > 0.1f) {
 			this.velocity.y *= this.wallSlideDamping;
 		}
 
 		Vector2 deltaY = Vector2.up * this.velocity.y * Time.deltaTime;
-		
-		// reset inherited velocity, it will be reaplied in vertical cast if we're still on the platform:
-		this.inheritedVelocity = Vector2.zero;
 
 		dist = Mathf.Abs(deltaY.y);
+		originalDist = dist;
 
-		c = this.rigid.Cast(deltaY, this.contactFilter, this.castResults, dist + LOOK_AHEAD_DIST);
+		if(dist > MIN_MOVE_DIST) {
+			this.grounded = false;
+		
+			// reset inherited velocity, it will be reaplied in vertical cast if we're still on the platform:
+			this.inheritedVelocity = Vector2.zero;
 
-		for(int i = 0; i < c; i++) {
-			RaycastHit2D hit = this.castResults[i];
-			Vector2 normal = hit.normal;
+			c = this.rigid.Cast(deltaY, this.contactFilter, this.castResults, dist + LOOK_AHEAD_DIST);
 
-			if(hit.collider.tag == "Platform") {
-				bool skip = HandlePlatformVertical(hit, hit.collider.gameObject.GetComponent<Platform>());
-				if(skip) {
-					continue;
+			for(int i = 0; i < c; i++) {
+				RaycastHit2D hit = this.castResults[i];
+				Vector2 normal = hit.normal;
+
+				if(hit.collider.CompareTag("Platform")) {
+					bool skip = HandlePlatformVertical(hit, hit.collider.gameObject.GetComponent<Platform>());
+					if(skip) {
+						continue;
+					}
+				}
+
+				if(normal.y >= MIN_GROUND_NORMAL_Y && !this.ignoreGround) {
+					this.grounded = true;
+					this.lastWasWall = false;
+					this.groundFrames = 0;
+
+					if(!newGroundNormal) {
+						this.groundNormal = normal;
+						newGroundNormal = true;
+					}
+
+					normal.x = 0;
+				}
+
+				float p = Vector2.Dot(this.velocity, normal);
+				if(p < 0) {
+					this.velocity -= p * normal;
+				}
+
+				if(hit.distance - LOOK_AHEAD_DIST < dist) {
+					dist = hit.distance - LOOK_AHEAD_DIST;
 				}
 			}
 
-			if(normal.y >= MIN_GROUND_NORMAL_Y && !this.ignoreGround) {
-				this.grounded = true;
-				this.lastWasWall = false;
-				this.groundFrames = 0;
-
-				if(!newGroundNormal) {
-					this.groundNormal = normal;
-					newGroundNormal = true;
-				}
-
-				normal.x = 0;
-			}
-
-			float p = Vector2.Dot(this.velocity, normal);
-			if(p < 0) {
-				this.velocity -= p * normal;
-			}
-
-			if(hit.distance - LOOK_AHEAD_DIST < dist) {
-				dist = hit.distance - LOOK_AHEAD_DIST;
-			}
+			this.rigid.position += deltaY / originalDist * dist;
 		}
-
-		this.rigid.position += deltaY.normalized * dist;
 
 		this.ignoreGround = false;
 

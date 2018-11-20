@@ -21,6 +21,7 @@ public class Level : MonoBehaviour {
 	[Header("UI")]
 	public Text nextWaveText;
 	public Text tokensText;
+	public Text goldText;
 
 	[Header("Enemies and waves")]
 	public Transform[] enemySpawns;
@@ -30,6 +31,7 @@ public class Level : MonoBehaviour {
 	private Player player;
 
 	private int collectedTokens = 0;
+	private int collectedGold = 0;
 	private List<Token> tokens;
 	private List<Token> droppedTokens;
 
@@ -75,6 +77,16 @@ public class Level : MonoBehaviour {
 		return true;
 	}
 
+	public bool TakeTokensAndGold(int tokens, int gold) {
+		if(this.collectedTokens < tokens || this.collectedGold < gold) {
+			return false;
+		}
+
+		ChangeTokensNum(-tokens);
+		ChangeGoldNum(-gold);
+		return true;
+	}
+
 	public void BuildCheckpoint(Vector2 position) {
 		if(this.checkpoint != null && this.checkpoint.gameObject != null) {
 			GameObject.Destroy(this.checkpoint.gameObject); // TODO: pool
@@ -86,6 +98,11 @@ public class Level : MonoBehaviour {
 	private void ChangeTokensNum(int delta) {
 		this.collectedTokens += delta;
 		this.tokensText.text = this.collectedTokens.ToString();
+	}
+
+	private void ChangeGoldNum(int delta) {
+		this.collectedGold += delta;
+		// this.goldText.text = this.collectedGold.ToString();
 	}
 
 	private IEnumerator WaitForRespawn() {

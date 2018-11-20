@@ -23,10 +23,18 @@ public abstract class SpriteAnimator : MonoBehaviour {
     private SpriteRenderer rend;
 
     private SpriteAnimation activeAnimation;
+    private string activeAnimationName;
     private float lastFrameChangeTime;
+
+    private Dictionary<string, SpriteAnimation> animationsDict;
 
     public void Awake() {
         this.rend = this.gameObject.GetComponent<SpriteRenderer>();
+
+        this.animationsDict = new Dictionary<string, SpriteAnimation>(this.animations.Count);
+        foreach(var animation in this.animations) {
+            this.animationsDict.Add(animation.name, animation);
+        }
     }
 
     public void Update() {
@@ -43,11 +51,12 @@ public abstract class SpriteAnimator : MonoBehaviour {
     }
 
     protected void SetActive(string name, bool resetFrames = true, bool resetTime = true) {
-        if(this.activeAnimation != null && this.activeAnimation.name == name) {
+        if(this.activeAnimation != null && this.activeAnimationName == name) {
             return;
         }
 
-        this.activeAnimation = this.animations.Find(o => o.name == name);
+        this.activeAnimation = this.animationsDict[name];
+        this.activeAnimationName = name;
 
         if(resetFrames) {
             this.frame = 0;

@@ -7,11 +7,13 @@ public class BulletTurret : Turret {
     public float damage;
 
 	[Header("Upgrades")]
-	public float[] damageUpgrades;
-	public float[] fireRateUpgrades;
-	public float[] rangeUpgrades;
+	public TurretUpgrade[] damageUpgrades; 
+	public TurretUpgrade[] fireRateUpgrades;
+	public TurretUpgrade[] rangeUpgrades;
 
     private RaycastHit2D[] raycastResults;
+
+    private Level level;
 
 	// upgrades:
 	private int damageLevel = -1;
@@ -21,6 +23,8 @@ public class BulletTurret : Turret {
 
     protected override void Init() {
         this.raycastResults = new RaycastHit2D[32];
+
+        this.level = GameObject.FindObjectOfType<Level>();
     }
 
     public override void Update() {
@@ -38,9 +42,26 @@ public class BulletTurret : Turret {
     }
 
     public override void Upgrade(int id) {
+		TurretUpgrade upgrade = null;
+        if(id == 0) {
+            upgrade = this.damageUpgrades[this.damageLevel + 1];
+        } else if(id == 1) {
+            upgrade = this.fireRateUpgrades[this.fireRateLevel + 1];
+        } else if(id == 1) {
+            upgrade = this.rangeUpgrades[this.rangeLevel + 1];
+        }
+        
+        if(upgrade == null) {
+            return;
+        }
+
+        if(!this.level.TakeTokensAndGold(upgrade.tokenCost, upgrade.goldCost)) {
+            return;
+        }
+
 		if(id == 0) {
 			this.damageLevel++;
-			this.damage = this.damageUpgrades[this.damageLevel];
+			this.damage = this.damageUpgrades[this.damageLevel].value;
             SetStats();
 
             if(this.damageLevel == this.damageUpgrades.Length - 1) {
@@ -48,7 +69,7 @@ public class BulletTurret : Turret {
             }
 		} else if(id == 1) {
             this.fireRateLevel++;
-            this.fireRate = this.fireRateUpgrades[this.fireRateLevel];
+            this.fireRate = this.fireRateUpgrades[this.fireRateLevel].value;
             SetStats();
 
             if(this.fireRateLevel == this.fireRateUpgrades.Length - 1) {
@@ -56,7 +77,7 @@ public class BulletTurret : Turret {
             }
         } else if(id == 2) {
             this.rangeLevel++;
-            this.radius = this.rangeUpgrades[this.rangeLevel];
+            this.radius = this.rangeUpgrades[this.rangeLevel].value;
             CircleDrawer.instance.Draw(this.transform.position, this.radius);
 
             if(this.rangeLevel == this.rangeUpgrades.Length - 1) {
@@ -80,11 +101,11 @@ public class BulletTurret : Turret {
 		CircleDrawer.instance.DisableSecondary();
 
 		if(id == 0) {
-			this.turretInfo.SetTempStat(0, this.damageUpgrades[this.damageLevel + 1].ToString("0.0"));
+			this.turretInfo.SetTempStat(0, this.damageUpgrades[this.damageLevel + 1].value.ToString("0.0"));
 		} else if(id == 1) {
-			this.turretInfo.SetTempStat(1, this.fireRateUpgrades[this.fireRateLevel + 1].ToString("0.0") + "s");
+			this.turretInfo.SetTempStat(1, this.fireRateUpgrades[this.fireRateLevel + 1].value.ToString("0.0") + "s");
 		} else if(id == 2) {
-			CircleDrawer.instance.DrawSecondary(this.rangeUpgrades[this.rangeLevel + 1]);
+			CircleDrawer.instance.DrawSecondary(this.rangeUpgrades[this.rangeLevel + 1].value);
 		}
 	}
 

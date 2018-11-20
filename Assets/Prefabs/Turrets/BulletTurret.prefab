@@ -1067,17 +1067,35 @@ MonoBehaviour:
     m_Bits: 1
   damage: 1
   damageUpgrades:
-  - 1.5
-  - 2.5
-  - 5
+  - tokenCost: 1
+    goldCost: 0
+    value: 1.5
+  - tokenCost: 1
+    goldCost: 0
+    value: 2.5
+  - tokenCost: 1
+    goldCost: 0
+    value: 5
   fireRateUpgrades:
-  - 0.7
-  - 0.4
-  - 0.2
+  - tokenCost: 1
+    goldCost: 0
+    value: 0.7
+  - tokenCost: 1
+    goldCost: 0
+    value: 0.4
+  - tokenCost: 1
+    goldCost: 0
+    value: 0.2
   rangeUpgrades:
-  - 9
-  - 12
-  - 16
+  - tokenCost: 1
+    goldCost: 0
+    value: 9
+  - tokenCost: 1
+    goldCost: 0
+    value: 12
+  - tokenCost: 1
+    goldCost: 0
+    value: 15
 --- !u!114 &114414809476261344
 MonoBehaviour:
   m_ObjectHideFlags: 1
