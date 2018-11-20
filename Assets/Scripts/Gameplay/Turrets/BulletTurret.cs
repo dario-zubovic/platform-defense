@@ -41,14 +41,26 @@ public class BulletTurret : Turret {
 			this.damageLevel++;
 			this.damage = this.damageUpgrades[this.damageLevel];
             SetStats();
+
+            if(this.damageLevel == this.damageUpgrades.Length - 1) {
+                this.upgradeDialog.buttons[0].gameObject.SetActive(false);
+            }
 		} else if(id == 1) {
             this.fireRateLevel++;
             this.fireRate = this.fireRateUpgrades[this.fireRateLevel];
             SetStats();
+
+            if(this.fireRateLevel == this.fireRateUpgrades.Length - 1) {
+                this.upgradeDialog.buttons[1].gameObject.SetActive(false);
+            }
         } else if(id == 2) {
             this.rangeLevel++;
             this.radius = this.rangeUpgrades[this.rangeLevel];
             CircleDrawer.instance.Draw(this.transform.position, this.radius);
+
+            if(this.rangeLevel == this.rangeUpgrades.Length - 1) {
+                this.upgradeDialog.buttons[2].gameObject.SetActive(false);
+            }
         }
 
         CloseUpgradeDialog();

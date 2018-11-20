@@ -687,6 +687,11 @@ MonoBehaviour:
   - {fileID: 4852786424685816}
   - {fileID: 4670016431287758}
   selection: {fileID: 4464420597376550}
+  shortcutLabels:
+  - {fileID: 114706589522388680}
+  - {fileID: 114620570995894454}
+  - {fileID: 114096208727109894}
+  - {fileID: 114649700078088924}
   stand: {fileID: 114789140873926752}
 --- !u!114 &114441520758835036
 MonoBehaviour:
@@ -1329,7 +1334,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 94d5124c5a8004a428e8f8d807f3ed39, type: 3}
-  m_Color: {r: 1, g: 0.9687811, b: 0, a: 1}
+  m_Color: {r: 0.5754717, g: 0.5574177, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

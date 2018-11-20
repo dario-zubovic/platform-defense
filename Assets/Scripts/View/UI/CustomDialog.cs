@@ -1,9 +1,11 @@
+using TMPro;
 using UnityEngine;
 
 public abstract class CustomDialog : MonoBehaviour {
     [Header("Dialog")]
     public Transform[] buttons;
     public Transform selection;
+    public TextMeshPro[] shortcutLabels;
 
     private const float MOVE_DELAY = 0.15f;
 
@@ -21,6 +23,20 @@ public abstract class CustomDialog : MonoBehaviour {
         this.selected = this.buttons.Length - 1;
         this.selection.position = this.activeButton.position;
         this.lastMoveTime = Time.time;
+
+        int j = 1;
+        for(int i = 0; i < this.buttons.Length; i++) {
+            if(!this.buttons[i].gameObject.activeSelf) {
+                continue;
+            }
+
+            if(i == this.buttons.Length - 1) {
+                this.shortcutLabels[i].text = "0";    
+            } else {
+                this.shortcutLabels[i].text = j.ToString();
+                j++;
+            }
+        }
     }
 
     public void Update() {
@@ -112,7 +128,7 @@ public abstract class CustomDialog : MonoBehaviour {
 
             c++;
             if(c == s) {
-                Select(c);
+                Select(i);
                 Pressed(this.selected);
                 return;
             }
