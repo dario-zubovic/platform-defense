@@ -193,7 +193,7 @@ public abstract class Actor : MonoBehaviour {
 				}
 			}
 
-			this.rigid.position += moveVector / originalDist * dist;
+			this.rigid.position += moveVector * (dist / originalDist);
 		}
 
 		// gravity:
@@ -257,7 +257,7 @@ public abstract class Actor : MonoBehaviour {
 				}
 			}
 
-			this.rigid.position += deltaY / originalDist * dist;
+			this.rigid.position += deltaY * (dist / originalDist);
 		}
 
 		this.ignoreGround = false;
