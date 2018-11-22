@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d80edd6caba93514eb01722041fe50b4, type: 3}
+  m_Name: Crystal left RB
+  m_EditorClassIdentifier: 
+  m_Cells:
+  - m_Tile: {fileID: 0}
+    m_Matrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Pivot: {x: 0, y: 0, z: 0}
+  randomTiles:
+  - {fileID: 11400000, guid: b96bd1ef17ef9364db219a527a28b2b0, type: 2}
+  - {fileID: 11400000, guid: 2e0d79806bb3d21488a9c0b4fa13b4f6, type: 2}
+  - {fileID: 11400000, guid: 6331c8103e3832c4bb5305d5417730ab, type: 2}
+  - {fileID: 11400000, guid: da942a98d2eb31849a8741db9eeaaafe, type: 2}
+  - {fileID: 11400000, guid: 0cc40d5e2cd7f654b91dce7a30dce0d9, type: 2}
+  - {fileID: 11400000, guid: 4f6a6b40b22c48f42ba3b7002bdcd72c, type: 2}

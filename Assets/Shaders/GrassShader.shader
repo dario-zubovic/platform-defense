@@ -83,7 +83,8 @@ v2f SpriteVert(appdata_t IN)
         1,_Skew,0,0,
         0,1,0,0,
         0,0,1,0,
-        0,0,0,1);
+        0,0,0,1
+    );
     OUT.vertex = UnityFlipSprite(mul(transformMatrix, IN.vertex), _Flip);
     OUT.vertex = UnityObjectToClipPos(OUT.vertex);
     OUT.texcoord = IN.texcoord;
