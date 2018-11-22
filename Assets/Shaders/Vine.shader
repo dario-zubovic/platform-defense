@@ -1,6 +1,5 @@
 ﻿Shader "Custom/Vine" {
 	Properties {
-		[HideInInspector] _Color ("Color", Color) = (0.5,0.5,0.5,0.5)
 		_MainTex ("Texture", 2D) = "white" {}
 		_P0 ("Point 0", Vector) = (0, 0, 0, 0)
 		_P1 ("Point 1", Vector) = (0, 0, 0, 0)
@@ -61,7 +60,7 @@
 			// }
 
 			// From: http://research.microsoft.com/en-us/um/people/hoppe/ravg.pdf
-			float2 get_distance_vector(float2 b0, float2 b1, float2 b2) {
+			float2 get_distance_vector(float2 b0, float2 b1, float2 b2, out float t) {
 				
 				float a=det(b0,b2), b=2.0*det(b1,b0), d=2.0*det(b2,b1);
 				
@@ -77,21 +76,22 @@
 				float2 d0p=b0-pp;
 				float ap=det(d0p,d20), bp=2.0*det(d10,d0p);
 				// (note that 2*ap+bp+dp=2*a+b+d=4*area(b0,b1,b2))
-				float t=clamp((ap+bp)/(2.0*a+b+d), 0.0 ,1.0);
+				t=clamp((ap+bp)/(2.0*a+b+d), 0.0 ,1.0);
 				return lerp(lerp(b0,b1,t),lerp(b1,b2,t),t);
 
 			}
 
-			float approx_distance(float2 p, float2 b0, float2 b1, float2 b2) {
-				return length(get_distance_vector(b0-p, b1-p, b2-p));
+			float approx_distance(float2 p, float2 b0, float2 b1, float2 b2, out float t) {
+				return length(get_distance_vector(b0-p, b1-p, b2-p, t));
 			}
 
 			float2 _P0, _P1, _P2;
-			float4 _Color;
+			float _Offset;
 			
 			fixed4 frag (v2f i) : SV_Target {
-				if(approx_distance(floor(i.worldPos * 8) * 0.125, _P0, _P1 + float2(0.3 * sin(_Time.y * 1.5 + _P1.x), 0), _P2) < 0.0625) {
-					return tex2D(_MainTex, i.worldPos) * _Color;
+				float t;
+				if(approx_distance(floor(i.worldPos * 8) * 0.125, _P0, _P1 + float2(0.3 * sin(_Time.y * 1.5 + _P1.x), 0), _P2, t) < 0.0625) {
+					return tex2D(_MainTex, float2(t, _Offset));
 				} else {
 					return fixed4(0, 0, 0, 0);
 				}

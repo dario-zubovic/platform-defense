@@ -3,7 +3,7 @@ using UnityEngine;
 public class TutorialFly : MonoBehaviour {
     public Transform[] waypoints;
     public float flightTime;
-    public SpriteRenderer spriteRend;
+    public SpriteRenderer spriteRend, spriteRend2;
     public ParticleSystem particles;
 
     private int waypointId = -1;
@@ -36,7 +36,15 @@ public class TutorialFly : MonoBehaviour {
         if(this.waypointId >= this.waypoints.Length) {
             this.enabled = false;
             this.spriteRend.enabled = false;
+            this.spriteRend2.enabled = false;
             this.particles.Stop();
+            return;
+        }
+
+        if(this.destination.position.x > this.transform.position.x) {
+            this.spriteRend.transform.localScale = new Vector3(1, 1, 1);
+        } else {
+            this.spriteRend.transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 

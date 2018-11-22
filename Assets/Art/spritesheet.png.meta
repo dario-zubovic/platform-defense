@@ -1091,7 +1091,7 @@ TextureImporter:
     21302172: spritesheet_1086
     21302174: spritesheet_1087
     21302176: spritesheet_1088
-    21302178: spritesheet_1089
+    21302178: drone
     21302180: spritesheet_1090
     21302182: icon_gold
     21302184: spritesheet_1092
@@ -24155,7 +24155,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_1089
+      name: drone
       rect:
         serializedVersion: 2
         x: 312

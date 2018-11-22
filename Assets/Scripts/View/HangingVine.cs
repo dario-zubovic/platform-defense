@@ -7,7 +7,7 @@ public class HangingVine : MonoBehaviour {
 	[Range(0, 0.5f)]
 	public float multiplier;
 	public float frequency;
-	public Color color;
+	public float offset;
 
 	private SpriteRenderer rend;
 
@@ -19,7 +19,6 @@ public class HangingVine : MonoBehaviour {
 
 	public void Start() {
 		this.rend = this.gameObject.GetComponent<SpriteRenderer>();
-		this.rend.material.SetColor("_Color", this.color);
 	}
 
 	public void Update() {
@@ -32,6 +31,7 @@ public class HangingVine : MonoBehaviour {
 		this.rend.material.SetVector("_P0", this.point1.position);
 		this.rend.material.SetVector("_P1", this.point2.position + (Vector3)this.skew);
 		this.rend.material.SetVector("_P2", this.point3.position);
+		this.rend.material.SetFloat("_Offset", this.offset);
 	}
 
 	public void OnTriggerEnter2D(Collider2D trigger) {
