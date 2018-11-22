@@ -43,6 +43,8 @@ public abstract class Enemy : Actor {
     protected void Die() {
         Level.instance.AddGold(5);
 
+        GoldDropParticles.instance.Drop(this.transform.position);
+
         GameObject.Destroy(this.gameObject); // TODO: pool
     }
 
