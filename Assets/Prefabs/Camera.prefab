@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 81082047118569778}
   - component: {fileID: 114611625763299232}
   - component: {fileID: 114466034651662460}
+  - component: {fileID: 114469070028322200}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -71,7 +72,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 7991
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -112,7 +113,7 @@ MonoBehaviour:
   parallaxMul: {x: 0.6, y: 0.4}
   dramaColors:
     serializedVersion: 2
-    key0: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
+    key0: {r: 0.5372549, g: 0, b: 0, a: 1}
     key1: {r: 0.5377358, g: 0, b: 0, a: 1}
     key2: {r: 0.3773585, g: 0, b: 0, a: 0}
     key3: {r: 0.1792453, g: 0, b: 0, a: 0}
@@ -139,6 +140,20 @@ MonoBehaviour:
     m_Mode: 1
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
+--- !u!114 &114469070028322200
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1957980537540826}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3917c4230d8350943bba16709a5c4909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: 6e3c5d107bee4c54d8d4d8a76c7234ef, type: 3}
+  color: {r: 0, g: 0.42352942, b: 0.17010511, a: 1}
+  color2: {r: 0.49609914, g: 0, b: 0.8584906, a: 1}
 --- !u!114 &114611625763299232
 MonoBehaviour:
   m_ObjectHideFlags: 1
