@@ -27,6 +27,11 @@ public class Level : MonoBehaviour {
 	public Transform[] enemySpawns;
 	public WaveDescription[] waves;
 
+	public static Level instance {
+		get;
+		private set;
+	}
+
 	private CameraController cameraController;
 	private Player player;
 
@@ -44,6 +49,8 @@ public class Level : MonoBehaviour {
 
 		this.tokens = new List<Token>(GameObject.FindObjectsOfType<Token>());
 		this.droppedTokens = new List<Token>();
+
+		Level.instance = this;
 	}
 
 	public void Start() {
@@ -85,6 +92,18 @@ public class Level : MonoBehaviour {
 		ChangeTokensNum(-tokens);
 		ChangeGoldNum(-gold);
 		return true;
+	}
+
+	public void AddGold(int delta) {
+		ChangeGoldNum(delta);
+	}
+
+	public int GetTokenCount() {
+		return this.collectedTokens;
+	}
+
+	public int GetGoldCount() {
+		return this.collectedGold;
 	}
 
 	public void BuildCheckpoint(Vector2 position) {

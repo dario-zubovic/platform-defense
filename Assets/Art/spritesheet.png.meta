@@ -1093,9 +1093,9 @@ TextureImporter:
     21302176: spritesheet_1088
     21302178: spritesheet_1089
     21302180: spritesheet_1090
-    21302182: spritesheet_1091
+    21302182: icon_gold
     21302184: spritesheet_1092
-    21302186: spritesheet_1093
+    21302186: icon_crystal
     21302188: spritesheet_1094
     21302190: spritesheet_1095
     21302192: spritesheet_1096
@@ -24195,7 +24195,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_1091
+      name: icon_gold
       rect:
         serializedVersion: 2
         x: 328
@@ -24235,7 +24235,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_1093
+      name: icon_crystal
       rect:
         serializedVersion: 2
         x: 344

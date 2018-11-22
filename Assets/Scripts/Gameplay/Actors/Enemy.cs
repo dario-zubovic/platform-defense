@@ -28,7 +28,7 @@ public abstract class Enemy : Actor {
         this.health -= damage;
 
         if(this.health <= 0) {
-            GameObject.Destroy(this.gameObject);
+            Die();
         }
     }
     
@@ -38,6 +38,12 @@ public abstract class Enemy : Actor {
     
 	protected override void BeforeMovementPhase() {
         HandleEffects();
+    }
+
+    protected void Die() {
+        Level.instance.AddGold(5);
+
+        GameObject.Destroy(this.gameObject); // TODO: pool
     }
 
     private void HandleEffects() {
