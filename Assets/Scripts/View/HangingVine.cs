@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class HangingVine : MonoBehaviour {
 	public Transform point1, point2, point3;
 	[Range(0, 0.5f)]
 	public float multiplier;
 	public float frequency;
+	public Color color;
 
 	private SpriteRenderer rend;
 
@@ -19,6 +19,7 @@ public class HangingVine : MonoBehaviour {
 
 	public void Start() {
 		this.rend = this.gameObject.GetComponent<SpriteRenderer>();
+		this.rend.material.SetColor("_Color", this.color);
 	}
 
 	public void Update() {
@@ -27,7 +28,7 @@ public class HangingVine : MonoBehaviour {
 
 		Vector2 targetSkew = this.velocity * Mathf.Sin(this.frequency * (Time.time - this.lastTime));
 		this.skew = Vector2.Lerp(this.skew, targetSkew, 0.075f);
-		
+
 		this.rend.material.SetVector("_P0", this.point1.position);
 		this.rend.material.SetVector("_P1", this.point2.position + (Vector3)this.skew);
 		this.rend.material.SetVector("_P2", this.point3.position);

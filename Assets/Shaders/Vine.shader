@@ -1,6 +1,6 @@
 ﻿Shader "Custom/Vine" {
 	Properties {
-		_Color ("Color", Color) = (0.5,0.5,0.5,0.5)
+		[HideInInspector] _Color ("Color", Color) = (0.5,0.5,0.5,0.5)
 		_MainTex ("Texture", 2D) = "white" {}
 		_P0 ("Point 0", Vector) = (0, 0, 0, 0)
 		_P1 ("Point 1", Vector) = (0, 0, 0, 0)
@@ -90,7 +90,7 @@
 			float4 _Color;
 			
 			fixed4 frag (v2f i) : SV_Target {
-				if(approx_distance(floor(i.worldPos * 8) * 0.125, _P0, _P1 + float2(0.3 * sin(_Time.y), 0), _P2) < 0.125) {
+				if(approx_distance(floor(i.worldPos * 8) * 0.125, _P0, _P1 + float2(0.3 * sin(_Time.y * 1.5 + _P1.x), 0), _P2) < 0.0625) {
 					return tex2D(_MainTex, i.worldPos) * _Color;
 				} else {
 					return fixed4(0, 0, 0, 0);
