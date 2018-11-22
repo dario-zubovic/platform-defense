@@ -48,8 +48,7 @@
 				fixed4 col = tex2D(_MainTex, i.uv);
 
 				float2 worldPos = float2(i.uv.x - 0.5, i.uv.y - 0.5) * unity_OrthoParams.xy + 0.5 * _WorldSpaceCameraPos.xy;
-				worldPos.x = floor(worldPos.x * 16) * 0.0625;
-				worldPos.y = floor(worldPos.y * 16) * 0.0625;
+				worldPos = floor(worldPos * 16) * 0.0625;
 				float l = 2 * length(worldPos - 0.5 * _CircleParams.xy);
 
 				if(l >= _CircleParams.z && l < _CircleParams.z + 0.125) {
