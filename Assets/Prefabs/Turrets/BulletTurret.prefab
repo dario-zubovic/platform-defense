@@ -804,7 +804,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 21093210060757436, guid: 303d7f9ef27aa8e4a818bf072b18f3f5, type: 2}
+  - {fileID: 2100000, guid: 5ff6cefc2733b1c4bb601c08fef8c6a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -979,7 +979,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 21093210060757436, guid: 303d7f9ef27aa8e4a818bf072b18f3f5, type: 2}
+  - {fileID: 2100000, guid: 5ff6cefc2733b1c4bb601c08fef8c6a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1069,7 +1069,7 @@ MonoBehaviour:
   damageUpgrades:
   - tokenCost: 1
     goldCost: 0
-    value: 1.5
+    value: 2
   - tokenCost: 1
     goldCost: 0
     value: 2.5
@@ -1079,7 +1079,7 @@ MonoBehaviour:
   fireRateUpgrades:
   - tokenCost: 1
     goldCost: 0
-    value: 0.7
+    value: 0.5
   - tokenCost: 1
     goldCost: 0
     value: 0.4

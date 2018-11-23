@@ -7,7 +7,7 @@ public class TutorialFly : MonoBehaviour {
     public ParticleSystem particles;
 
     private int waypointId = -1;
-    private float flightStartTime;
+    private float flightStartTime = -100;
     private Vector2 flightStartPos;
 
     private Transform destination {

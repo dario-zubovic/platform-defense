@@ -9,17 +9,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7f49b7c25b6e2f4d98e1e8d4802ab01, type: 3}
-  m_Name: Wave2
+  m_Name: Wave3
   m_EditorClassIdentifier: 
+  description: 
   waves:
   - {fileID: 11400000, guid: b8c43ec00d18d4443b9a7d55885b031d, type: 2}
+  - {fileID: 11400000, guid: a57d7c515316b9e4699b26bf9b23cdd6, type: 2}
   - {fileID: 11400000, guid: b8c43ec00d18d4443b9a7d55885b031d, type: 2}
+  - {fileID: 11400000, guid: a57d7c515316b9e4699b26bf9b23cdd6, type: 2}
   - {fileID: 11400000, guid: b8c43ec00d18d4443b9a7d55885b031d, type: 2}
-  - {fileID: 11400000, guid: b8c43ec00d18d4443b9a7d55885b031d, type: 2}
-  - {fileID: 11400000, guid: b8c43ec00d18d4443b9a7d55885b031d, type: 2}
+  - {fileID: 11400000, guid: a57d7c515316b9e4699b26bf9b23cdd6, type: 2}
   delays:
   - 0
-  - 5
-  - 10
+  - 3
+  - 6
+  - 9
+  - 12
   - 15
-  - 20

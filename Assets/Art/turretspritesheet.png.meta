@@ -4,6 +4,8 @@ TextureImporter:
   fileIDToRecycleName:
     21300000: turretspritesheet_0
     21300002: turretspritesheet_1
+    21300004: turretspritesheet_2
+    21300006: turretspritesheet_3
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -122,7 +124,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa1e5c3fe11deb44b8c0899868948ad6
+      spriteID: 74f112e12f791d946939951567381f5e
       vertices: []
       indices: 
       edges: []
@@ -142,7 +144,47 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe924ee8d96a2a14984a38224a103006
+      spriteID: 9576d7256c517f24398b8e13876c5c7f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: turretspritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c12a1c8e59ead9647b9ace3550ef7457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: turretspritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 642f23a033e8ca04a944bc7cbf12a2df
       vertices: []
       indices: 
       edges: []
