@@ -63,20 +63,15 @@
 			float2 get_distance_vector(float2 b0, float2 b1, float2 b2, out float t) {
 				
 				float a=det(b0,b2), b=2.0*det(b1,b0), d=2.0*det(b2,b1);
-				
-				// if( abs(2.0*a+b+d) < 0.0 ) {
-				// 	return closestPointInSegment(b0,b2);
-				// }
+
 
 				float f=b*d-a*a;
-				float2 d21=b2-b1, d10=b1-b0, d20=b2-b0;
-				float2 gf=2.0*(b*d21+d*d10+a*d20);
+				float2 d10=b1-b0, d20=b2-b0;
+				float2 gf=2.0*(b*(b2-b1)+d*d10+a*d20);
 				gf=float2(gf.y,-gf.x);
-				float2 pp=-f*gf/dot(gf,gf);
-				float2 d0p=b0-pp;
-				float ap=det(d0p,d20), bp=2.0*det(d10,d0p);
-				// (note that 2*ap+bp+dp=2*a+b+d=4*area(b0,b1,b2))
-				t=clamp((ap+bp)/(2.0*a+b+d), 0.0 ,1.0);
+				float2 d0p=b0+f*gf/dot(gf,gf);
+
+				t=clamp((det(d0p,d20)+2.0*det(d10,d0p))/(2.0*a+b+d), 0.0 ,1.0);
 				return lerp(lerp(b0,b1,t),lerp(b1,b2,t),t);
 
 			}

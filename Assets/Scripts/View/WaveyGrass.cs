@@ -7,6 +7,8 @@ public class WaveyGrass : MonoBehaviour {
 	public float multiplier;
 	public float frequency;
 
+	public float offsetMul = 1f;
+
 	private Material mat;
 
 	private float targetSpeed;
@@ -27,7 +29,7 @@ public class WaveyGrass : MonoBehaviour {
 		this.skew = Mathf.Lerp(this.skew, targetSkew, 0.075f);
 
 		this.mat.SetFloat("_Skew", this.skew);
-		this.transform.localPosition = new Vector3(this.skew * 0.5f, 0, 0);
+		this.transform.localPosition = new Vector3(this.offsetMul * this.skew * 0.5f, 0, 0);
 	}
 
 	public void OnTriggerEnter2D(Collider2D trigger) {
@@ -36,7 +38,7 @@ public class WaveyGrass : MonoBehaviour {
 		}
 
 		Actor actor = trigger.gameObject.GetComponent<Actor>();
-		Vector2 vel = actor.GetVelocity() * this.multiplier;
+		Vector2 vel = actor.GetVelocity() * this.multiplier * Mathf.Sign(this.offsetMul);
 		if(Mathf.Abs(vel.x) > Mathf.Abs(this.targetSpeed)) {
 			this.targetSpeed = vel.x;
 			this.lastTime = Time.time;
