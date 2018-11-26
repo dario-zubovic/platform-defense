@@ -12,6 +12,7 @@ public abstract class Turret : MonoBehaviour {
 	[Header("Visuals")]
 	public TurretInfo turretInfo;
 	public UpgradeTurretDialog upgradeDialog;
+    public CostIndicator costIndicator;
 	public Transform barrel;
 	public float slewHomeWait;
 	public float slewHomeTime;
@@ -100,6 +101,7 @@ public abstract class Turret : MonoBehaviour {
 		this.turretInfo.ResetTempStats();
 		CircleDrawer.instance.DisableSecondary();
 		this.upgradeDialog.gameObject.SetActive(false);
+		this.costIndicator.gameObject.SetActive(false);
 	}
 
 

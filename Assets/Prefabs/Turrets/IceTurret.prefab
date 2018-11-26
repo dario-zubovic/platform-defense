@@ -118,9 +118,10 @@ MonoBehaviour:
     m_Bits: 1024
   turretInfo: {fileID: 0}
   upgradeDialog: {fileID: 0}
+  costIndicator: {fileID: 0}
   barrel: {fileID: 4843556196264826}
-  slewHomeWait: 0
-  slewHomeTime: 0
+  slewHomeWait: 3
+  slewHomeTime: 2
   speed: 10
   projectilePrefab: {fileID: 114371218778764414, guid: 99391706d7a07484e86fb0994694dca8,
     type: 2}

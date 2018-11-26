@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletTurret : Turret {
+
     [Header("Projectile")]
     public LayerMask wallLayer;
     public float damage;
@@ -42,15 +43,7 @@ public class BulletTurret : Turret {
     }
 
     public override void Upgrade(int id) {
-		TurretUpgrade upgrade = null;
-        if(id == 0) {
-            upgrade = this.damageUpgrades[this.damageLevel + 1];
-        } else if(id == 1) {
-            upgrade = this.fireRateUpgrades[this.fireRateLevel + 1];
-        } else if(id == 1) {
-            upgrade = this.rangeUpgrades[this.rangeLevel + 1];
-        }
-        
+		TurretUpgrade upgrade = GetUpgradeById(id);        
         if(upgrade == null) {
             return;
         }
@@ -99,15 +92,37 @@ public class BulletTurret : Turret {
     public override void PreviewUpgrade(int id) {
 		this.turretInfo.ResetTempStats();
 		CircleDrawer.instance.DisableSecondary();
+        
+		TurretUpgrade upgrade = GetUpgradeById(id);
 
 		if(id == 0) {
-			this.turretInfo.SetTempStat(0, this.damageUpgrades[this.damageLevel + 1].value.ToString("0.0"));
+			this.turretInfo.SetTempStat(0, upgrade.value.ToString("0.0"));
 		} else if(id == 1) {
-			this.turretInfo.SetTempStat(1, this.fireRateUpgrades[this.fireRateLevel + 1].value.ToString("0.0") + "s");
+			this.turretInfo.SetTempStat(1, upgrade.value.ToString("0.0") + "s");
 		} else if(id == 2) {
-			CircleDrawer.instance.DrawSecondary(this.rangeUpgrades[this.rangeLevel + 1].value);
+			CircleDrawer.instance.DrawSecondary(upgrade.value);
 		}
+
+        if(upgrade == null) {
+            this.costIndicator.gameObject.SetActive(false);
+        } else {
+            this.costIndicator.gameObject.SetActive(true);
+            this.costIndicator.SetCost(upgrade.tokenCost, upgrade.goldCost);
+        }
 	}
+
+    private TurretUpgrade GetUpgradeById(int id) {
+        switch(id) {
+            case 0:
+                return this.damageUpgrades[this.damageLevel + 1];
+            case 1:
+                return this.fireRateUpgrades[this.fireRateLevel + 1];
+            case 2:
+                return this.rangeUpgrades[this.rangeLevel + 1];
+        }
+
+        return null;
+    }
 
 	protected override Enemy Filter(SortedList<float, GameObject> sortedOverlapResults) {
         GameObject targetGo = null;
