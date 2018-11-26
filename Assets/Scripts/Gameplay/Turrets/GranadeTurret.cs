@@ -58,9 +58,13 @@ public class GranadeTurret : Turret {
                 c.a = Mathf.RoundToInt(t * 5) % 2 == 0 ? 0.6f : 0f;
             }
 
-
             rend.color = c;
         }
+
+        this.aim.position = this.lockedEnemy.transform.position;
+        float angle = 0;
+        CanBeReached(this.lockedEnemy.transform.position, out angle, true);
+        SetBarrelRotation(angle);
     }
 
     public override void FixedUpdate() {
