@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Name: JumpUp
   m_EditorClassIdentifier: 
   framerate: 0.083333336
-  loop: 1
+  loop: 0
   frames:
-  - {fileID: 21300008, guid: c9bc4ee998e1f934890b907ee4eee656, type: 3}
+  - {fileID: 21300008, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
+  - {fileID: 21300010, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
+  - {fileID: 21300012, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}

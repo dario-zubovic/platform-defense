@@ -9,9 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4906012d9e51e524089687d802dc5bc3, type: 3}
-  m_Name: JumpUp
+  m_Name: JumpLand
   m_EditorClassIdentifier: 
   framerate: 0.083333336
-  loop: 1
+  loop: 0
   frames:
-  - {fileID: 21300008, guid: c9bc4ee998e1f934890b907ee4eee656, type: 3}
+  - {fileID: 21300022, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
+  - {fileID: 21300024, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
+  - {fileID: 21300026, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
