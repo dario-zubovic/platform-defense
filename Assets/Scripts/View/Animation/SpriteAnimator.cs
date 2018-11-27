@@ -67,6 +67,10 @@ public abstract class SpriteAnimator : MonoBehaviour {
         }
     }
 
+    public void SetFrame(int frame) {
+        this.frame = frame;
+    }
+
     protected void SetActive(string name, bool resetFrames = true, bool resetTime = true) {
         if(this.activeAnimation != null && this.activeAnimationName == name) {
             return;

@@ -5,8 +5,9 @@ using UnityEngine;
 public class DisappearingPlatform : Platform {
 	public float duration;
 	public float wait;
-	public Color color;
-	public float colorChangeDuration;
+	public float animationDuration;
+	public SpriteAnimator animator;
+	public SpriteRenderer rend;
 
 	public override PlatformType type {
 		get {
@@ -15,7 +16,6 @@ public class DisappearingPlatform : Platform {
 	}
 
 	private BoxCollider2D coll;
-	private SpriteRenderer rend;
 
 	private bool started, disappeared;
 	private float startTime;
@@ -24,15 +24,10 @@ public class DisappearingPlatform : Platform {
 	private ContactFilter2D contactFilter;
 	private Collider2D[] overlapResults;
 
-	private Color startColor;
-
 	private float seed;
 
 	public void Start() {
 		this.coll = this.gameObject.GetComponent<BoxCollider2D>();
-		this.rend = this.gameObject.GetComponent<SpriteRenderer>();
-
-		this.startColor = this.rend.color;
 
 		this.contactFilter = new ContactFilter2D();
 		this.contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(this.gameObject.layer));
@@ -57,14 +52,15 @@ public class DisappearingPlatform : Platform {
 			float delta = Time.time - this.startTime;
 
 			if(delta < this.duration) {
-				this.rend.color = Color.Lerp(this.startColor, this.color, delta / this.colorChangeDuration);
-				SetProgress(Mathf.Clamp01( (delta - this.colorChangeDuration) / (this.duration - this.colorChangeDuration) ) );
+				this.animator.enabled = true;
+				SetProgress(Mathf.Clamp01( (delta - this.animationDuration) / (this.duration - this.animationDuration) ) );
 			}
 			
 			if(!this.disappeared && delta > this.duration) {
 				this.coll.enabled = false;
-				this.rend.enabled = false;
+				this.animator.enabled = false;
 				this.disappeared = true;
+				SetProgress(1);
 			} else if(this.disappeared && delta > this.duration + this.wait) {
 				this.shouldAppear = true;
 			}
@@ -81,7 +77,9 @@ public class DisappearingPlatform : Platform {
 
 			if(doAppear) {
 				this.coll.enabled = true;
-				this.rend.enabled = true;
+				this.rend.sprite = this.animator.animations[0].frames[0];
+				this.animator.enabled = false;
+				this.animator.SetFrame(0);
 				this.disappeared = false;
 				this.started = false;
 
@@ -102,15 +100,15 @@ public class DisappearingPlatform : Platform {
 	}
 
 	private IEnumerator ReappearCor() {
-		this.rend.color = this.startColor;
-
 		float begin = Time.time;
-		float dur = this.duration - this.colorChangeDuration;
+		float dur = this.duration - this.animationDuration;
 
 		while(Time.time - begin < dur && !this.started) {
 			SetProgress(1 - ( (Time.time - begin) / dur ) );
 			yield return null;
 		}
+
+		SetProgress(0);
 
 		yield return null;
 	}
