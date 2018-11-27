@@ -117500,7 +117500,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 2048
+    maxNumParticles: 1024
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -119621,7 +119621,7 @@ ParticleSystem:
     scrollSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.49
       minScalar: 0
       maxCurve:
         serializedVersion: 2

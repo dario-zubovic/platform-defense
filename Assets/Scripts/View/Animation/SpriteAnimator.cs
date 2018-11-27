@@ -43,8 +43,17 @@ public abstract class SpriteAnimator : MonoBehaviour {
         }
 
         if(Time.time - this.lastFrameChangeTime > this.activeAnimation.framerate) {
-            this.frame = (this.frame + 1) % this.activeAnimation.frames.Count;
             this.lastFrameChangeTime = Time.time;
+
+            this.frame++;
+            if(this.frame >= this.activeAnimation.frames.Count) {
+                if(this.activeAnimation.loop) {
+                    this.frame = 0;
+                } else {
+                    this.frame--;
+                    return;
+                }
+            }
 
             this.rend.sprite = this.activeAnimation.frames[this.frame];
         }

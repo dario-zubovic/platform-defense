@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4900882754880740}
   - component: {fileID: 114050138279965586}
-  - component: {fileID: 70894381723984448}
+  - component: {fileID: 61556984138283458}
   - component: {fileID: 50080297180553972}
   m_Layer: 10
   m_Name: BouncyEnemy
@@ -69,7 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4501863334089364}
   - component: {fileID: 212690334176734130}
-  - component: {fileID: 114262029966456900}
+  - component: {fileID: 114315757131204782}
   m_Layer: 10
   m_Name: Sprite
   m_TagString: Untagged
@@ -152,8 +152,8 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &70894381723984448
-CapsuleCollider2D:
+--- !u!61 &61556984138283458
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -164,9 +164,19 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0, y: -1.15}
-  m_Size: {x: 2.5, y: 1.63}
-  m_Direction: 1
+  m_Offset: {x: 0, y: -1.25}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.55, y: 1.5}
+  m_EdgeRadius: 0
 --- !u!114 &114050138279965586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -188,10 +198,14 @@ MonoBehaviour:
   healthIndicator: {fileID: 4383566073588522}
   moveRight: 0
   jumpWaitTimeMin: 1.5
-  jumpWaitTimeMax: 7
-  jumpSpeed: 17.5
+  jumpWaitTimeMax: 12
+  prepareForJumpTime: 0.33333334
+  landTime: 0.33333334
+  jumpSpeedMin: 18
+  jumpSpeedMax: 19
   spriteTransform: {fileID: 4501863334089364}
---- !u!114 &114262029966456900
+  animator: {fileID: 114315757131204782}
+--- !u!114 &114315757131204782
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,11 +213,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1846858531873356}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a14285454cec7c749b5ec1a27e94d9ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 09e35b2829c5f3e46ab7112606e8104c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animations:
   - {fileID: 11400000, guid: 84ccc2337870fdd419555560462ba0b3, type: 2}
+  - {fileID: 11400000, guid: 5ddccba583d406140937687d345a7067, type: 2}
+  - {fileID: 11400000, guid: 3ca6650c5ff41174b9881fbc8aa6f221, type: 2}
+  - {fileID: 11400000, guid: 345546caa07b2fd458feb3de25f7d9bf, type: 2}
+  - {fileID: 11400000, guid: 66eb325d75ef9ba4a8d7b8ab47d44b9d, type: 2}
+  - {fileID: 11400000, guid: e7a0bdd86e5a8a846bbba34c3279f13a, type: 2}
+  fallSpeedThreshold: 0.5
+  jumpMidPointSpeedThreshold: 1
 --- !u!212 &212507312170030946
 SpriteRenderer:
   m_ObjectHideFlags: 1

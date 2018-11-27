@@ -16,8 +16,12 @@ public abstract class Enemy : Actor {
 
     protected override void Init() {
         this.health = this.startHealth;
-
-        this.effects = new List<EnemyEffect>(64);
+        
+        if(this.effects == null) {
+            this.effects = new List<EnemyEffect>(64);
+        } else {
+            this.effects.Clear();
+        }
     }
 
     public void Update() {
