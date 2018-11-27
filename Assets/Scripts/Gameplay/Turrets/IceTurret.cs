@@ -49,9 +49,9 @@ public class IceTurret : Turret {
     }
 
     private bool CanBeReached(Vector2 target) {
-        Vector2 dir = target - (Vector2)this.transform.position;
+        Vector2 dir = target - (Vector2)this.barrel.position;
         
-        int c = Physics2D.RaycastNonAlloc(this.transform.position, dir, this.raycastResults, dir.magnitude, this.wallLayer);
+        int c = Physics2D.RaycastNonAlloc(this.barrel.position, dir, this.raycastResults, dir.magnitude, this.wallLayer);
 
         for(int i = 0; i < c; i++) {
             if(this.raycastResults[i].collider != null && !this.raycastResults[i].collider.isTrigger) {

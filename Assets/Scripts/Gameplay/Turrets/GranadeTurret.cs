@@ -211,7 +211,7 @@ public class GranadeTurret : Turret {
     }
 
     private bool CanBeReached(Vector2 target, out float reachAngle, bool force = false) {
-        Vector2 delta = target - new Vector2(this.transform.position.x, this.transform.position.y);
+        Vector2 delta = target - (Vector2)this.barrel.position;
         bool flip = delta.x < 0;
         delta.x = Mathf.Abs(delta.x);
 
@@ -250,7 +250,7 @@ public class GranadeTurret : Turret {
         
         float timeOfFlight = ( this.speed * sin + Mathf.Sqrt( this.speed*this.speed*sin*sin - 2*g*delta.y ) ) / g;
 
-        Vector2 previousPos = this.transform.position;
+        Vector2 previousPos = this.barrel.position;
         Vector2 newPos; 
 
         for(int i = 1; i <= PROJECTILE_CHECK_SUBDIVISIONS; i++) {
@@ -260,8 +260,7 @@ public class GranadeTurret : Turret {
                 this.speed * t * cos,
                 this.speed * t * sin - 0.5f * g * t * t
             );
-            newPos.x += this.transform.position.x;
-            newPos.y += this.transform.position.y;
+            newPos += (Vector2)this.barrel.position;
 
             // Debug.DrawLine(previousPos, newPos, Color.red, 0.1f);
             

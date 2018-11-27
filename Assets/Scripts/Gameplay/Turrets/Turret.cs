@@ -147,7 +147,7 @@ public abstract class Turret : MonoBehaviour {
 			return;
 		}
 
-		Vector2 delta = target.transform.position - this.transform.position;
+		Vector2 delta = target.transform.position - this.barrel.position;
 
 		float angle = Mathf.Atan2(delta.y, delta.x);
 		SetBarrelRotation(angle);
