@@ -2121,11 +2121,11 @@ MonoBehaviour:
   - tokenCost: 0
     goldCost: 100
     value: 1
-  - tokenCost: 1
+  - tokenCost: 0
     goldCost: 150
     value: 2
   - tokenCost: 1
-    goldCost: 200
+    goldCost: 150
     value: 4
   damageHighUpgrades:
   - tokenCost: 0
@@ -2141,11 +2141,11 @@ MonoBehaviour:
   - tokenCost: 0
     goldCost: 100
     value: 4
-  - tokenCost: 1
+  - tokenCost: 0
     goldCost: 150
     value: 5
   - tokenCost: 1
-    goldCost: 200
+    goldCost: 150
     value: 7
 --- !u!114 &114943036006523294
 MonoBehaviour:

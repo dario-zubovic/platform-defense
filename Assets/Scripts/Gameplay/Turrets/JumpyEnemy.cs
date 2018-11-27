@@ -25,6 +25,11 @@ public class JumpyEnemy : GroundEnemy {
         this.nextJumpTime = Time.time + Random.Range(this.jumpWaitTimeMin, this.jumpWaitTimeMax);
     }
 
+    protected override void Die() {
+        base.Die();
+        
+        this.dead = true;
+    }
     
 	protected override void MidMovementPhase() {
         base.MidMovementPhase();

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Name: Walljump
   m_EditorClassIdentifier: 
   framerate: 0.083333336
+  loop: 1
   frames:
   - {fileID: 21300024, guid: c9bc4ee998e1f934890b907ee4eee656, type: 3}

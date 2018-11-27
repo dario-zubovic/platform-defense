@@ -22,11 +22,15 @@ public class PlayerAnimator : SpriteAnimator {
         // change state if needed:
 
         bool wasIdle = this.state == State.Idle;
+        bool wasRunning = this.state == State.Run;
+        bool wasJumping = this.state == State.Jump || this.state == State.WallJump;
         bool wasWallJumping = false;
 
         if(this.state == State.Dead && !dead) {
             this.state = State.Idle;
         }
+        
+        string runAnimName = "Run";
 
         switch(this.state) {
             case State.Idle:
@@ -101,10 +105,20 @@ public class PlayerAnimator : SpriteAnimator {
             case State.Idle:
                 {
                     if(!wasIdle) {
-                        this.idleAnimName = "Idle";
+                        if(wasRunning) {
+                            this.idleAnimName = "IdleSlowdown";
+                        } else if(wasJumping) {
+                            this.idleAnimName = "JumpLand";
+                        } else {
+                            this.idleAnimName = "Idle";
+                        }
                     } else {
                         if(this.idleAnimName == "IdleCapeWave") {
                             if(this.frame == 0) {
+                                this.idleAnimName = "Idle";
+                            }
+                        } else if(this.idleAnimName != "Idle") {
+                            if(this.finishedSingleShot) {
                                 this.idleAnimName = "Idle";
                             }
                         } else {
@@ -132,7 +146,11 @@ public class PlayerAnimator : SpriteAnimator {
 
             case State.Run:
                 {
-                    
+                    // if(!wasRunning) {
+                    //     if(wasJumping) {
+
+                    //     }
+                    // }
                 }
                 break;
 
@@ -151,10 +169,10 @@ public class PlayerAnimator : SpriteAnimator {
                 SetActive(this.idleAnimName);
                 break;
             case State.Run:
-                SetActive("Run");
+                SetActive(runAnimName);
                 break;
             case State.WallSlide:
-                SetActive("Wallslide2");
+                SetActive("Wallslide1");
                 break;
             case State.WallJump:
                 SetActive("Walljump");
@@ -174,6 +192,9 @@ public class PlayerAnimator : SpriteAnimator {
                         SetActive("JumpDownFast");
                         break;
                 }
+                break;
+            case State.Dead:
+                SetActive("Death");
                 break;
         }
 

@@ -44,7 +44,7 @@ public abstract class Enemy : Actor {
         HandleEffects();
     }
 
-    protected void Die() {
+    protected virtual void Die() {
         Level.instance.AddGold(5);
 
         GoldDropParticles.instance.Drop(this.transform.position);

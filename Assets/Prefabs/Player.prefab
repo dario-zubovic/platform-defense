@@ -161,6 +161,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6b5aa12ec94d1444b8cea68e3979d0da, type: 2}
   - {fileID: 11400000, guid: 179f80afb85439142adcc2de9e5700fd, type: 2}
   - {fileID: 11400000, guid: f210e4415531b84408b566e1b87cbda5, type: 2}
+  - {fileID: 11400000, guid: a8ee4d5e775bd5e48965c587068ea6c8, type: 2}
+  - {fileID: 11400000, guid: 019ee49d7be9f2b40aba1f11344e46b1, type: 2}
+  - {fileID: 11400000, guid: 0c49bbe346c468c488040940a2a7e143, type: 2}
   runningHorizontalSpeedThreshold: 0.5
   fallSpeedThreshold: 1.5
   jumpMidPointSpeedThreshold: 5
@@ -4824,6 +4827,6 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0

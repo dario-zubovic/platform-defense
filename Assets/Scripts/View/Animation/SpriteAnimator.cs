@@ -20,6 +20,11 @@ public abstract class SpriteAnimator : MonoBehaviour {
         }
     }
 
+    public bool finishedSingleShot {
+        get;
+        private set;
+    }
+
     private SpriteRenderer rend;
 
     private SpriteAnimation activeAnimation;
@@ -37,7 +42,7 @@ public abstract class SpriteAnimator : MonoBehaviour {
         }
     }
 
-    public void Update() {
+    public void LateUpdate() {
         if(this.activeAnimation == null) {
             return;
         }
@@ -45,12 +50,15 @@ public abstract class SpriteAnimator : MonoBehaviour {
         if(Time.time - this.lastFrameChangeTime > this.activeAnimation.framerate) {
             this.lastFrameChangeTime = Time.time;
 
+            this.finishedSingleShot = false;
+
             this.frame++;
             if(this.frame >= this.activeAnimation.frames.Count) {
                 if(this.activeAnimation.loop) {
                     this.frame = 0;
                 } else {
                     this.frame--;
+                    this.finishedSingleShot = true;
                     return;
                 }
             }
@@ -72,6 +80,11 @@ public abstract class SpriteAnimator : MonoBehaviour {
         }
 
         if(resetTime) {
+            if(resetFrames) {
+                this.frame = -1;
+            } else {
+                this.frame--;
+            }
             this.lastFrameChangeTime = -100;
         }
     }
