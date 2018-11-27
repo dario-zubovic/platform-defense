@@ -2119,13 +2119,13 @@ MonoBehaviour:
   - {fileID: 212468665835229394}
   damageLowUpgrades:
   - tokenCost: 0
-    goldCost: 100
+    goldCost: 75
     value: 1
   - tokenCost: 0
-    goldCost: 150
+    goldCost: 125
     value: 2
   - tokenCost: 1
-    goldCost: 150
+    goldCost: 125
     value: 4
   damageHighUpgrades:
   - tokenCost: 0
@@ -2139,13 +2139,13 @@ MonoBehaviour:
     value: 11
   blastRadiusUpgrades:
   - tokenCost: 0
-    goldCost: 100
+    goldCost: 75
     value: 4
   - tokenCost: 0
-    goldCost: 150
+    goldCost: 125
     value: 5
-  - tokenCost: 1
-    goldCost: 150
+  - tokenCost: 0
+    goldCost: 125
     value: 7
 --- !u!114 &114943036006523294
 MonoBehaviour:

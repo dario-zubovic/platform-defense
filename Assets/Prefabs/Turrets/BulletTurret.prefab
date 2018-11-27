@@ -1569,14 +1569,14 @@ MonoBehaviour:
     goldCost: 0
     value: 0.2
   rangeUpgrades:
-  - tokenCost: 1
-    goldCost: 0
+  - tokenCost: 0
+    goldCost: 50
     value: 9
-  - tokenCost: 1
-    goldCost: 0
+  - tokenCost: 0
+    goldCost: 75
     value: 12
-  - tokenCost: 1
-    goldCost: 0
+  - tokenCost: 0
+    goldCost: 100
     value: 15
 --- !u!114 &114079593792393416
 MonoBehaviour:
