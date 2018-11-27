@@ -194,6 +194,12 @@ MonoBehaviour:
   airDrag: 0.05
   wallSlideDamping: 0.75
   speedMultipler: 1
+  normalLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  deadLayer:
+    serializedVersion: 2
+    m_Bits: 8192
   startHealth: 3
   healthIndicator: {fileID: 4383566073588522}
   moveRight: 0
@@ -223,6 +229,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 345546caa07b2fd458feb3de25f7d9bf, type: 2}
   - {fileID: 11400000, guid: 66eb325d75ef9ba4a8d7b8ab47d44b9d, type: 2}
   - {fileID: 11400000, guid: e7a0bdd86e5a8a846bbba34c3279f13a, type: 2}
+  - {fileID: 11400000, guid: 1ad58659e1ac65342b36553adade3222, type: 2}
   fallSpeedThreshold: 0.5
   jumpMidPointSpeedThreshold: 1
 --- !u!212 &212507312170030946

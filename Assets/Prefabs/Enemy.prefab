@@ -212,6 +212,13 @@ MonoBehaviour:
   groundFriction: 0.3
   airDrag: 0.05
   wallSlideDamping: 0.75
+  speedMultipler: 1
+  normalLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  deadLayer:
+    serializedVersion: 2
+    m_Bits: 8192
   startHealth: 7
   healthIndicator: {fileID: 4717870694244044}
   moveRight: 0

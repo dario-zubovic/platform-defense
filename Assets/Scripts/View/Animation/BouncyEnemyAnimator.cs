@@ -6,7 +6,13 @@ public class BouncyEnemyAnimator : SpriteAnimator {
 
     private State state;
     private JumpPhase jumpPhase;
-    
+
+    private JumpyEnemy enemy;
+
+    public void Start() {
+        this.enemy = this.gameObject.GetComponentInParent<JumpyEnemy>();
+    }
+
     public void Refresh(Vector2 velocity, bool grounded, bool jumped, bool prepareForJump, bool landed, bool dead) {
         // change state:
 
@@ -64,6 +70,14 @@ public class BouncyEnemyAnimator : SpriteAnimator {
                     }
                 }
                 break;
+
+            case State.Dead:
+                {
+                    if(this.finishedSingleShot) {
+                        this.enemy.FullDeath();
+                    }
+                }
+                break;
         }
 
         // set animation according to state:
@@ -99,6 +113,12 @@ public class BouncyEnemyAnimator : SpriteAnimator {
             case State.JumpLand:
                 {
                     SetActive("JumpLand");
+                }
+                break;
+
+            case State.Dead:
+                {
+                    SetActive("Death");
                 }
                 break;
         }

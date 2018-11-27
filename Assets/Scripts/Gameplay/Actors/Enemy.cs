@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Enemy : Actor {
+
     [Header("Enemy stats")]
     public float startHealth;
 
@@ -22,9 +23,13 @@ public abstract class Enemy : Actor {
         } else {
             this.effects.Clear();
         }
+
+        this.gameObject.layer = LayerMask.NameToLayer("Enemy");
     }
 
     public void Update() {
+        
+        this.healthIndicator.localEulerAngles = new Vector3(0, facingRight ? 0f : 180f, 0);
         this.healthIndicator.localScale = new Vector3(this.health / this.startHealth, 1, 1);
     }
 
@@ -45,11 +50,7 @@ public abstract class Enemy : Actor {
     }
 
     protected virtual void Die() {
-        Level.instance.AddGold(5);
-
-        GoldDropParticles.instance.Drop(this.transform.position);
-
-        GameObject.Destroy(this.gameObject); // TODO: pool
+        this.gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
     }
 
     private void HandleEffects() {

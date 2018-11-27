@@ -7,9 +7,25 @@ public class GroundEnemy : Enemy {
     [Header("Enemy settings")]
     public bool moveRight;
 
+    protected bool dead;
+
     protected override void Init() {
         base.Init();
+    }
+
+    protected override void Die() {
+        base.Die();
         
-        this.input = this.moveRight ? Vector2.right : Vector2.left;
+        this.dead = true;
+    }
+    
+	protected override void BeforeMovementPhase() {
+        base.BeforeMovementPhase();
+
+        if(this.dead) {
+            this.input = Vector2.zero;
+        } else {
+            this.input = this.moveRight ? Vector2.right : Vector2.left;
+        }
     }
 }

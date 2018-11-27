@@ -15,7 +15,14 @@ public class JumpyEnemy : GroundEnemy {
     private bool jumped;
     private bool prepareForJump;
     private bool landed;
-    private bool dead;
+
+    public void FullDeath() {
+        Level.instance.AddGold(5);
+
+        GoldDropParticles.instance.Drop(this.transform.position);
+    
+        GameObject.Destroy(this.gameObject);
+    }
 
     protected override void Init() {
         base.Init();
@@ -24,13 +31,11 @@ public class JumpyEnemy : GroundEnemy {
 
         this.nextJumpTime = Time.time + Random.Range(this.jumpWaitTimeMin, this.jumpWaitTimeMax);
     }
-
+    
     protected override void Die() {
         base.Die();
-        
-        this.dead = true;
     }
-    
+
 	protected override void MidMovementPhase() {
         base.MidMovementPhase();
 
