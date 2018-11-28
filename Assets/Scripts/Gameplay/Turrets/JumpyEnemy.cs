@@ -52,13 +52,15 @@ public class JumpyEnemy : GroundEnemy {
                 Jump();
                 this.jumped = true;
             } else if(Time.time >= this.nextJumpTime - this.prepareForJumpTime) {
-                this.prepareForJump = true;
+                if(this.groundNormal.y < 0.95f) {
+                    this.nextJumpTime += this.jumpWaitTimeMin;
+                } else {
+                    this.prepareForJump = true;
+                }
             } else if(Time.time - this.groundedTime <= this.landTime) {
                 this.landed = true;
             }
         }
-        
-        this.spriteTransform.localEulerAngles = new Vector3(0, 0, 90f - Mathf.Atan2(this.groundNormal.y, this.groundNormal.x) * Mathf.Rad2Deg);
     }
 
     protected override void AfterMovementPhase() {

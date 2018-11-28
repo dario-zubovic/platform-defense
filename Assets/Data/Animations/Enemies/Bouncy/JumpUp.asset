@@ -14,6 +14,5 @@ MonoBehaviour:
   framerate: 0.083333336
   loop: 0
   frames:
+  - {fileID: 21300006, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
   - {fileID: 21300008, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
-  - {fileID: 21300010, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
-  - {fileID: 21300012, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
