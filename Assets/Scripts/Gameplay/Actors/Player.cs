@@ -80,7 +80,7 @@ public class Player : Actor {
 		HandleInput();
 
 		Vector2 localPos = this.animator.transform.localPosition;
-		localPos.x = Mathf.Abs(this.velocity.x) * (Time.time - this.lastFixedUpdateTime);
+		localPos.x = this.velocity.x * (Time.time - this.lastFixedUpdateTime);
 		localPos.y = this.velocity.y * (Time.time - this.lastFixedUpdateTime);
 		this.animator.transform.localPosition = localPos;
 	}

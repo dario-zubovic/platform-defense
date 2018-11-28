@@ -9,6 +9,9 @@ public abstract class Turret : MonoBehaviour {
 	[Header("Generic settings")]
 	public LayerMask enemyLayers;
 
+	[Header("Sfx")]
+	public AudioSource audioSource;
+
 	[Header("Visuals")]
 	public TurretInfo turretInfo;
 	public UpgradeTurretDialog upgradeDialog;

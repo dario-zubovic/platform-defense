@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114283241772092774}
   - component: {fileID: 70180799956191096}
   - component: {fileID: 50107925565980156}
+  - component: {fileID: 81761215538561482}
   m_Layer: 8
   m_Name: Player
   m_TagString: Actor
@@ -139,6 +140,13 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.48}
   m_Size: {x: 1.15, y: 2.5}
   m_Direction: 0
+--- !u!81 &81761215538561482
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1021886627628752}
+  m_Enabled: 1
 --- !u!114 &114072124484704190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -168,6 +176,7 @@ MonoBehaviour:
   fallSpeedThreshold: 1.5
   jumpMidPointSpeedThreshold: 5
   jumpDownSlowSpeedThreshold: 20
+  stepPeriod: 0.4
   bounceParticles: {fileID: 198081279172821964}
 --- !u!114 &114283241772092774
 MonoBehaviour:
@@ -180,6 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc371263a22f9f84ea58d625c1617e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orientedTransform: {fileID: 4647448912488418}
   moveSpeed: 13
   airAccelerationTime: 0.095
   groundFriction: 0.3
@@ -4819,14 +4829,14 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -5
-  m_Sprite: {fileID: 21302340, guid: ad20680051d94554d8bcf8d0a253d82e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c9bc4ee998e1f934890b907ee4eee656, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0

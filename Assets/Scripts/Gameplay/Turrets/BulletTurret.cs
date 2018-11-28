@@ -22,10 +22,13 @@ public class BulletTurret : Turret {
 	private int rangeLevel = -1;
     private int turretLevel = 0;
 
-    protected override void Init() {
+    public void Start() {
         this.raycastResults = new RaycastHit2D[32];
-
         this.level = GameObject.FindObjectOfType<Level>();
+
+        Sound sound = SoundManager.instance.GetSound(SoundId.BulletTurretShot);
+        this.audioSource.clip = sound.clip;
+        this.audioSource.volume = sound.volume;
     }
 
     public override void Update() {
@@ -42,6 +45,8 @@ public class BulletTurret : Turret {
         target.TakeDamage(this.damage);
 
         BulletTraceParticles.instance.Emit(this.barrel.position, target.transform.position);
+    
+        this.audioSource.Play();
     }
 
     public override void Upgrade(int id) {

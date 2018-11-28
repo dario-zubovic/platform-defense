@@ -188,18 +188,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4714becb157088d4da2db56be4d12489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orientedTransform: {fileID: 4501863334089364}
   moveSpeed: 3
   airAccelerationTime: 0.1
   groundFriction: 0.3
   airDrag: 0.05
   wallSlideDamping: 0.75
   speedMultipler: 1
-  normalLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  deadLayer:
-    serializedVersion: 2
-    m_Bits: 8192
   startHealth: 3
   healthIndicator: {fileID: 4383566073588522}
   moveRight: 0

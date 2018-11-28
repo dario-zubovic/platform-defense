@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Actor : MonoBehaviour {
 	// settings:
+	public Transform orientedTransform;
 
 	[Header("Movement")]
 	public float moveSpeed;
@@ -265,12 +266,12 @@ public abstract class Actor : MonoBehaviour {
 		// facing & cam:
 
 		float dir = this.forceMoveTimer > 0 ? this.velocity.x : this.input.x;
-		if(dir > 0.05f && !facingRight) {
+		if(dir > 0.05f && !this.facingRight) {
 			this.facingRight = true;
-			this.transform.eulerAngles = new Vector3(0, 0, 0);
-		} else if(dir < -0.05f && facingRight) {
+			this.orientedTransform.localEulerAngles = new Vector3(0, 0, 0);
+		} else if(dir < -0.05f && this.facingRight) {
 			this.facingRight = false;
-			this.transform.eulerAngles = new Vector3(0, 180f, 0);
+			this.orientedTransform.localEulerAngles = new Vector3(0, 180f, 0);
 		}
 
 		AfterMovementPhase();

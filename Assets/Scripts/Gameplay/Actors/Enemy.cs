@@ -28,8 +28,6 @@ public abstract class Enemy : Actor {
     }
 
     public void Update() {
-        this.healthIndicator.localPosition = new Vector3(facingRight ? -1f : 1f, this.healthIndicator.localPosition.y, 0);
-        this.healthIndicator.localEulerAngles = new Vector3(0, facingRight ? 0f : 180f, 0);
         this.healthIndicator.localScale = new Vector3(this.health / this.startHealth, 1, 1);
     }
 

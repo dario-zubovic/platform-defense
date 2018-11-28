@@ -8,6 +8,9 @@ public class PlayerAnimator : SpriteAnimator {
     public float jumpMidPointSpeedThreshold;
     public float jumpDownSlowSpeedThreshold;
 
+    [Header("Sfx settings")]
+    public float stepPeriod;
+
     public ParticleSystem bounceParticles;
 
     private State state;
@@ -16,6 +19,7 @@ public class PlayerAnimator : SpriteAnimator {
 
     private string idleAnimName = "Idle";
 
+    private float lastStepSfxTime;
 
     public void Refresh(Vector2 velocity, Vector2 input, bool grounded, bool wallSliding, bool jumped, bool wallJumped, bool bounced, bool dead) {
 
@@ -109,6 +113,11 @@ public class PlayerAnimator : SpriteAnimator {
                             this.idleAnimName = "IdleSlowdown";
                         } else if(wasJumping) {
                             this.idleAnimName = "JumpLand";
+
+                            if(Time.time - this.lastStepSfxTime > this.stepPeriod) {
+                                SoundManager.instance.PlayPlayerLandSfx();
+                                this.lastStepSfxTime = Time.time;
+                            }
                         } else {
                             this.idleAnimName = "Idle";
                         }
@@ -146,11 +155,17 @@ public class PlayerAnimator : SpriteAnimator {
 
             case State.Run:
                 {
-                    // if(!wasRunning) {
-                    //     if(wasJumping) {
+                    if(!wasRunning) {
+                        if(wasJumping && Time.time - this.lastStepSfxTime > this.stepPeriod) {
+                            SoundManager.instance.PlayPlayerLandSfx();
+                            this.lastStepSfxTime = Time.time;
+                        }
+                    }
 
-                    //     }
-                    // }
+                    if(Time.time - this.lastStepSfxTime > this.stepPeriod) {
+                        SoundManager.instance.PlayPlayerStepSfx();
+                        this.lastStepSfxTime = Time.time;
+                    }
                 }
                 break;
 
