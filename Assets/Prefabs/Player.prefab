@@ -176,7 +176,8 @@ MonoBehaviour:
   fallSpeedThreshold: 1.5
   jumpMidPointSpeedThreshold: 5
   jumpDownSlowSpeedThreshold: 20
-  stepPeriod: 0.4
+  stepPeriod: 0.25
+  stepPeriodRand: 0.15
   bounceParticles: {fileID: 198081279172821964}
 --- !u!114 &114283241772092774
 MonoBehaviour:

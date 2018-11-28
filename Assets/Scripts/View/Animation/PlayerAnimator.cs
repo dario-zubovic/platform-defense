@@ -10,6 +10,7 @@ public class PlayerAnimator : SpriteAnimator {
 
     [Header("Sfx settings")]
     public float stepPeriod;
+    public float stepPeriodRand;
 
     public ParticleSystem bounceParticles;
 
@@ -115,8 +116,8 @@ public class PlayerAnimator : SpriteAnimator {
                             this.idleAnimName = "JumpLand";
 
                             if(Time.time - this.lastStepSfxTime > this.stepPeriod) {
-                                SoundManager.instance.PlayPlayerLandSfx();
-                                this.lastStepSfxTime = Time.time;
+                                // TODO: player land sound
+                                this.lastStepSfxTime = Time.time + Random.value * this.stepPeriodRand;
                             }
                         } else {
                             this.idleAnimName = "Idle";
@@ -141,6 +142,10 @@ public class PlayerAnimator : SpriteAnimator {
 
             case State.Jump:
                 {
+                    if(!wasJumping) {
+                        SoundManager.instance.PlayPlayerJumpSfx();
+                    }
+
                     if(Mathf.Abs(velocity.y) < this.jumpMidPointSpeedThreshold) {
                         this.jumpPhase = JumpPhase.MidPoint;
                     } else if(velocity.y > 0) {
@@ -157,14 +162,14 @@ public class PlayerAnimator : SpriteAnimator {
                 {
                     if(!wasRunning) {
                         if(wasJumping && Time.time - this.lastStepSfxTime > this.stepPeriod) {
-                            SoundManager.instance.PlayPlayerLandSfx();
-                            this.lastStepSfxTime = Time.time;
+                            // TODO: player land sound
+                            this.lastStepSfxTime = Time.time + Random.value * this.stepPeriodRand;
                         }
                     }
 
                     if(Time.time - this.lastStepSfxTime > this.stepPeriod) {
                         SoundManager.instance.PlayPlayerStepSfx();
-                        this.lastStepSfxTime = Time.time;
+                        this.lastStepSfxTime = Time.time + Random.value * this.stepPeriodRand;
                     }
                 }
                 break;

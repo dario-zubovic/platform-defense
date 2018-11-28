@@ -26,17 +26,17 @@ public class SoundManager : MonoBehaviour {
         this.materialZone = zone;
     }
 
-    public void PlayPlayerLandSfx() {
+    public void PlayPlayerJumpSfx() {
         SoundId id = SoundId.None;
         switch(this.materialZone) {
             case MaterialZone.Zone.Grass:
-                id = SoundId.PlayerLandGrass;
+                id = SoundId.PlayerJumpGrass;
                 break;
             case MaterialZone.Zone.Rock:
-                id = SoundId.PlayerLandRock;
+                id = SoundId.PlayerJumpRock;
                 break;
             case MaterialZone.Zone.Wood:
-                id = SoundId.PlayerLandWood;
+                id = SoundId.PlayerJumpWood;
                 break;
             
             default:
@@ -93,9 +93,9 @@ public class Sound {
 public enum SoundId {
     None,
 
-    PlayerLandGrass,
-    PlayerLandRock,
-    PlayerLandWood,
+    PlayerJumpGrass,
+    PlayerJumpRock,
+    PlayerJumpWood,
     PlayerStepGrass,
     PlayerStepRock,
     PlayerStepWood,
