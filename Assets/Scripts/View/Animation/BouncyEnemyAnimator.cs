@@ -63,9 +63,9 @@ public class BouncyEnemyAnimator : SpriteAnimator {
         // state logic:
 
         if(this.state == State.Ground || this.state == State.JumpLand) {
-            this.transform.localPosition = new Vector3(0, -1, 0);
+            this.transform.localPosition = new Vector3(0, 0.25f, 0);
         } else {
-            this.transform.localPosition = Vector3.zero;
+            this.transform.localPosition = new Vector3(0, 1.25f, 0);
         }
 
         switch(this.state) {
