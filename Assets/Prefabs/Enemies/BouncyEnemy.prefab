@@ -200,8 +200,8 @@ MonoBehaviour:
   moveRight: 0
   jumpWaitTimeMin: 1.5
   jumpWaitTimeMax: 12
-  prepareForJumpTime: 0.33333334
-  landTime: 0.33333334
+  prepareForJumpTime: 0.25
+  landTime: 0.25
   jumpSpeedMin: 18
   jumpSpeedMax: 19
   spriteTransform: {fileID: 4501863334089364}

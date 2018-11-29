@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Level : MonoBehaviour {
+	public int startLives;
+
 	[Header("Spawn")]
 	public Transform respawn;
 	public float dramaTime;
@@ -22,6 +24,7 @@ public class Level : MonoBehaviour {
 	public Text nextWaveText;
 	public Text tokensText;
 	public Text goldText;
+	public Image[] lifeIndicators;
 
 	[Header("Enemies and waves")]
 	public Transform[] enemySpawns;
@@ -42,6 +45,8 @@ public class Level : MonoBehaviour {
 
 	private Checkpoint checkpoint;
 
+	private int lives;
+
 	public void Awake() {
 		this.cameraController = Camera.main.GetComponent<CameraController>();
 
@@ -58,11 +63,16 @@ public class Level : MonoBehaviour {
 		this.cameraController.SetTarget(this.player.transform, false);
 		this.cameraController.bounds = this.levelBounds;
 
+		this.lives = this.startLives;
+		ChangeLivesNum(0);
+
 		StartCoroutine(SpawnWaves());
 	}
 
 	public void PlayerDied() {
 		DropTokens();
+
+		ChangeLivesNum(-1);
 
 		StartCoroutine(WaitForRespawn());
 	}
@@ -122,6 +132,14 @@ public class Level : MonoBehaviour {
 	private void ChangeGoldNum(int delta) {
 		this.collectedGold += delta;
 		this.goldText.text = this.collectedGold.ToString();
+	}
+
+	private void ChangeLivesNum(int delta) {
+		this.lives += delta;
+
+		for(int i = 0; i < this.lifeIndicators.Length; i++) {
+			this.lifeIndicators[i].gameObject.SetActive(i < this.lives);
+		}
 	}
 
 	private IEnumerator WaitForRespawn() {
