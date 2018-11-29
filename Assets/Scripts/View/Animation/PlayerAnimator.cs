@@ -8,6 +8,12 @@ public class PlayerAnimator : SpriteAnimator {
     public float jumpMidPointSpeedThreshold;
     public float jumpDownSlowSpeedThreshold;
 
+    [Header("Dust")]
+    public GameObject dustLandPrefab;
+    public GameObject dustRunPrefab;
+    public float dustStepPeriod;
+    public float dustStepPeriodRand;
+
     [Header("Sfx settings")]
     public float stepPeriod;
     public float stepPeriodRand;
@@ -21,8 +27,9 @@ public class PlayerAnimator : SpriteAnimator {
     private string idleAnimName = "Idle";
 
     private float lastStepSfxTime;
+    private float lastStepDustTime;
 
-    public void Refresh(Vector2 velocity, Vector2 input, bool grounded, bool wallSliding, bool jumped, bool wallJumped, bool bounced, bool dead) {
+    public void Refresh(Vector2 velocity, Vector2 input, Vector2 groundNormal, bool grounded, bool wallSliding, bool jumped, bool wallJumped, bool bounced, bool dead) {
 
         // change state if needed:
 
@@ -114,11 +121,7 @@ public class PlayerAnimator : SpriteAnimator {
                             this.idleAnimName = "IdleSlowdown";
                         } else if(wasJumping) {
                             this.idleAnimName = "JumpLand";
-
-                            if(Time.time - this.lastStepSfxTime > this.stepPeriod) {
-                                // TODO: player land sound
-                                this.lastStepSfxTime = Time.time + Random.value * this.stepPeriodRand;
-                            }
+                            Landed(groundNormal);
                         } else {
                             this.idleAnimName = "Idle";
                         }
@@ -142,7 +145,7 @@ public class PlayerAnimator : SpriteAnimator {
 
             case State.Jump:
                 {
-                    if(!wasJumping) {
+                    if((!wasJumping && jumped) || wallJumped) {
                         SoundManager.instance.PlayPlayerJumpSfx();
                     }
 
@@ -161,9 +164,8 @@ public class PlayerAnimator : SpriteAnimator {
             case State.Run:
                 {
                     if(!wasRunning) {
-                        if(wasJumping && Time.time - this.lastStepSfxTime > this.stepPeriod) {
-                            // TODO: player land sound
-                            this.lastStepSfxTime = Time.time + Random.value * this.stepPeriodRand;
+                        if(wasJumping) {
+                            Landed(groundNormal);
                         }
                     }
 
@@ -171,12 +173,28 @@ public class PlayerAnimator : SpriteAnimator {
                         SoundManager.instance.PlayPlayerStepSfx();
                         this.lastStepSfxTime = Time.time + Random.value * this.stepPeriodRand;
                     }
+
+                    if(Time.time - this.lastStepDustTime > this.dustStepPeriod) {
+                        GameObject dust = Pool.instance.Grab(this.dustRunPrefab);
+                        dust.transform.position = this.transform.position;
+                        dust.transform.localRotation = this.transform.localRotation;
+                        
+                        this.lastStepDustTime = Time.time + Random.value * this.dustStepPeriodRand;
+                    }
                 }
                 break;
 
             case State.WallSlide:
                 {
                     
+                }
+                break;
+
+            case State.WallJump:
+                {
+                    if(wallJumped) {
+                        SoundManager.instance.PlayPlayerJumpSfx();
+                    }
                 }
                 break;
         }
@@ -222,6 +240,17 @@ public class PlayerAnimator : SpriteAnimator {
         if(bounced) {
             this.bounceParticles.Play();
         }
+    }
+
+    private void Landed(Vector2 groundNormal) {
+        GameObject dust = Pool.instance.Grab(this.dustLandPrefab);
+        dust.transform.position = this.transform.position;
+        dust.transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(groundNormal.y, groundNormal.x) * Mathf.Rad2Deg - 90);
+
+        // TODO: player land sound
+
+        this.lastStepDustTime = Time.time;
+        this.lastStepSfxTime = Time.time + Random.value * this.stepPeriodRand;
     }
 
     private enum State {

@@ -176,7 +176,13 @@ MonoBehaviour:
   fallSpeedThreshold: 1.5
   jumpMidPointSpeedThreshold: 5
   jumpDownSlowSpeedThreshold: 20
-  stepPeriod: 0.25
+  dustLandPrefab: {fileID: 1764685108280608, guid: 0b3eda65fdacc1743a0cd763e8501ddb,
+    type: 2}
+  dustRunPrefab: {fileID: 1473102595535622, guid: 08b560394fddaec4e803142c73fd912c,
+    type: 2}
+  dustStepPeriod: 0.3
+  dustStepPeriodRand: 0.3
+  stepPeriod: 0.45
   stepPeriodRand: 0.15
   bounceParticles: {fileID: 198081279172821964}
 --- !u!114 &114283241772092774

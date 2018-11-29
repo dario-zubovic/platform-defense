@@ -232,7 +232,7 @@ public class Player : Actor {
 	}
 
 	private void UpdateAnimation() {
-		this.animator.Refresh(this.velocity, this.input, this.grounded, this.wallSliding, this.jumped, this.wallJumped, this.bounced, this.dead);
+		this.animator.Refresh(this.velocity, this.input, this.groundNormal, this.grounded, this.wallSliding, this.jumped, this.wallJumped, this.bounced, this.dead);
 	}
 
 	private void Die() {

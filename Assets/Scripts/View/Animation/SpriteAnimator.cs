@@ -22,7 +22,7 @@ public abstract class SpriteAnimator : MonoBehaviour {
 
     public bool finishedSingleShot {
         get;
-        private set;
+        protected set;
     }
 
     private SpriteRenderer rend;
