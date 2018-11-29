@@ -117,11 +117,12 @@ public class Level : MonoBehaviour {
 	}
 
 	public void BuildCheckpoint(Vector2 position) {
-		if(this.checkpoint != null && this.checkpoint.gameObject != null) {
-			GameObject.Destroy(this.checkpoint.gameObject); // TODO: pool
+		if(this.checkpoint != null && this.checkpoint.gameObject != null && this.checkpoint.gameObject.activeSelf) {
+        	Pool.instance.Return(this.checkpoint.gameObject);
 		}
 
-		this.checkpoint = GameObject.Instantiate<Checkpoint>(this.checkpointPrefab, position, Quaternion.identity);
+		this.checkpoint = Pool.instance.Grab<Checkpoint>(this.checkpointPrefab);
+		this.checkpoint.transform.position = position;
 	}
 
 	private void ChangeTokensNum(int delta) {
@@ -164,7 +165,8 @@ public class Level : MonoBehaviour {
 		if(this.checkpoint != null) {
 			this.checkpoint.lives--;
 			if(this.checkpoint.lives == 0) {
-				GameObject.Destroy(this.checkpoint.gameObject); // TODO: pool
+        		Pool.instance.Return(this.checkpoint.gameObject);
+				this.checkpoint = null;
 			}
 		}
 	}
@@ -211,11 +213,11 @@ public class Level : MonoBehaviour {
 
 	private void DropTokens() {
 		foreach(var token in this.droppedTokens) {
-			if(token == null || token.gameObject == null) {
+			if(token == null || token.gameObject == null || !token.gameObject.activeSelf) {
 				continue;
 			}
 
-			GameObject.Destroy(token.gameObject); // TODO: pool
+        	Pool.instance.Return(token.gameObject);
 		}
 		this.droppedTokens.Clear();
 
@@ -224,8 +226,10 @@ public class Level : MonoBehaviour {
 		ChangeTokensNum(0);
 
 		for(int i = 0; i < leftovers; i++) {
-			Token token = GameObject.Instantiate<Token>(this.dropTokenPrefab, this.player.transform.position, Quaternion.identity); // TODO: pool
 			
+			Token token = Pool.instance.Grab<Token>(this.dropTokenPrefab);
+			token.transform.position = this.player.transform.position;
+
 			Vector2 safePos = FindDropTokenSafeLocation(token);
 			token.transform.position = this.player.transform.position + Vector3.up;
 			token.MoveTo(safePos);

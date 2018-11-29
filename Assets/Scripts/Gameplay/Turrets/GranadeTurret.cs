@@ -9,7 +9,7 @@ public class GranadeTurret : Turret {
 
     [Header("Projectile")]
     public float speed;
-    public Grenade projectilePrefab; // TODO: pool
+    public Grenade projectilePrefab;
     public LayerMask wallLayer;
     public float blastRadius;
     public float minDamage, maxDamage;
@@ -182,9 +182,10 @@ public class GranadeTurret : Turret {
     private void SetStats() {
         this.turretInfo.SetStats(this.minDamage.ToString("0") + "-" + this.maxDamage.ToString("0"), this.blastRadius.ToString("0.0"));
     }
-
+    
     private void FireOnLocked(float targetAngle) {
-        Grenade projectile = GameObject.Instantiate<Grenade>(this.projectilePrefab, this.transform.position, Quaternion.identity);
+        Grenade projectile = Pool.instance.Grab<Grenade>(this.projectilePrefab);
+        projectile.transform.position = this.barrel.position;
         projectile.rigid.velocity = this.speed * new Vector2(Mathf.Cos(targetAngle), Mathf.Sin(targetAngle));
         projectile.blastRadius = this.blastRadius;
         projectile.minDamage = this.minDamage;

@@ -11,6 +11,10 @@ public abstract class Projectile : MonoBehaviour {
     }
 
     private bool exploaded;
+
+    public void OnEnable() {
+        this.exploaded = false;
+    }
     
     public void Update() {
         Vector2 vel = this.rigid.velocity;
@@ -30,7 +34,7 @@ public abstract class Projectile : MonoBehaviour {
         }
 
         this.exploaded = true;
-        GameObject.Destroy(this.gameObject); // TODO: pool
+        Pool.instance.Return(this.gameObject);
     }
 
     protected abstract void AffectEnemy(Enemy enemy, float dist);

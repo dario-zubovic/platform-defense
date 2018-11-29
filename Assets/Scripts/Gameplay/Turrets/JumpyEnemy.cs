@@ -21,7 +21,7 @@ public class JumpyEnemy : GroundEnemy {
 
         GoldDropParticles.instance.Drop(this.transform.position);
     
-        GameObject.Destroy(this.gameObject);
+        Pool.instance.Return(this.gameObject);
     }
 
     protected override void Init() {
@@ -30,6 +30,10 @@ public class JumpyEnemy : GroundEnemy {
         this.groundNormal = Vector2.up;
 
         this.nextJumpTime = Time.time + Random.Range(this.jumpWaitTimeMin, this.jumpWaitTimeMax);
+        this.groundedTime = 0;
+        this.jumped = false;
+        this.prepareForJump = false;
+        this.landed = false;
     }
     
     protected override void Die() {

@@ -34,8 +34,6 @@ public class Token : MonoBehaviour {
         this.level = GameObject.FindObjectOfType<Level>();
 
         if(this.isDropToken) {
-            this.lastPickupTime = Time.time;
-            Activate();
             return;
         }
 
@@ -44,6 +42,13 @@ public class Token : MonoBehaviour {
         } else {
             Hide();
             this.lastPickupTime = -1000;
+        }
+    }
+
+    public void OnEnable() {
+        if(this.isDropToken) {
+            this.lastPickupTime = Time.time;
+            Activate();
         }
     }
 
@@ -57,7 +62,7 @@ public class Token : MonoBehaviour {
     }
 
     public void OnTriggerEnter2D(Collider2D coll) {
-        if(!this.isActive || (this.isStarting && Time.time - this.lastPickupTime < 2f)) {
+        if(!this.isActive || !this.gameObject.activeSelf || (this.isStarting && Time.time - this.lastPickupTime < 2f)) {
             return;
         }
 
@@ -90,7 +95,7 @@ public class Token : MonoBehaviour {
         this.rend.enabled = false;
     
         if(this.isDropToken) {
-            GameObject.Destroy(this.gameObject); // TODO: pool
+            Pool.instance.Return(this.gameObject);
         }
     }
 }

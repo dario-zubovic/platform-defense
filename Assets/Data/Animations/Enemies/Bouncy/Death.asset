@@ -14,6 +14,8 @@ MonoBehaviour:
   framerate: 0.083333336
   loop: 0
   frames:
+  - {fileID: 21300024, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
+  - {fileID: 21300026, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
   - {fileID: 21300028, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
   - {fileID: 21300030, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
   - {fileID: 21300032, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
@@ -22,5 +24,3 @@ MonoBehaviour:
   - {fileID: 21300038, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
   - {fileID: 21300040, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
   - {fileID: 21300042, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
-  - {fileID: 21300044, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
-  - {fileID: 21300046, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}

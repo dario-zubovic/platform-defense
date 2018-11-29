@@ -57,7 +57,8 @@ public class TurretStand : MonoBehaviour {
 
         CloseBuildDialog();
 
-        this.turret = GameObject.Instantiate<Turret>(this.turretPrefabs[id], this.transform.position, Quaternion.identity);    
+        this.turret = Pool.instance.Grab<Turret>(this.turretPrefabs[id]);
+        this.turret.transform.position = this.transform.position;    
         this.turret.ShowInfo();
 
         this.standSprite.enabled = false;

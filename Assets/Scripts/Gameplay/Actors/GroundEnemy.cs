@@ -11,6 +11,8 @@ public class GroundEnemy : Enemy {
 
     protected override void Init() {
         base.Init();
+
+        this.dead = false;
     }
 
     protected override void Die() {

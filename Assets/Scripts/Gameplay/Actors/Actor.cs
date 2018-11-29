@@ -70,7 +70,7 @@ public abstract class Actor : MonoBehaviour {
 		this.gameObject.tag = "Actor";
 	}
 
-	public void Start() {
+	public void OnEnable() {
 		Init();
 	}
 

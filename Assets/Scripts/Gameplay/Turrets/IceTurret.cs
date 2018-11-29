@@ -22,7 +22,8 @@ public class IceTurret : Turret {
 
     protected override void Fire(Enemy target) {
         Vector2 dir = (target.transform.position - this.transform.position).normalized;
-        SlowdownProjectile projectile = GameObject.Instantiate<SlowdownProjectile>(this.projectilePrefab, this.transform.position, Quaternion.identity);
+        SlowdownProjectile projectile = Pool.instance.Grab<SlowdownProjectile>(this.projectilePrefab);
+        projectile.transform.position = this.transform.position;
         projectile.rigid.gravityScale = 0f;
         projectile.rigid.velocity = this.speed * dir;
         projectile.blastRadius = this.blastRadius;

@@ -13,6 +13,10 @@ public class BouncyEnemyAnimator : SpriteAnimator {
         this.enemy = this.gameObject.GetComponentInParent<JumpyEnemy>();
     }
 
+    public void OnEnable() {
+        this.state = State.Ground;
+    }
+
     public void Refresh(Vector2 velocity, bool grounded, bool jumped, bool prepareForJump, bool landed, bool dead) {
         // change state:
 
