@@ -1,15 +1,12 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Camera))]
 public class CircleDrawer : MonoBehaviour {
     public static CircleDrawer instance {
         get; 
         private set;
     }
 
-    public Shader shader;
-    public Color color, color2;
-
+    private SpriteRenderer rend;
     private Material mat;
 
     private Vector2 center;
@@ -18,7 +15,8 @@ public class CircleDrawer : MonoBehaviour {
     private bool multi;
 
     public void Awake() {
-        this.mat = new Material(this.shader);
+        this.rend = this.gameObject.GetComponent<SpriteRenderer>();
+        this.mat = this.rend.material;
 
         instance = this;
     }
@@ -27,33 +25,55 @@ public class CircleDrawer : MonoBehaviour {
         this.enabled = true;
         this.center = center;
         this.radius = radius;
+
+        MoveAndResize();
+        SetParams();
     }
 
     public void DrawSecondary(float radius) {
         this.radius2 = radius;
         this.multi = true;
+
+        MoveAndResize();
+        SetParams();
     }
 
     public void DontDraw() {
         this.enabled = false;
         this.multi = false;
+        this.radius2 = 0;
+
+        SetParams();
     }
 
     public void DisableSecondary() {
         this.multi = false;
+        this.radius2 = 0;
+
+        MoveAndResize();
+        SetParams();
     }
 
-    public void OnRenderImage(RenderTexture src, RenderTexture dest) {
-        this.mat.SetColor("_Color", this.color);
+    private void SetParams() {
+        if(!this.enabled) {
+            this.rend.enabled = false;
+            return;
+        }
+
+        this.rend.enabled = true;
+
         this.mat.SetVector("_CircleParams", new Vector4(this.center.x, this.center.y, this.radius, this.radius2));
         
         if(this.multi) {
             this.mat.EnableKeyword("TWO_CIRCLES");
-            this.mat.SetColor("_Color2", this.color2);
         } else {
             this.mat.DisableKeyword("TWO_CIRCLES");
         }
+    }
 
-        Graphics.Blit(src, dest, this.mat);
+    private void MoveAndResize() {
+        float r = this.radius > this.radius2 ? this.radius : this.radius2;
+        this.transform.localScale = new Vector3(r * 2f + 0.5f, r * 2f + 0.5f, 0);
+        this.transform.position = this.center;
     }
 }

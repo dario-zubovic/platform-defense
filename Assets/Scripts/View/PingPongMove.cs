@@ -8,7 +8,7 @@ public class PingPongMove : MonoBehaviour {
 
     private Vector3 start, end;
 
-    public void Start() {
+    public void OnEnable() {
         if(this.local) {
             this.start = this.transform.localPosition;
         } else {

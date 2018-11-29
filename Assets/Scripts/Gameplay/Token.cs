@@ -30,7 +30,7 @@ public class Token : MonoBehaviour {
     private Level level;
 
     public void Awake() {
-        this.rend = this.gameObject.GetComponent<SpriteRenderer>();
+        this.rend = this.gameObject.GetComponentInChildren<SpriteRenderer>();
         this.level = GameObject.FindObjectOfType<Level>();
 
         if(this.isDropToken) {
