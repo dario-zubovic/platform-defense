@@ -25,11 +25,11 @@ public class BouncyEnemyAnimator : SpriteAnimator {
                 {
                     if(jumped || (!grounded && Mathf.Abs(velocity.y) > this.fallSpeedThreshold)) {
                         this.state = State.Jump;
-                    } else if(prepareForJump) {
-                        this.state = State.JumpPrepare;
                     } else if(dead) {
                         this.state = State.Dead;
-                    } 
+                    } else if(prepareForJump) {
+                        this.state = State.JumpPrepare;
+                    }
                 }
                 break;
 
@@ -37,6 +37,8 @@ public class BouncyEnemyAnimator : SpriteAnimator {
                 {
                     if(jumped || (!grounded && Mathf.Abs(velocity.y) > this.fallSpeedThreshold)) {
                         this.state = State.Jump;
+                    } else if(dead) {
+                        this.state = State.Dead;
                     }
                 }
                 break;
