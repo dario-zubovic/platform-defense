@@ -182,8 +182,8 @@ MonoBehaviour:
     type: 2}
   dustStepPeriod: 0.2
   dustStepPeriodRand: 0.3
-  stepPeriod: 0.45
-  stepPeriodRand: 0.15
+  stepPeriod: 0.25
+  stepPeriodRand: 0.05
   bounceParticles: {fileID: 198081279172821964}
 --- !u!114 &114283241772092774
 MonoBehaviour:
@@ -203,7 +203,7 @@ MonoBehaviour:
   airDrag: 0.075
   wallSlideDamping: 0.75
   speedMultipler: 1
-  jumpSpeed: 13.3
+  jumpSpeed: 13
   jumpExtendSpeed: 2
   jumpExtendTime: 0.3
   coyoteFrames: 8

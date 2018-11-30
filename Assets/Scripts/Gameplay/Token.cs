@@ -45,6 +45,7 @@ public class Token : MonoBehaviour
         Sound pickupSound = SoundManager.instance.GetSound(SoundId.TokenPickup);
         this.pickupAudioSource.clip = pickupSound.clip;
         this.pickupAudioSource.volume = pickupSound.volume;
+        this.pickupAudioSource.outputAudioMixerGroup = pickupSound.outputChannel;
 
         // enable ambient sound loop
         Sound ambientSound = SoundManager.instance.GetSound(SoundId.TokenAmbient);
@@ -55,6 +56,7 @@ public class Token : MonoBehaviour
         this.ambientAudioSource.rolloffMode = AudioRolloffMode.Linear;
         this.ambientAudioSource.maxDistance = 20;
         this.ambientAudioSource.dopplerLevel = 0.15f;
+        this.ambientAudioSource.outputAudioMixerGroup = ambientSound.outputChannel;
 
         // play our ambient loop
         ambientAudioSource.Play();

@@ -5,10 +5,12 @@ public class SoundManager : MonoBehaviour
 {
     public AudioSource sfxSource;
     public AudioSource musicSource;
+    public AudioMixerGroup environmentOutputChannel;
+    //! The general UI output channel.  This can be overridden.  It is for reference and does not
+    //! itself implement any functionality.
+    public AudioMixerGroup uiOutputChannel;
 
     public List<Sound> sounds;
-    // The mixer that routes to global environmental effects such as reverb
-    public AudioMixerGroup sfxOutput;
 
     public static SoundManager instance
     {
@@ -23,12 +25,9 @@ public class SoundManager : MonoBehaviour
     public void Awake()
     {
         SoundManager.instance = this;
-
-        // set the correct audio output for each effect.
-        sfxSource.outputAudioMixerGroup = sfxOutput;
-
         // begin playing music
         musicSource.Play();
+        sfxSource.outputAudioMixerGroup = environmentOutputChannel;
         // this.player = GameObject.FindObjectOfType<Player>();
     }
 
@@ -96,6 +95,7 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
+        this.sfxSource.pitch = Random.Range(0.8f, 1.2f);
         this.sfxSource.PlayOneShot(sound.clip, sound.volume);
     }
 }
@@ -107,6 +107,8 @@ public class Sound
     public AudioClip clip;
     [Range(0f, 1f)]
     public float volume = 1f;
+    // Set the output channel.  It is up to code to check and route this properly.
+    public AudioMixerGroup outputChannel;
 }
 
 [System.Serializable]
@@ -127,6 +129,9 @@ public enum SoundId
 
     TokenPickup,
     TokenAmbient,
+    UIMove,
+    UIBack,
+    UISelect,
     Placeholder2,
     Placeholder3,
     Placeholder4,
@@ -135,4 +140,5 @@ public enum SoundId
     Placeholder7,
     Placeholder8,
     Placeholder9,
+
 }
