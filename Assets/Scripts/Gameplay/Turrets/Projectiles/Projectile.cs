@@ -4,8 +4,16 @@ using UnityEngine;
 public abstract class Projectile : MonoBehaviour {
     public Rigidbody2D rigid;
     public LayerMask enemyLayers;
+    public SoundId sfxOnHit;
+
+    public Color particlesColor;
 
     public float blastRadius {
+        get;
+        set;
+    }
+
+    public Turret owner {
         get;
         set;
     }
@@ -32,6 +40,9 @@ public abstract class Projectile : MonoBehaviour {
         for(int i = 0; i < colliders.Length; i++) {
             AffectEnemy(colliders[i].gameObject.GetComponent<Enemy>(), Vector2.Distance(this.transform.position, colliders[i].gameObject.transform.position) / this.blastRadius);
         }
+
+        TurretParticles.instance.EmitCircle(this.transform.position, this.blastRadius, this.particlesColor);
+        SoundManager.instance.PlaySfx(this.sfxOnHit);
 
         this.exploaded = true;
         Pool.instance.Return(this.gameObject);

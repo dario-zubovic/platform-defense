@@ -29,6 +29,7 @@ public abstract class Actor : MonoBehaviour {
 
 	protected bool grounded;
 	protected Vector2 groundNormal;
+	protected Vector2 groundPosition;
 	protected bool wallSliding;
 	protected bool lastWasWall;
 	protected float wallNormalX;
@@ -83,7 +84,7 @@ public abstract class Actor : MonoBehaviour {
 		this.velocity = Vector2.zero;
 		this.velocityXRef = 0;
 		this.grounded = false;
-		this.groundNormal = Vector2.zero;
+		this.groundNormal = Vector2.up;
 		this.wallSliding = false;
 		this.lastWasWall = false;
 		this.wallNormalX = 0;
@@ -173,6 +174,7 @@ public abstract class Actor : MonoBehaviour {
 
 					if(!newGroundNormal) {
 						this.groundNormal = normal;
+						this.groundPosition = hit.point;
 						newGroundNormal = true;
 					}
 
@@ -242,6 +244,7 @@ public abstract class Actor : MonoBehaviour {
 
 					if(!newGroundNormal) {
 						this.groundNormal = normal;
+						this.groundPosition = hit.point;
 						newGroundNormal = true;
 					}
 

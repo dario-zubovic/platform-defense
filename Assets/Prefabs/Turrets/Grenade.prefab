@@ -93,6 +93,8 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 1024
+  sfxOnHit: 15
+  particlesColor: {r: 0.9843137, g: 0.32462898, b: 0, a: 0.72156864}
 --- !u!212 &212289648349242048
 SpriteRenderer:
   m_ObjectHideFlags: 1

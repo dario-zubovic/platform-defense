@@ -98,7 +98,7 @@ public abstract class Turret : MonoBehaviour {
     public virtual void PreviewUpgrade(int id) {
 	}
     
-	public virtual void CloseUpgradeDialog() {
+	public void CloseUpgradeDialog() {
         StartCoroutine(UnlockPlayer());
 
 		this.turretInfo.ResetTempStats();

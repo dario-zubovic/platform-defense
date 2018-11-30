@@ -1670,6 +1670,7 @@ MonoBehaviour:
   barrel: {fileID: 4672236959816550}
   slewHomeWait: 3
   slewHomeTime: 2
+  particlesColor: {r: 0.8392157, g: 0.8392157, b: 0.8392157, a: 1}
   wallLayer:
     serializedVersion: 2
     m_Bits: 1

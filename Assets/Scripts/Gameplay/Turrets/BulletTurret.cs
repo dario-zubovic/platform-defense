@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletTurret : Turret {
+    public Color particlesColor;
 
     [Header("Projectile")]
     public LayerMask wallLayer;
@@ -45,7 +46,7 @@ public class BulletTurret : Turret {
     protected override void Fire(Enemy target) {
         target.TakeDamage(this.damage);
 
-        BulletTraceParticles.instance.Emit(this.barrel.position, target.transform.position);
+        TurretParticles.instance.EmitLine(this.barrel.position, target.transform.position, this.particlesColor);
 
         this.audioSource.Play();
     }

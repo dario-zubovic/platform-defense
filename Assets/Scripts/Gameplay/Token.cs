@@ -34,6 +34,7 @@ public class Token : MonoBehaviour {
 
     public void Awake() {
         this.rend = this.gameObject.GetComponentInChildren<SpriteRenderer>();
+        this.ambientAudioSource = this.gameObject.GetComponent<AudioSource>();
         this.level = GameObject.FindObjectOfType<Level>();
 
         SetupAudio();
@@ -51,16 +52,6 @@ public class Token : MonoBehaviour {
     }
     
     public void SetupAudio() {
-        this.pickupAudioSource = this.gameObject.AddComponent<AudioSource>();
-        this.ambientAudioSource = this.gameObject.AddComponent<AudioSource>();
-
-        // enable pickup sound
-        Sound pickupSound = SoundManager.instance.GetSound(SoundId.TokenPickup);
-        this.pickupAudioSource.clip = pickupSound.clip;
-        this.pickupAudioSource.volume = pickupSound.volume;
-        this.pickupAudioSource.outputAudioMixerGroup = pickupSound.outputChannel;
-
-        // enable ambient sound loop
         Sound ambientSound = SoundManager.instance.GetSound(SoundId.TokenAmbient);
         this.ambientAudioSource.clip = ambientSound.clip;
         this.ambientAudioSource.volume = ambientSound.volume;
@@ -106,7 +97,7 @@ public class Token : MonoBehaviour {
         }
 
         // Player picks up token
-        this.pickupAudioSource.Play();
+        SoundManager.instance.PlaySfx(SoundId.TokenPickup);
         this.ambientAudioSource.Stop();
 
         this.lastPickupTime = Time.time;

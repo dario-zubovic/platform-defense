@@ -38,8 +38,8 @@ public class Level : MonoBehaviour {
 	private CameraController cameraController;
 	private Player player;
 
-	private int collectedTokens = 0;
-	private int collectedGold = 0;
+	private int collectedTokens = 999;
+	private int collectedGold = 9999;
 	private List<Token> tokens;
 	private List<Token> droppedTokens;
 

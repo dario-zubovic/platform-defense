@@ -12,6 +12,9 @@ public class SoundManager : MonoBehaviour
 
     public List<Sound> sounds;
 
+    public float spatialSoundsMinDistance, spatialSoundsMaxDistance;
+    public AnimationCurve spatialSoundFalloffCurve;
+
     public static SoundManager instance {
         get;
         private set;
@@ -19,7 +22,7 @@ public class SoundManager : MonoBehaviour
 
     private MaterialZone.Zone materialZone;
 
-    // private Player player;
+    private Player player;
 
     public void Awake() {
         SoundManager.instance = this;
@@ -27,12 +30,14 @@ public class SoundManager : MonoBehaviour
         // begin playing music
         this.musicSource.Play();
         this.sfxSource.outputAudioMixerGroup = this.environmentOutputChannel;
-        
-        // this.player = GameObject.FindObjectOfType<Player>();
     }
 
     public void SetZone(MaterialZone.Zone zone) {
         this.materialZone = zone;
+    }
+
+    public void SetPlayer(Player player) {
+        this.player = player;
     }
 
     public void PlayPlayerJumpSfx() {
@@ -87,13 +92,29 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
-        if(sound.randomPitch) {
-            this.sfxSource.pitch = Random.Range(sound.pitchMin, sound.pitchMax);
-        } else {
-            this.sfxSource.pitch = 1f;
-        }
-        
+        sound.ApplyPitch(this.sfxSource);
+
         this.sfxSource.PlayOneShot(sound.clip, sound.volume);
+    }
+
+    public void PlayAtPosition(SoundId id, Vector2 pos) {
+        Sound sound = this.sounds.Find(o => o.id == id);
+        if (sound == null) {
+            Debug.LogWarning("Couldn't find sound with id " + id.ToString());
+            return;
+        }
+
+        float dist = Vector2.Distance(this.player.transform.position, pos);
+        if(dist > this.spatialSoundsMaxDistance) {
+            return;
+        }
+
+        sound.ApplyPitch(this.sfxSource);
+    
+        float t = (dist - this.spatialSoundsMinDistance) / (this.spatialSoundsMaxDistance - this.spatialSoundsMinDistance);
+        t = Mathf.Clamp01(t);
+
+        this.sfxSource.PlayOneShot(sound.clip, sound.volume * this.spatialSoundFalloffCurve.Evaluate(t));
     }
 }
 
@@ -109,6 +130,14 @@ public class Sound {
     public bool randomPitch;
     [Range(0, 2f)]
     public float pitchMin = 1f, pitchMax = 1;
+
+    public void ApplyPitch(AudioSource source) {
+        if(this.randomPitch) {
+            source.pitch = Random.Range(this.pitchMin, this.pitchMax);
+        } else {
+            source.pitch = 1f;
+        }
+    }
 }
 
 [System.Serializable]
@@ -132,6 +161,8 @@ public enum SoundId {
     UIBack,
     UISelect,
 
+    BombTurretHit,
+    IceTurretHit,
 
     Placeholder2,
     Placeholder3,

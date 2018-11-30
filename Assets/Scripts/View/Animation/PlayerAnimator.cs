@@ -29,7 +29,7 @@ public class PlayerAnimator : SpriteAnimator {
     private float lastStepSfxTime;
     private float lastStepDustTime;
 
-    public void Refresh(Vector2 velocity, Vector2 input, Vector2 groundNormal, bool grounded, bool wallSliding, bool jumped, bool wallJumped, bool bounced, bool dead) {
+    public void Refresh(Vector2 velocity, Vector2 input, Vector2 groundNormal, Vector2 groundPos, bool grounded, bool wallSliding, bool jumped, bool wallJumped, bool bounced, bool dead) {
 
         // change state if needed:
 
@@ -121,7 +121,7 @@ public class PlayerAnimator : SpriteAnimator {
                             this.idleAnimName = "IdleSlowdown";
                         } else if(wasJumping) {
                             this.idleAnimName = "JumpLand";
-                            Landed(groundNormal);
+                            Landed(groundPos, groundNormal);
                         } else {
                             this.idleAnimName = "Idle";
                         }
@@ -165,7 +165,7 @@ public class PlayerAnimator : SpriteAnimator {
                 {
                     if(!wasRunning) {
                         if(wasJumping) {
-                            Landed(groundNormal);
+                            Landed(groundPos, groundNormal);
                         }
                     }
 
@@ -176,8 +176,15 @@ public class PlayerAnimator : SpriteAnimator {
 
                     if(Time.time - this.lastStepDustTime > this.dustStepPeriod) {
                         GameObject dust = Pool.instance.Grab(this.dustRunPrefab);
-                        dust.transform.position = this.transform.position;
-                        dust.transform.localRotation = this.transform.localRotation;
+                        dust.transform.position = groundPos;
+
+                        bool facingRight = this.transform.eulerAngles.y < 90f;
+                        float angle = Mathf.Atan2(groundNormal.y, groundNormal.x) * Mathf.Rad2Deg;
+                        dust.transform.localEulerAngles = new Vector3(
+                            0,
+                            facingRight ? 0f : 180f,
+                            facingRight ? (angle - 90f) : (90f - angle)
+                        );
                         
                         this.lastStepDustTime = Time.time + Random.value * this.dustStepPeriodRand;
                     }
@@ -242,9 +249,9 @@ public class PlayerAnimator : SpriteAnimator {
         }
     }
 
-    private void Landed(Vector2 groundNormal) {
+    private void Landed(Vector2 groundPos, Vector2 groundNormal) {
         GameObject dust = Pool.instance.Grab(this.dustLandPrefab);
-        dust.transform.position = this.transform.position;
+        dust.transform.position = groundPos;
         dust.transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(groundNormal.y, groundNormal.x) * Mathf.Rad2Deg - 90);
 
         // TODO: player land sound
