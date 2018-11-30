@@ -27,8 +27,15 @@ public class GoldDropParticles : MonoBehaviour {
 
 	public void Drop(Vector2 position) {
 		float angle = Random.Range(this.angleFrom, this.angleTo) * Mathf.Deg2Rad;
-		this.p.velocity = Random.Range(this.speedFrom, this.speedTo) * new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-		this.p.position = position + Vector2.up;
-		this.particles.Emit(p, 1);
+		Vector2 vel = Random.Range(this.speedFrom, this.speedTo) * new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+		Vector2 pos = position + Vector2.up;
+
+		int t = Random.Range(2, 4);
+
+		for(int i = 0; i < t; i++) {
+			this.p.position = pos + Random.insideUnitCircle * 0.2f;
+			this.p.velocity = vel + Random.insideUnitCircle * 1.5f;
+			this.particles.Emit(this.p, 1);
+		}
 	}
 }

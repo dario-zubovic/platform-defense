@@ -33,6 +33,8 @@ public class TrampolinePlatform : Platform {
 		Player player = actor as Player;
 		if(player != null) {
 			player.bounced = true;
+		
+			SoundManager.instance.PlaySfx(SoundId.JumpyPlatform);
 		}
 	}
 }

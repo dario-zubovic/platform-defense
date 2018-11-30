@@ -87,6 +87,7 @@ public class Player : Actor {
 
 	public void OnTriggerEnter2D(Collider2D trigger) {
 		if(trigger.tag == "Spikes") {
+			SoundManager.instance.PlaySfx(SoundId.PlayerSpikesDeath);
 			Die();
 		} else if(trigger.tag == "TurretStand") {
 			this.onStand = trigger.gameObject.GetComponent<TurretStand>();

@@ -11,6 +11,7 @@ public class PlayerAnimator : SpriteAnimator {
     [Header("Dust")]
     public GameObject dustLandPrefab;
     public GameObject dustRunPrefab;
+    public GameObject dustStopPrefab;
     public float dustStepPeriod;
     public float dustStepPeriodRand;
 
@@ -119,6 +120,7 @@ public class PlayerAnimator : SpriteAnimator {
                     if(!wasIdle) {
                         if(wasRunning) {
                             this.idleAnimName = "IdleSlowdown";
+                            PlayDust(groundPos, groundNormal, this.dustStopPrefab);
                         } else if(wasJumping) {
                             this.idleAnimName = "JumpLand";
                             Landed(groundPos, groundNormal);
@@ -175,17 +177,7 @@ public class PlayerAnimator : SpriteAnimator {
                     }
 
                     if(Time.time - this.lastStepDustTime > this.dustStepPeriod) {
-                        GameObject dust = Pool.instance.Grab(this.dustRunPrefab);
-                        dust.transform.position = groundPos;
-
-                        bool facingRight = this.transform.eulerAngles.y < 90f;
-                        float angle = Mathf.Atan2(groundNormal.y, groundNormal.x) * Mathf.Rad2Deg;
-                        dust.transform.localEulerAngles = new Vector3(
-                            0,
-                            facingRight ? 0f : 180f,
-                            facingRight ? (angle - 90f) : (90f - angle)
-                        );
-                        
+                        PlayDust(groundPos, groundNormal, this.dustRunPrefab);
                         this.lastStepDustTime = Time.time + Random.value * this.dustStepPeriodRand;
                     }
                 }
@@ -258,6 +250,19 @@ public class PlayerAnimator : SpriteAnimator {
 
         this.lastStepDustTime = Time.time;
         this.lastStepSfxTime = Time.time + Random.value * this.stepPeriodRand;
+    }
+
+    private void PlayDust(Vector2 groundPos, Vector2 groundNormal, GameObject prefab) {
+        GameObject dust = Pool.instance.Grab(prefab);
+        dust.transform.position = groundPos;
+
+        bool facingRight = this.transform.eulerAngles.y < 90f;
+        float angle = Mathf.Atan2(groundNormal.y, groundNormal.x) * Mathf.Rad2Deg;
+        dust.transform.localEulerAngles = new Vector3(
+            0,
+            facingRight ? 0f : 180f,
+            facingRight ? (angle - 90f) : (90f - angle)
+        );
     }
 
     private enum State {

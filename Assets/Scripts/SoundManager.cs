@@ -164,6 +164,11 @@ public enum SoundId {
     BombTurretHit,
     IceTurretHit,
 
+    PlayerWallJump,
+    PlayerSpikesDeath,
+
+    JumpyPlatform,
+
     Placeholder2,
     Placeholder3,
     Placeholder4,
