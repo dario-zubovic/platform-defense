@@ -24,6 +24,7 @@ public class RunningEnemyAnimator : SpriteAnimator {
                     if(!grounded && Mathf.Abs(velocity.y) > this.fallSpeedThreshold) {
                         this.state = State.Fall;
                     } else if(dead) {
+                        SoundManager.instance.PlayAtPosition(SoundId.RunningEnemyDeath, this.transform.position);
                         this.state = State.Dead;
                     }
                 }

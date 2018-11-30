@@ -24,8 +24,12 @@ public class BouncyEnemyAnimator : SpriteAnimator {
             case State.Ground:
                 {
                     if(jumped || (!grounded && Mathf.Abs(velocity.y) > this.fallSpeedThreshold)) {
+                        if(jumped) {
+                            SoundManager.instance.PlayAtPosition(SoundId.BouncyEnemyJump, this.transform.position);
+                        }
                         this.state = State.Jump;
                     } else if(dead) {
+                        SoundManager.instance.PlayAtPosition(SoundId.BouncyEnemyDeath, this.transform.position);
                         this.state = State.Dead;
                     } else if(prepareForJump) {
                         this.state = State.JumpPrepare;
@@ -36,8 +40,12 @@ public class BouncyEnemyAnimator : SpriteAnimator {
             case State.JumpPrepare:
                 {
                     if(jumped || (!grounded && Mathf.Abs(velocity.y) > this.fallSpeedThreshold)) {
+                        if(jumped) {
+                            SoundManager.instance.PlayAtPosition(SoundId.BouncyEnemyJump, this.transform.position);
+                        }
                         this.state = State.Jump;
                     } else if(dead) {
+                        SoundManager.instance.PlayAtPosition(SoundId.BouncyEnemyDeath, this.transform.position);
                         this.state = State.Dead;
                     }
                 }
@@ -54,6 +62,9 @@ public class BouncyEnemyAnimator : SpriteAnimator {
             case State.JumpLand:
                 {
                     if(jumped || (!grounded && Mathf.Abs(velocity.y) > this.fallSpeedThreshold)) {
+                        if(jumped) {
+                            SoundManager.instance.PlayAtPosition(SoundId.BouncyEnemyJump, this.transform.position);
+                        }
                         this.state = State.Jump;
                     } else if(!landed) {
                         this.state = State.Ground;

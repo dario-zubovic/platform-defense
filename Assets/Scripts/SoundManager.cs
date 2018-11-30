@@ -6,9 +6,6 @@ public class SoundManager : MonoBehaviour
     public AudioSource sfxSource;
     public AudioSource musicSource;
     public AudioMixerGroup environmentOutputChannel;
-    //! The general UI output channel.  This can be overridden.  It is for reference and does not
-    //! itself implement any functionality.
-    public AudioMixerGroup uiOutputChannel;
 
     public List<Sound> sounds;
 
@@ -98,14 +95,14 @@ public class SoundManager : MonoBehaviour
     }
 
     public void PlayAtPosition(SoundId id, Vector2 pos) {
-        Sound sound = this.sounds.Find(o => o.id == id);
-        if (sound == null) {
-            Debug.LogWarning("Couldn't find sound with id " + id.ToString());
+        float dist = Vector2.Distance(this.player.transform.position, pos);
+        if(dist > this.spatialSoundsMaxDistance) {
             return;
         }
 
-        float dist = Vector2.Distance(this.player.transform.position, pos);
-        if(dist > this.spatialSoundsMaxDistance) {
+        Sound sound = this.sounds.Find(o => o.id == id);
+        if (sound == null) {
+            Debug.LogWarning("Couldn't find sound with id " + id.ToString());
             return;
         }
 
@@ -168,6 +165,11 @@ public enum SoundId {
     PlayerSpikesDeath,
 
     JumpyPlatform,
+
+    BouncyEnemyJump,
+    BouncyEnemyDeath,
+    
+    RunningEnemyDeath,
 
     Placeholder2,
     Placeholder3,
