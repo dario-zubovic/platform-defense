@@ -203,7 +203,7 @@ MonoBehaviour:
   airDrag: 0.075
   wallSlideDamping: 0.75
   speedMultipler: 1
-  jumpSpeed: 13
+  jumpSpeed: 13.3
   jumpExtendSpeed: 2
   jumpExtendTime: 0.3
   coyoteFrames: 8

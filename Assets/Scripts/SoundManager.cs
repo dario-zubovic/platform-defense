@@ -12,8 +12,7 @@ public class SoundManager : MonoBehaviour
 
     public List<Sound> sounds;
 
-    public static SoundManager instance
-    {
+    public static SoundManager instance {
         get;
         private set;
     }
@@ -22,26 +21,24 @@ public class SoundManager : MonoBehaviour
 
     // private Player player;
 
-    public void Awake()
-    {
+    public void Awake() {
         SoundManager.instance = this;
+
         // begin playing music
-        musicSource.Play();
-        sfxSource.outputAudioMixerGroup = environmentOutputChannel;
+        this.musicSource.Play();
+        this.sfxSource.outputAudioMixerGroup = this.environmentOutputChannel;
+        
         // this.player = GameObject.FindObjectOfType<Player>();
     }
 
-    public void SetZone(MaterialZone.Zone zone)
-    {
+    public void SetZone(MaterialZone.Zone zone) {
         this.materialZone = zone;
     }
 
-    public void PlayPlayerJumpSfx()
-    {
+    public void PlayPlayerJumpSfx() {
         // Figure out which sound should be played based on the MaterialZone
         SoundId id = SoundId.None;
-        switch (this.materialZone)
-        {
+        switch (this.materialZone) {
             case MaterialZone.Zone.Grass:
                 id = SoundId.PlayerJumpGrass;
                 break;
@@ -59,11 +56,9 @@ public class SoundManager : MonoBehaviour
         PlaySfx(id);
     }
 
-    public void PlayPlayerStepSfx()
-    {
+    public void PlayPlayerStepSfx() {
         SoundId id = SoundId.None;
-        switch (this.materialZone)
-        {
+        switch (this.materialZone) {
             case MaterialZone.Zone.Grass:
                 id = SoundId.PlayerStepGrass;
                 break;
@@ -81,39 +76,43 @@ public class SoundManager : MonoBehaviour
         PlaySfx(id);
     }
 
-    public Sound GetSound(SoundId id)
-    {
+    public Sound GetSound(SoundId id) {
         return this.sounds.Find(o => o.id == id);
     }
 
-    private void PlaySfx(SoundId id)
-    {
+    public void PlaySfx(SoundId id) {
         Sound sound = this.sounds.Find(o => o.id == id);
-        if (sound == null)
-        {
+        if (sound == null) {
             Debug.LogWarning("Couldn't find sound with id " + id.ToString());
             return;
         }
 
-        this.sfxSource.pitch = Random.Range(0.8f, 1.2f);
+        if(sound.randomPitch) {
+            this.sfxSource.pitch = Random.Range(sound.pitchMin, sound.pitchMax);
+        } else {
+            this.sfxSource.pitch = 1f;
+        }
+        
         this.sfxSource.PlayOneShot(sound.clip, sound.volume);
     }
 }
 
 [System.Serializable]
-public class Sound
-{
+public class Sound {
     public SoundId id;
     public AudioClip clip;
     [Range(0f, 1f)]
     public float volume = 1f;
-    // Set the output channel.  It is up to code to check and route this properly.
+
     public AudioMixerGroup outputChannel;
+
+    public bool randomPitch;
+    [Range(0, 2f)]
+    public float pitchMin = 1f, pitchMax = 1;
 }
 
 [System.Serializable]
-public enum SoundId
-{
+public enum SoundId {
     None,
 
     PlayerJumpGrass,
@@ -132,6 +131,8 @@ public enum SoundId
     UIMove,
     UIBack,
     UISelect,
+
+
     Placeholder2,
     Placeholder3,
     Placeholder4,
