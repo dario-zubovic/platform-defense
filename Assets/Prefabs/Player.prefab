@@ -180,7 +180,7 @@ MonoBehaviour:
     type: 2}
   dustRunPrefab: {fileID: 1473102595535622, guid: 08b560394fddaec4e803142c73fd912c,
     type: 2}
-  dustStepPeriod: 0.3
+  dustStepPeriod: 0.2
   dustStepPeriodRand: 0.3
   stepPeriod: 0.45
   stepPeriodRand: 0.15
