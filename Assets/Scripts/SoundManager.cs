@@ -1,13 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
-
-public class SoundManager : MonoBehaviour {
+using UnityEngine.Audio;
+public class SoundManager : MonoBehaviour
+{
     public AudioSource sfxSource;
     public AudioSource musicSource;
 
     public List<Sound> sounds;
+    // The mixer that routes to global environmental effects such as reverb
+    public AudioMixerGroup sfxOutput;
 
-    public static SoundManager instance {
+    public static SoundManager instance
+    {
         get;
         private set;
     }
@@ -16,19 +20,29 @@ public class SoundManager : MonoBehaviour {
 
     // private Player player;
 
-    public void Awake() {
+    public void Awake()
+    {
         SoundManager.instance = this;
-    
+
+        // set the correct audio output for each effect.
+        sfxSource.outputAudioMixerGroup = sfxOutput;
+
+        // begin playing music
+        musicSource.Play();
         // this.player = GameObject.FindObjectOfType<Player>();
     }
 
-    public void SetZone(MaterialZone.Zone zone) {
+    public void SetZone(MaterialZone.Zone zone)
+    {
         this.materialZone = zone;
     }
 
-    public void PlayPlayerJumpSfx() {
+    public void PlayPlayerJumpSfx()
+    {
+        // Figure out which sound should be played based on the MaterialZone
         SoundId id = SoundId.None;
-        switch(this.materialZone) {
+        switch (this.materialZone)
+        {
             case MaterialZone.Zone.Grass:
                 id = SoundId.PlayerJumpGrass;
                 break;
@@ -38,7 +52,7 @@ public class SoundManager : MonoBehaviour {
             case MaterialZone.Zone.Wood:
                 id = SoundId.PlayerJumpWood;
                 break;
-            
+
             default:
                 return;
         }
@@ -46,9 +60,11 @@ public class SoundManager : MonoBehaviour {
         PlaySfx(id);
     }
 
-    public void PlayPlayerStepSfx() {
+    public void PlayPlayerStepSfx()
+    {
         SoundId id = SoundId.None;
-        switch(this.materialZone) {
+        switch (this.materialZone)
+        {
             case MaterialZone.Zone.Grass:
                 id = SoundId.PlayerStepGrass;
                 break;
@@ -66,13 +82,16 @@ public class SoundManager : MonoBehaviour {
         PlaySfx(id);
     }
 
-    public Sound GetSound(SoundId id) {
+    public Sound GetSound(SoundId id)
+    {
         return this.sounds.Find(o => o.id == id);
     }
 
-    private void PlaySfx(SoundId id) {
+    private void PlaySfx(SoundId id)
+    {
         Sound sound = this.sounds.Find(o => o.id == id);
-        if(sound == null) {
+        if (sound == null)
+        {
             Debug.LogWarning("Couldn't find sound with id " + id.ToString());
             return;
         }
@@ -82,7 +101,8 @@ public class SoundManager : MonoBehaviour {
 }
 
 [System.Serializable]
-public class Sound {
+public class Sound
+{
     public SoundId id;
     public AudioClip clip;
     [Range(0f, 1f)]
@@ -90,7 +110,8 @@ public class Sound {
 }
 
 [System.Serializable]
-public enum SoundId {
+public enum SoundId
+{
     None,
 
     PlayerJumpGrass,
@@ -104,8 +125,8 @@ public enum SoundId {
     BombTurretShot,
     IceTurretShot,
 
-    Placeholder0,
-    Placeholder1,
+    TokenPickup,
+    TokenAmbient,
     Placeholder2,
     Placeholder3,
     Placeholder4,
