@@ -27,8 +27,6 @@ public class JumpyEnemy : GroundEnemy {
     protected override void Init() {
         base.Init();
 
-        this.groundNormal = Vector2.up;
-
         this.nextJumpTime = Time.time + Random.Range(this.jumpWaitTimeMin, this.jumpWaitTimeMax);
         this.groundedTime = 0;
         this.jumped = false;

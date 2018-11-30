@@ -260,7 +260,7 @@ public class Player : Actor {
 			this.jumpFrames = 0;
 		}
 
-		if(Input.GetButtonDown("Build")) {
+		if(Input.GetButtonDown("Build") || Input.GetKeyDown(KeyCode.E)) {
 			this.build = true;
 		}
 

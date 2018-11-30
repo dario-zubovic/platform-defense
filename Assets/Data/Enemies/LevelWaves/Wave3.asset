@@ -13,16 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   waves:
-  - {fileID: 11400000, guid: b8c43ec00d18d4443b9a7d55885b031d, type: 2}
-  - {fileID: 11400000, guid: a57d7c515316b9e4699b26bf9b23cdd6, type: 2}
-  - {fileID: 11400000, guid: b8c43ec00d18d4443b9a7d55885b031d, type: 2}
-  - {fileID: 11400000, guid: a57d7c515316b9e4699b26bf9b23cdd6, type: 2}
-  - {fileID: 11400000, guid: b8c43ec00d18d4443b9a7d55885b031d, type: 2}
-  - {fileID: 11400000, guid: a57d7c515316b9e4699b26bf9b23cdd6, type: 2}
+  - {fileID: 11400000, guid: c12199286b2ca87439d3507d016a745a, type: 2}
+  - {fileID: 11400000, guid: d8c884c07801d7648a26ce3d7cc56fc4, type: 2}
   delays:
   - 0
-  - 3
-  - 6
-  - 9
-  - 12
-  - 15
+  - 2

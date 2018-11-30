@@ -2040,23 +2040,23 @@ MonoBehaviour:
   amount: 0.15
   amountUpgrades:
   - tokenCost: 0
-    goldCost: 20
+    goldCost: 25
     value: 0.25
   - tokenCost: 0
     goldCost: 60
     value: 0.4
   - tokenCost: 1
-    goldCost: 50
+    goldCost: 110
     value: 0.6
   durationLowUpgrades:
   - tokenCost: 0
-    goldCost: 30
+    goldCost: 35
     value: 2
   - tokenCost: 0
     goldCost: 50
     value: 3
   - tokenCost: 1
-    goldCost: 50
+    goldCost: 100
     value: 5
   durationHighUpgrades:
   - tokenCost: 0

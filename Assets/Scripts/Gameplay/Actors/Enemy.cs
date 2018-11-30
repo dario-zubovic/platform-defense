@@ -28,7 +28,7 @@ public abstract class Enemy : Actor {
     }
 
     public void Update() {
-        this.healthIndicator.localScale = new Vector3(this.health / this.startHealth, 1, 1);
+        this.healthIndicator.localScale = new Vector3(Mathf.Clamp01(this.health / this.startHealth), 1, 1);
     }
 
     public void TakeDamage(float damage) {        

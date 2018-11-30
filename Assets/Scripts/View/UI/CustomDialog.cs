@@ -43,7 +43,7 @@ public abstract class CustomDialog : MonoBehaviour {
         HandleMove();
         HandleShortcuts();
 
-        if(Input.GetButtonDown("Jump")) {
+        if(Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)) {
             if(this.selected == this.buttons.Length - 1) {
                 Close();
             } else {
