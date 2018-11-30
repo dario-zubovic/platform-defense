@@ -21,6 +21,7 @@ TextureImporter:
     21300032: icons_16
     21300034: icons_25
     21300036: holodisplay
+    21300038: aim
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -470,7 +471,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 63
+        width: 94
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -480,6 +481,26 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 494ad9ea431f7d5409ec24cf7286061a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aim
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 66
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86eeedbdf3acef246bacbb08dccfa015
       vertices: []
       indices: 
       edges: []
