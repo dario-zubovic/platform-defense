@@ -42,7 +42,7 @@ public abstract class Projectile : MonoBehaviour {
         }
 
         TurretParticles.instance.EmitCircle(this.transform.position, this.blastRadius, this.particlesColor);
-        SoundManager.instance.PlaySfx(this.sfxOnHit);
+        SoundManager.instance.PlayAtPosition(this.sfxOnHit, this.transform.position);
 
         this.exploaded = true;
         Pool.instance.Return(this.gameObject);

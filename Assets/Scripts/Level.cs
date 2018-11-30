@@ -52,6 +52,8 @@ public class Level : MonoBehaviour {
 
 		this.player = GameObject.Instantiate<Player>(this.playerPrefab);
 
+		SoundManager.instance.SetPlayer(this.player);
+
 		this.tokens = new List<Token>(GameObject.FindObjectsOfType<Token>());
 		this.droppedTokens = new List<Token>();
 
