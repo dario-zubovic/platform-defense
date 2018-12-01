@@ -15,7 +15,7 @@ MonoBehaviour:
   spawn: 0
   count: 5
   period: 5
-  enemyPrefab: {fileID: 114050138279965586, guid: ded1e15e92726f749a5413efc7b41f72,
+  enemyPrefab: {fileID: 114050138279965586, guid: b172a080f0611204384c0baf66d72abb,
     type: 2}
   health: 3
   speed: 3
