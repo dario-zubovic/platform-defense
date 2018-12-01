@@ -33,6 +33,7 @@ public class RunningEnemyAnimator : SpriteAnimator {
             case State.Fall:
                 {
                     if(grounded) {
+                        SoundManager.instance.PlayAtPosition(SoundId.RunningEnemyLand, this.transform.position);
                         this.state = State.Ground;
                     }
                 }

@@ -59,6 +59,7 @@ public class BouncyEnemyAnimator : SpriteAnimator {
             case State.Jump:
                 {
                     if(landed || grounded) {
+                        SoundManager.instance.PlayAtPosition(SoundId.BouncyEnemyLand, this.transform.position);
                         this.state = State.JumpLand;
                     }
                 }

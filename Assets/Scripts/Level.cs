@@ -24,7 +24,10 @@ public class Level : MonoBehaviour {
 	public Text nextWaveText;
 	public Text tokensText;
 	public Text goldText;
+	public Text livesText;
 	public Image[] lifeIndicators;
+	public Transform shutterTop, shutterBottom;
+	public float shutterCloseDuration;
 
 	[Header("Enemies and waves")]
 	public Transform[] enemySpawns;
@@ -46,6 +49,10 @@ public class Level : MonoBehaviour {
 	private Checkpoint checkpoint;
 
 	private int lives;
+	
+	private bool lost;
+	private float lostTime;
+	private bool reloadingScene;
 
 	public void Awake() {
 		this.cameraController = Camera.main.GetComponent<CameraController>();
@@ -69,6 +76,37 @@ public class Level : MonoBehaviour {
 		ChangeLivesNum(0);
 
 		StartCoroutine(SpawnWaves());
+	}
+
+	public void Update() {
+		if(this.lives <= 0) {
+			if(!this.lost) {
+				this.lostTime = Time.time;
+				this.lost = true;
+			}
+
+			this.player.locked = true;
+
+			float t = (Time.time - this.lostTime) / this.shutterCloseDuration;
+			t = Mathf.Clamp01(t);
+			t = Util.BounceEaseOut(0, 1, t);
+
+			this.shutterTop.position = new Vector3(640, Mathf.Lerp(900, 540, t), 0);
+			this.shutterBottom.position = new Vector3(640, Mathf.Lerp(-180, 180, t), 0);
+		
+			if(t > 0.95f && Input.GetButtonDown("Jump")) {
+				Repeat();
+			}
+		}
+	}
+
+	public void Repeat() {
+		if(this.reloadingScene) {
+			return;
+		}
+
+		UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("Level", UnityEngine.SceneManagement.LoadSceneMode.Single);
+		this.reloadingScene = true;
 	}
 
 	public void PlayerDied() {
@@ -137,8 +175,10 @@ public class Level : MonoBehaviour {
 		this.goldText.text = this.collectedGold.ToString();
 	}
 
-	private void ChangeLivesNum(int delta) {
+	public void ChangeLivesNum(int delta) {
 		this.lives += delta;
+
+		this.livesText.text = this.lives.ToString();
 
 		for(int i = 0; i < this.lifeIndicators.Length; i++) {
 			this.lifeIndicators[i].gameObject.SetActive(i < this.lives);
@@ -260,7 +300,7 @@ public class Level : MonoBehaviour {
 	private IEnumerator SpawnWaves() {
 		float lastSpawnTime = Time.time;
 
-		WaitForSeconds delay = new WaitForSeconds(0.5f);
+		WaitForSeconds delay = new WaitForSeconds(1f);
 
 		foreach(WaveDescription wave in this.waves) {
 			this.nextWaveText.enabled = true;
@@ -269,6 +309,10 @@ public class Level : MonoBehaviour {
 				yield return delay;
 			}
 			this.nextWaveText.enabled = false;
+
+			if(this.lost) {
+				break;
+			}
 
 			yield return wave.wave.Spawn(this);
 			lastSpawnTime = Time.time;

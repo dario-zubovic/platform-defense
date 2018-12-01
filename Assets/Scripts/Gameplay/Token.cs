@@ -64,10 +64,7 @@ public class Token : MonoBehaviour {
     }
 
     public void OnEnable() {
-        // play our ambient loop
-        this.ambientAudioSource.Play();
-
-        if (this.isDropToken) {
+        if (this.isDropToken) {    
             this.lastPickupTime = Time.time;
             Activate();
         }
@@ -76,6 +73,7 @@ public class Token : MonoBehaviour {
     public void Activate() {
         this.isActive = true;
         this.rend.enabled = true;
+        this.ambientAudioSource.Play();
     }
 
     public void MoveTo(Vector3 pos) {
@@ -118,6 +116,7 @@ public class Token : MonoBehaviour {
     private void Hide() {
         this.isActive = false;
         this.rend.enabled = false;
+        this.ambientAudioSource.Stop();
 
         if (this.isDropToken) {
             Pool.instance.Return(this.gameObject);

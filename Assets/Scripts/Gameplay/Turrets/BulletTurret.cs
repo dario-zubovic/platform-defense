@@ -23,14 +23,16 @@ public class BulletTurret : Turret {
     private int rangeLevel = -1;
     private int turretLevel = 0;
 
+    private Sound sound;
+
     public void Start() {
         this.raycastResults = new RaycastHit2D[32];
         this.level = GameObject.FindObjectOfType<Level>();
 
-        Sound sound = SoundManager.instance.GetSound(SoundId.BulletTurretShot);
-        this.audioSource.clip = sound.clip;
-        this.audioSource.volume = sound.volume;
-        this.audioSource.outputAudioMixerGroup = sound.outputChannel;
+        this.sound = SoundManager.instance.GetSound(SoundId.BulletTurretShot);
+        this.audioSource.clip = this.sound.clip;
+        this.audioSource.volume = this.sound.volume;
+        this.audioSource.outputAudioMixerGroup = this.sound.outputChannel;
     }
 
     public override void Update() {
@@ -48,6 +50,7 @@ public class BulletTurret : Turret {
 
         TurretParticles.instance.EmitLine(this.barrel.position, target.transform.position, this.particlesColor);
 
+        this.sound.ApplyPitch(this.audioSource);
         this.audioSource.Play();
     }
 

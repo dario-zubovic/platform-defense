@@ -86,10 +86,10 @@ public class Player : Actor {
 	}
 
 	public void OnTriggerEnter2D(Collider2D trigger) {
-		if(trigger.tag == "Spikes") {
+		if(trigger.CompareTag("Spikes")) {
 			SoundManager.instance.PlaySfx(SoundId.PlayerSpikesDeath);
 			Die();
-		} else if(trigger.tag == "TurretStand") {
+		} else if(trigger.CompareTag("TurretStand")) {
 			this.onStand = trigger.gameObject.GetComponent<TurretStand>();
 			this.onStand.Hover();
 		}

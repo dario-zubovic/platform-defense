@@ -194,6 +194,9 @@ public enum SoundId {
     PlayerLandRock,
     PlayerLandWood,
 
+    BouncyEnemyLand,
+    RunningEnemyLand,
+
     Placeholder2,
     Placeholder3,
     Placeholder4,

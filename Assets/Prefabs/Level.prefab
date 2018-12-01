@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e18419c770dee4aa8bf64c0b1c5d5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startLives: 30
+  startLives: 25
   respawn: {fileID: 4690780412106920}
   dramaTime: 1.5
   respawnTime: 2
@@ -157,6 +157,7 @@ MonoBehaviour:
   nextWaveText: {fileID: 0}
   tokensText: {fileID: 0}
   goldText: {fileID: 0}
+  livesText: {fileID: 0}
   lifeIndicators:
   - {fileID: 0}
   - {fileID: 0}
@@ -198,6 +199,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  shutterTop: {fileID: 0}
+  shutterBottom: {fileID: 0}
+  shutterCloseDuration: 2.5
   enemySpawns:
   - {fileID: 4725832031765786}
   - {fileID: 4823307234264248}
