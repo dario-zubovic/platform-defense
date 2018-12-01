@@ -38,7 +38,6 @@ public class SoundManager : MonoBehaviour
     }
 
     public void PlayPlayerJumpSfx() {
-        // Figure out which sound should be played based on the MaterialZone
         SoundId id = SoundId.None;
         switch (this.materialZone) {
             case MaterialZone.Zone.Grass:
@@ -49,6 +48,26 @@ public class SoundManager : MonoBehaviour
                 break;
             case MaterialZone.Zone.Wood:
                 id = SoundId.PlayerJumpWood;
+                break;
+
+            default:
+                return;
+        }
+
+        PlaySfx(id);
+    }
+
+    public void PlayPlayerLandSfx() {
+        SoundId id = SoundId.None;
+        switch (this.materialZone) {
+            case MaterialZone.Zone.Grass:
+                id = SoundId.PlayerLandGrass;
+                break;
+            case MaterialZone.Zone.Rock:
+                id = SoundId.PlayerLandRock;
+                break;
+            case MaterialZone.Zone.Wood:
+                id = SoundId.PlayerLandWood;
                 break;
 
             default:
@@ -161,7 +180,7 @@ public enum SoundId {
     BombTurretHit,
     IceTurretHit,
 
-    PlayerWallJump,
+    Placeholder1,
     PlayerSpikesDeath,
 
     JumpyPlatform,
@@ -170,6 +189,10 @@ public enum SoundId {
     BouncyEnemyDeath,
     
     RunningEnemyDeath,
+
+    PlayerLandGrass,
+    PlayerLandRock,
+    PlayerLandWood,
 
     Placeholder2,
     Placeholder3,

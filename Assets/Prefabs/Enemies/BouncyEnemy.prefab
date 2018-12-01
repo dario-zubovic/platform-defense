@@ -203,8 +203,8 @@ MonoBehaviour:
   jumpWaitTimeMax: 12
   prepareForJumpTime: 0.25
   landTime: 0.25
-  jumpSpeedMin: 18
-  jumpSpeedMax: 19
+  jumpSpeedMin: 21
+  jumpSpeedMax: 26
   spriteTransform: {fileID: 4501863334089364}
   animator: {fileID: 114315757131204782}
 --- !u!114 &114315757131204782

@@ -78,10 +78,10 @@ public class BouncyEnemyAnimator : SpriteAnimator {
 
         // state logic:
 
-        if(this.state == State.Ground || this.state == State.JumpLand) {
-            this.transform.localPosition = this.normalLocalPos;
-        } else {
+        if(this.state == State.JumpPrepare) {
             this.transform.localPosition = this.airLocalPos;
+        } else {
+            this.transform.localPosition = this.normalLocalPos;
         }
 
         switch(this.state) {

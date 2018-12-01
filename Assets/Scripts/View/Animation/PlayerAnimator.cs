@@ -246,7 +246,7 @@ public class PlayerAnimator : SpriteAnimator {
         dust.transform.position = groundPos;
         dust.transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(groundNormal.y, groundNormal.x) * Mathf.Rad2Deg - 90);
 
-        // TODO: player land sound
+        SoundManager.instance.PlayPlayerLandSfx();
 
         this.lastStepDustTime = Time.time;
         this.lastStepSfxTime = Time.time + Random.value * this.stepPeriodRand;
