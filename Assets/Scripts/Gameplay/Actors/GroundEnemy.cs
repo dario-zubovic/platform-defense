@@ -15,6 +15,12 @@ public class GroundEnemy : Enemy {
         this.dead = false;
     }
 
+    public override void Spawn(Vector3 location) {
+        base.Spawn(location);
+
+        this.dead = false;
+    }
+
     protected override void Die() {
         base.Die();
         

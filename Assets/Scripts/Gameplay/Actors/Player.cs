@@ -218,7 +218,7 @@ public class Player : Actor {
 		}
 
 		if(this.onStand == null) {
-			if(this.grounded && this.velocity.magnitude < 0.1f) {
+			if(this.grounded && this.velocity.magnitude < 0.1f && this.level.TakeTokensAndGold(0, 15)) {
 				this.level.BuildCheckpoint(this.transform.position);
 			}
 		} else {

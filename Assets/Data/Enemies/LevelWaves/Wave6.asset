@@ -8,14 +8,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f09eb98453ed12e428749680e6d9bfd3, type: 3}
+  m_Script: {fileID: 11500000, guid: e7f49b7c25b6e2f4d98e1e8d4802ab01, type: 3}
   m_Name: Wave6
   m_EditorClassIdentifier: 
   description: 
-  spawn: 0
-  count: 5
-  period: 1
-  enemyPrefab: {fileID: 114050138279965586, guid: ded1e15e92726f749a5413efc7b41f72,
-    type: 2}
-  health: 10
-  speed: 3
+  waves:
+  - {fileID: 11400000, guid: 644066f81015bfd41b41b4309c2f2ec2, type: 2}
+  - {fileID: 11400000, guid: 7da2cf7b3dbe95e4aaa3f567cc69d82b, type: 2}
+  delays:
+  - 0
+  - 1

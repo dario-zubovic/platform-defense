@@ -50,6 +50,8 @@ public class BouncyEnemyAnimator : SpriteAnimator {
                     } else if(dead) {
                         SoundManager.instance.PlayAtPosition(SoundId.BouncyEnemyDeath, this.transform.position);
                         this.state = State.Dead;
+                    } else if(!prepareForJump) {
+                        this.state = State.Ground;
                     }
                 }
                 break;

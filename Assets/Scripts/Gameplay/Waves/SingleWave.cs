@@ -7,6 +7,7 @@ public class SingleWave : EnemyWave {
     public int spawn;
     public int count;
     public float period;
+    public float periodRand;
     
     [Header("Individual settings")]
     public Enemy enemyPrefab;
@@ -19,7 +20,7 @@ public class SingleWave : EnemyWave {
     }
 
     public override IEnumerator Spawn(Level level) {
-        WaitForSeconds wait = new WaitForSeconds(this.period);
+        WaitForSeconds wait = new WaitForSeconds(this.period + Random.value * this.periodRand - this.periodRand * 0.5f);
 
         for(int i = 0; i < this.count; i++) {
             yield return wait;
@@ -31,8 +32,9 @@ public class SingleWave : EnemyWave {
 
     private void SpawnEnemy(Transform spawnPoint) {
         Enemy enemy = Pool.instance.Grab<Enemy>(this.enemyPrefab);
-        enemy.transform.position = spawnPoint.transform.position;
         enemy.startHealth = this.health;
         enemy.moveSpeed = this.speed;
+        enemy.transform.position = spawnPoint.transform.position;
+        enemy.Spawn(spawnPoint.transform.position);
     }
 }

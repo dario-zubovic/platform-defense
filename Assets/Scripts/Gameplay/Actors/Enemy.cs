@@ -16,9 +16,7 @@ public abstract class Enemy : Actor {
 
     private List<EnemyEffect> effects;
 
-    protected override void Init() {
-        this.health = this.startHealth;
-        
+    protected override void Init() {        
         if(this.effects == null) {
             this.effects = new List<EnemyEffect>(64);
         } else {
@@ -26,6 +24,12 @@ public abstract class Enemy : Actor {
         }
 
         this.gameObject.layer = LayerMask.NameToLayer("Enemy");
+    }
+
+    public override void Spawn(Vector3 location) {
+        base.Spawn(location);
+
+        this.health = this.startHealth;
     }
 
     public void Update() {
