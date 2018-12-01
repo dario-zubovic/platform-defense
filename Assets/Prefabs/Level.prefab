@@ -199,9 +199,42 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  loseImage: {fileID: 0}
+  winImage: {fileID: 0}
   shutterTop: {fileID: 0}
   shutterBottom: {fileID: 0}
   shutterCloseDuration: 2.5
+  waveDisplays:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   enemySpawns:
   - {fileID: 4725832031765786}
   - {fileID: 4823307234264248}
@@ -226,3 +259,15 @@ MonoBehaviour:
     wave: {fileID: 11400000, guid: 5c0f6328db8d3c6499784fd142af92d2, type: 2}
   - delay: 60
     wave: {fileID: 11400000, guid: 3a57ff74b3fc34541b926b34700fd04c, type: 2}
+  - delay: 30
+    wave: {fileID: 11400000, guid: 53ace7375ea38ae42982def35c549c2b, type: 2}
+  - delay: 30
+    wave: {fileID: 11400000, guid: 0da6a3aab7d6e4d499bbffe6c41c5559, type: 2}
+  - delay: 45
+    wave: {fileID: 11400000, guid: bca615fff96982546910e8ec1e699d85, type: 2}
+  - delay: 60
+    wave: {fileID: 11400000, guid: 6d2a50a9671831f42a64695c8766b440, type: 2}
+  - delay: 45
+    wave: {fileID: 11400000, guid: 5bea8935aef3fcc4eb1d62bd3395e438, type: 2}
+  - delay: 60
+    wave: {fileID: 11400000, guid: c50b61fdefe571141b34948d88e9c946, type: 2}

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f09eb98453ed12e428749680e6d9bfd3, type: 3}
+  m_Name: Wave17_part2
+  m_EditorClassIdentifier: 
+  description: 
+  upSpawn: 0
+  downSpawn: 0
+  spawn: 1
+  count: 5
+  period: 2
+  periodRand: 0.5
+  enemyPrefab: {fileID: 114050138279965586, guid: 7eaddf4c9ea89b74eb1b68f34c4ca231,
+    type: 2}
+  health: 7
+  speed: 3

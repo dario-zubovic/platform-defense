@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Name: Wave4
   m_EditorClassIdentifier: 
   description: 
+  upSpawn: 0
+  downSpawn: 1
   spawn: 0
   count: 3
   period: 5
+  periodRand: 0
   enemyPrefab: {fileID: 114050138279965586, guid: ded1e15e92726f749a5413efc7b41f72,
     type: 2}
   health: 10

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Name: Wave3
   m_EditorClassIdentifier: 
   description: 
+  upSpawn: 0
+  downSpawn: 1
   spawn: 0
   count: 30
   period: 1

@@ -19,7 +19,7 @@ public abstract class Actor : MonoBehaviour {
 
 	// constants:
 	private const float MIN_MOVE_DIST = 0.01f;
-	private const float LOOK_AHEAD_DIST = 0.05f;
+	private const float LOOK_AHEAD_DIST = 0.075f;
 	private const float MIN_GROUND_NORMAL_Y = 0.65f;
 
 	// state:

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f49b7c25b6e2f4d98e1e8d4802ab01, type: 3}
+  m_Name: Wave13
+  m_EditorClassIdentifier: 
+  description: 
+  upSpawn: 1
+  downSpawn: 1
+  waves:
+  - {fileID: 11400000, guid: 29898d10599196d459e9dac7a78caf16, type: 2}
+  - {fileID: 11400000, guid: bd5aa87c0031a90449dc12c070cc24c8, type: 2}
+  - {fileID: 11400000, guid: 29898d10599196d459e9dac7a78caf16, type: 2}
+  - {fileID: 11400000, guid: bd5aa87c0031a90449dc12c070cc24c8, type: 2}
+  - {fileID: 11400000, guid: 29898d10599196d459e9dac7a78caf16, type: 2}
+  - {fileID: 11400000, guid: bd5aa87c0031a90449dc12c070cc24c8, type: 2}
+  delays:
+  - 0
+  - 5
+  - 10
+  - 15
+  - 20
+  - 25

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Name: Wave6
   m_EditorClassIdentifier: 
   description: 
+  upSpawn: 1
+  downSpawn: 1
   waves:
   - {fileID: 11400000, guid: 644066f81015bfd41b41b4309c2f2ec2, type: 2}
   - {fileID: 11400000, guid: 7da2cf7b3dbe95e4aaa3f567cc69d82b, type: 2}

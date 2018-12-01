@@ -26,8 +26,10 @@ public class Level : MonoBehaviour {
 	public Text goldText;
 	public Text livesText;
 	public Image[] lifeIndicators;
+	public Image loseImage, winImage;
 	public Transform shutterTop, shutterBottom;
 	public float shutterCloseDuration;
+	public WaveDisplay[] waveDisplays;
 
 	[Header("Enemies and waves")]
 	public Transform[] enemySpawns;
@@ -50,9 +52,11 @@ public class Level : MonoBehaviour {
 
 	private int lives;
 	
-	private bool lost;
-	private float lostTime;
+	private bool done;
+	private float doneTime;
 	private bool reloadingScene;
+
+	private int currentWaveDisplay = -1;
 
 	public void Awake() {
 		this.cameraController = Camera.main.GetComponent<CameraController>();
@@ -75,26 +79,36 @@ public class Level : MonoBehaviour {
 		this.lives = this.startLives;
 		ChangeLivesNum(0);
 
+		SetupWaves();
+
 		StartCoroutine(SpawnWaves());
 	}
 
 	public void Update() {
-		if(this.lives <= 0) {
-			if(!this.lost) {
-				this.lostTime = Time.time;
-				this.lost = true;
-			}
+		if(this.lives <= 0 && !this.done) {
+			this.doneTime = Time.time;
+			this.done = true;
+		}
 
+		if(this.done) {
 			this.player.locked = true;
 
-			float t = (Time.time - this.lostTime) / this.shutterCloseDuration;
+			float t = (Time.time - this.doneTime) / this.shutterCloseDuration;
 			t = Mathf.Clamp01(t);
 			t = Util.BounceEaseOut(0, 1, t);
+
+			if(this.lives <= 0) {
+				this.loseImage.gameObject.SetActive(true);
+				this.winImage.gameObject.SetActive(false);
+			} else {
+				this.loseImage.gameObject.SetActive(false);
+				this.winImage.gameObject.SetActive(true);
+			}
 
 			this.shutterTop.position = new Vector3(640, Mathf.Lerp(900, 540, t), 0);
 			this.shutterBottom.position = new Vector3(640, Mathf.Lerp(-180, 180, t), 0);
 		
-			if(t > 0.95f && Input.GetButtonDown("Jump")) {
+			if(t > 0.95f && Input.GetButtonDown("Jump") && this.lives <= 0) {
 				Repeat();
 			}
 		}
@@ -104,8 +118,12 @@ public class Level : MonoBehaviour {
 		if(this.reloadingScene) {
 			return;
 		}
-
-		UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("Level", UnityEngine.SceneManagement.LoadSceneMode.Single);
+		
+		if(this.lives <= 0) {
+			UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("Level", UnityEngine.SceneManagement.LoadSceneMode.Single);
+		} else {
+			UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("Menu", UnityEngine.SceneManagement.LoadSceneMode.Single);
+		}
 		this.reloadingScene = true;
 	}
 
@@ -297,6 +315,21 @@ public class Level : MonoBehaviour {
 		return startPos;
 	}
 
+	private void SetupWaves() {
+		for(int i = 0; i < this.waveDisplays.Length; i++) {
+			if(i >= this.waves.Length) {
+				this.waveDisplays[i].gameObject.SetActive(false);
+				continue;
+			}
+
+			EnemyWave wave = this.waves[i].wave;
+			
+			this.waveDisplays[i].waveNumText.text = (i+1).ToString();
+			this.waveDisplays[i].up.gameObject.SetActive(wave.upSpawn);
+			this.waveDisplays[i].down.gameObject.SetActive(wave.downSpawn);
+		}
+	}
+
 	private IEnumerator SpawnWaves() {
 		float lastSpawnTime = Time.time;
 
@@ -310,12 +343,17 @@ public class Level : MonoBehaviour {
 			}
 			this.nextWaveText.enabled = false;
 
-			if(this.lost) {
+			if(this.done) {
 				break;
 			}
 
+			this.currentWaveDisplay++;
+			this.waveDisplays[this.currentWaveDisplay].background.gameObject.SetActive(true);
+
 			yield return wave.wave.Spawn(this);
 			lastSpawnTime = Time.time;
+
+			this.waveDisplays[this.currentWaveDisplay].gameObject.SetActive(false);
 		}
 
 		yield return null;

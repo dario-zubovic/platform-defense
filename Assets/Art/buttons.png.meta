@@ -7,6 +7,7 @@ TextureImporter:
     21300004: play_1
     21300006: repeat_0
     21300008: repeat_1
+    21300010: youwin
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -119,7 +120,7 @@ TextureImporter:
         width: 130
         height: 97
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -139,7 +140,7 @@ TextureImporter:
         width: 92
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -159,7 +160,7 @@ TextureImporter:
         width: 92
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -179,7 +180,7 @@ TextureImporter:
         width: 92
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -199,13 +200,33 @@ TextureImporter:
         width: 92
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 333a1e90e2271a842b6b898a9e92f8ba
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: youwin
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 159
+        width: 106
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abbecf37139d5124fb60a8c2950527a6
       vertices: []
       indices: 
       edges: []

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f49b7c25b6e2f4d98e1e8d4802ab01, type: 3}
+  m_Name: Wave20
+  m_EditorClassIdentifier: 
+  description: 
+  upSpawn: 1
+  downSpawn: 1
+  waves:
+  - {fileID: 11400000, guid: aaf4cd372bf1ef94db8c03a8bf351e7b, type: 2}
+  - {fileID: 11400000, guid: cc612fc51ef8f0e44bfec8e1c2b6eea1, type: 2}
+  - {fileID: 11400000, guid: 884be1eaea50f324d878e3ae5e6233fa, type: 2}
+  - {fileID: 11400000, guid: 444d0c3de3276ae4e9e51dc221bdf2ee, type: 2}
+  - {fileID: 11400000, guid: 884be1eaea50f324d878e3ae5e6233fa, type: 2}
+  - {fileID: 11400000, guid: 884be1eaea50f324d878e3ae5e6233fa, type: 2}
+  - {fileID: 11400000, guid: 444d0c3de3276ae4e9e51dc221bdf2ee, type: 2}
+  - {fileID: 11400000, guid: 884be1eaea50f324d878e3ae5e6233fa, type: 2}
+  - {fileID: 11400000, guid: 884be1eaea50f324d878e3ae5e6233fa, type: 2}
+  - {fileID: 11400000, guid: 444d0c3de3276ae4e9e51dc221bdf2ee, type: 2}
+  - {fileID: 11400000, guid: 884be1eaea50f324d878e3ae5e6233fa, type: 2}
+  - {fileID: 11400000, guid: 40b6034997631de4891f355945f31547, type: 2}
+  delays:
+  - 0
+  - 2
+  - 0
+  - 2
+  - 4
+  - 8
+  - 10
+  - 12
+  - 16
+  - 18
+  - 20
+  - 22

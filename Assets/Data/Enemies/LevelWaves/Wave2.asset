@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Name: Wave2
   m_EditorClassIdentifier: 
   description: 
+  upSpawn: 0
+  downSpawn: 1
   spawn: 0
   count: 15
   period: 2
