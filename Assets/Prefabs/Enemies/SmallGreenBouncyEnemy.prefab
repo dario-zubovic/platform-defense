@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61556984138283458}
   - component: {fileID: 50080297180553972}
   m_Layer: 10
-  m_Name: GreenBouncyEnemy
+  m_Name: SmallGreenBouncyEnemy
   m_TagString: Actor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1846858531873356}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4900882754880740}
@@ -175,7 +175,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.55, y: 1.5}
+  m_Size: {x: 1.3, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &114050138279965586
 MonoBehaviour:
@@ -195,8 +195,8 @@ MonoBehaviour:
   airDrag: 0.05
   wallSlideDamping: 0.75
   speedMultipler: 1
-  startHealth: 10
-  worth: 5
+  startHealth: 3
+  worth: 1
   healthIndicator: {fileID: 4383566073588522}
   moveRight: 0
   jumpWaitTimeMin: 1.5
@@ -219,17 +219,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animations:
-  - {fileID: 11400000, guid: 995b6077acfb2b048b87e9fb7f3fc81f, type: 2}
-  - {fileID: 11400000, guid: 9fcbcc499d4a7bd4487529f1ee8d6330, type: 2}
-  - {fileID: 11400000, guid: 812a90901573c02448eb5a102765f843, type: 2}
-  - {fileID: 11400000, guid: 26a4cf71a06a8ad4887388fb470bd8ab, type: 2}
-  - {fileID: 11400000, guid: f01ffaf366894414aa523501b627fd90, type: 2}
-  - {fileID: 11400000, guid: abea8d65611a1974781cd5249954de6e, type: 2}
-  - {fileID: 11400000, guid: 851b3f5ac24b8144cbc339aa10ae96d4, type: 2}
+  - {fileID: 11400000, guid: a777ca174da7bee499013bcbb811352c, type: 2}
+  - {fileID: 11400000, guid: eb72a8b85c8457e48a91daa602ca28eb, type: 2}
+  - {fileID: 11400000, guid: 11181c7c3f85b914facb8ac406608564, type: 2}
+  - {fileID: 11400000, guid: 814d62fc6bc961e4c8b96e816668ad47, type: 2}
+  - {fileID: 11400000, guid: 23dae061da2a3404f81a72280e275409, type: 2}
+  - {fileID: 11400000, guid: 70f5f4f3a369ee3478438234333c41c6, type: 2}
+  - {fileID: 11400000, guid: f3432ed203cac21458d61f6055e283d8, type: 2}
   fallSpeedThreshold: 0.5
   jumpMidPointSpeedThreshold: 1
-  normalLocalPos: {x: 0, y: 0.25, z: 0}
-  airLocalPos: {x: 0, y: 1.25, z: 0}
+  normalLocalPos: {x: 0, y: 0, z: 0}
+  airLocalPos: {x: 0, y: 0, z: 0}
 --- !u!212 &212507312170030946
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -311,7 +311,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -8
-  m_Sprite: {fileID: 21300100, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
+  m_Sprite: {fileID: 21300212, guid: 787e9de95b5624f47a88ae06c7f10673, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

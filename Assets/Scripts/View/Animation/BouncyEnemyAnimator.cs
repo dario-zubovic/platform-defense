@@ -4,6 +4,9 @@ public class BouncyEnemyAnimator : SpriteAnimator {
     public float fallSpeedThreshold;
     public float jumpMidPointSpeedThreshold;
 
+    public Vector3 normalLocalPos = new Vector3(0, 0.25f, 0);
+    public Vector3 airLocalPos = new Vector3(0, 1.25f, 0);
+
     private State state;
     private JumpPhase jumpPhase;
 
@@ -76,9 +79,9 @@ public class BouncyEnemyAnimator : SpriteAnimator {
         // state logic:
 
         if(this.state == State.Ground || this.state == State.JumpLand) {
-            this.transform.localPosition = new Vector3(0, 0.25f, 0);
+            this.transform.localPosition = this.normalLocalPos;
         } else {
-            this.transform.localPosition = new Vector3(0, 1.25f, 0);
+            this.transform.localPosition = this.airLocalPos;
         }
 
         switch(this.state) {

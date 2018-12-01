@@ -196,6 +196,7 @@ MonoBehaviour:
   wallSlideDamping: 0.75
   speedMultipler: 1
   startHealth: 3
+  worth: 5
   healthIndicator: {fileID: 4383566073588522}
   moveRight: 0
   jumpWaitTimeMin: 1.5
@@ -227,6 +228,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1ad58659e1ac65342b36553adade3222, type: 2}
   fallSpeedThreshold: 0.5
   jumpMidPointSpeedThreshold: 1
+  normalLocalPos: {x: 0, y: 0.25, z: 0}
+  airLocalPos: {x: 0, y: 1.25, z: 0}
 --- !u!212 &212507312170030946
 SpriteRenderer:
   m_ObjectHideFlags: 1

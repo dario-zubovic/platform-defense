@@ -7,6 +7,7 @@ public abstract class Enemy : Actor {
 
     [Header("Enemy stats")]
     public float startHealth;
+    public int worth;
 
     [Header("Visuals")]
     public Transform healthIndicator;

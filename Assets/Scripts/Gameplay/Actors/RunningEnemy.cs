@@ -14,9 +14,9 @@ public class RunningEnemy : GroundEnemy {
             return;
         }
 
-        Level.instance.AddGold(3);
+        Level.instance.AddGold(this.worth);
 
-        GoldDropParticles.instance.Drop(this.transform.position, 3);
+        GoldDropParticles.instance.Drop(this.transform.position, this.worth);
 
         this.didFullDie = true;
 

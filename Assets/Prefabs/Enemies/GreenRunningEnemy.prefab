@@ -212,6 +212,7 @@ MonoBehaviour:
   wallSlideDamping: 0.75
   speedMultipler: 1
   startHealth: 5
+  worth: 3
   healthIndicator: {fileID: 4240909118908788}
   moveRight: 0
   waitAfterDeath: 8

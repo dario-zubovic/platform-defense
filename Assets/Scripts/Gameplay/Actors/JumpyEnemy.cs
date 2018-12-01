@@ -17,9 +17,9 @@ public class JumpyEnemy : GroundEnemy {
     private bool landed;
 
     public void FullDeath() {
-        Level.instance.AddGold(5);
+        Level.instance.AddGold(this.worth);
 
-        GoldDropParticles.instance.Drop(this.transform.position, 5);
+        GoldDropParticles.instance.Drop(this.transform.position, this.worth);
     
         Pool.instance.Return(this.gameObject);
     }
