@@ -240,11 +240,12 @@ public class GrenadeTurret : Turret {
 
         float angle1 = Mathf.Atan( ( this.speed*this.speed + Mathf.Sqrt(underRoot) ) / ( g * delta.x ) );
         float angle2 = Mathf.Atan( ( this.speed*this.speed - Mathf.Sqrt(underRoot) ) / ( g * delta.x ) );
+        float angle = Mathf.Max(angle1, angle2);
         if(flip) {
             angle1 = Mathf.PI - angle1;
             angle2 = Mathf.PI - angle2;
+            angle = Mathf.Min(angle1, angle2);
         }
-        float angle = Mathf.Min(angle1, angle2);
         reachAngle = angle;
 
         if(force) {

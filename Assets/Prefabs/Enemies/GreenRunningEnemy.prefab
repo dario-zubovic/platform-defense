@@ -205,13 +205,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientedTransform: {fileID: 4179216291462648}
-  moveSpeed: 6
+  moveSpeed: 10
   airAccelerationTime: 0.1
   groundFriction: 0.3
   airDrag: 0.05
   wallSlideDamping: 0.75
   speedMultipler: 1
-  startHealth: 5
+  startHealth: 17
   worth: 3
   healthIndicator: {fileID: 4240909118908788}
   moveRight: 0

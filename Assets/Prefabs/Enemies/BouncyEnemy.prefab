@@ -195,7 +195,7 @@ MonoBehaviour:
   airDrag: 0.05
   wallSlideDamping: 0.75
   speedMultipler: 1
-  startHealth: 3
+  startHealth: 12
   worth: 5
   healthIndicator: {fileID: 4383566073588522}
   moveRight: 0

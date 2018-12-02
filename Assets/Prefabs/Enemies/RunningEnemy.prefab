@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientedTransform: {fileID: 4179216291462648}
-  moveSpeed: 6
+  moveSpeed: 10
   airAccelerationTime: 0.1
   groundFriction: 0.3
   airDrag: 0.05

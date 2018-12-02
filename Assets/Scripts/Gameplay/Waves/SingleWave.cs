@@ -32,8 +32,8 @@ public class SingleWave : EnemyWave {
 
     private void SpawnEnemy(Transform spawnPoint) {
         Enemy enemy = Pool.instance.Grab<Enemy>(this.enemyPrefab);
-        enemy.startHealth = this.health;
-        enemy.moveSpeed = this.speed;
+        // enemy.startHealth = this.health;
+        // enemy.moveSpeed = this.speed;
         enemy.transform.position = spawnPoint.transform.position;
         enemy.Spawn(spawnPoint.transform.position);
     }

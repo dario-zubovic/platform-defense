@@ -239,35 +239,43 @@ MonoBehaviour:
   - {fileID: 4725832031765786}
   - {fileID: 4823307234264248}
   waves:
-  - delay: 90
-    wave: {fileID: 11400000, guid: 811f8bdbd09db5f40a4e947d4c539944, type: 2}
   - delay: 60
+    wave: {fileID: 11400000, guid: 811f8bdbd09db5f40a4e947d4c539944, type: 2}
+  - delay: 45
     wave: {fileID: 11400000, guid: 295045a9f13b5854da678ee3ba3189c3, type: 2}
   - delay: 60
     wave: {fileID: 11400000, guid: ab4238ba8d5fb0448838b4d7061ab43b, type: 2}
-  - delay: 45
+  - delay: 20
     wave: {fileID: 11400000, guid: c5250fa23c966c1458a3863f492bd7d0, type: 2}
   - delay: 30
     wave: {fileID: 11400000, guid: fc3235fb27c224044804c6781577f772, type: 2}
-  - delay: 60
+  - delay: 30
     wave: {fileID: 11400000, guid: e6673a85fa03e6c439b46a863b08df27, type: 2}
-  - delay: 30
+  - delay: 20
     wave: {fileID: 11400000, guid: 9389acf8a681c0248b168cc4b2e47382, type: 2}
-  - delay: 45
+  - delay: 30
     wave: {fileID: 11400000, guid: 5e04ffa440f72e046b8ecf0b444886a8, type: 2}
-  - delay: 60
+  - delay: 30
     wave: {fileID: 11400000, guid: 5c0f6328db8d3c6499784fd142af92d2, type: 2}
-  - delay: 60
+  - delay: 30
     wave: {fileID: 11400000, guid: 3a57ff74b3fc34541b926b34700fd04c, type: 2}
-  - delay: 30
+  - delay: 20
     wave: {fileID: 11400000, guid: 53ace7375ea38ae42982def35c549c2b, type: 2}
-  - delay: 30
+  - delay: 15
     wave: {fileID: 11400000, guid: 0da6a3aab7d6e4d499bbffe6c41c5559, type: 2}
-  - delay: 45
+  - delay: 15
     wave: {fileID: 11400000, guid: bca615fff96982546910e8ec1e699d85, type: 2}
-  - delay: 60
+  - delay: 15
     wave: {fileID: 11400000, guid: 6d2a50a9671831f42a64695c8766b440, type: 2}
-  - delay: 45
+  - delay: 30
     wave: {fileID: 11400000, guid: 5bea8935aef3fcc4eb1d62bd3395e438, type: 2}
-  - delay: 60
+  - delay: 10
     wave: {fileID: 11400000, guid: c50b61fdefe571141b34948d88e9c946, type: 2}
+  - delay: 15
+    wave: {fileID: 11400000, guid: abb904e5be423e34493ae927c0b4001f, type: 2}
+  - delay: 10
+    wave: {fileID: 11400000, guid: a3fc8062567105a4cb4555ba9e39a57a, type: 2}
+  - delay: 15
+    wave: {fileID: 11400000, guid: 1964575fe9168d74283ce621e489f0b6, type: 2}
+  - delay: 30
+    wave: {fileID: 11400000, guid: f37cf75996099034db743b1f38c29ba9, type: 2}

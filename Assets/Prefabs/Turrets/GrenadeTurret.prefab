@@ -2184,7 +2184,7 @@ MonoBehaviour:
   aimRends:
   - {fileID: 212812451723711954}
   damageLowUpgrades:
-  - tokenCost: 0
+  - tokenCost: 1
     goldCost: 75
     value: 1
   - tokenCost: 0
@@ -2204,7 +2204,7 @@ MonoBehaviour:
     goldCost: 0
     value: 11
   blastRadiusUpgrades:
-  - tokenCost: 0
+  - tokenCost: 1
     goldCost: 75
     value: 4
   - tokenCost: 0
