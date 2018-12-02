@@ -357,6 +357,8 @@ public class Level : MonoBehaviour {
 		}
 
 		yield return null;
+
+		this.done = true;
 	}
 
 #if UNITY_EDITOR
