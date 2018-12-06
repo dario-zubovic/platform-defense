@@ -1,6 +1,8 @@
+![Cover art](https://img.itch.zone/aW1nLzE2NzYzOTYuZ2lm/315x250%23c/MbGVPN.gif)
+
 # Fire Of Kala
 
-This is a source code for Fire Of Kala - a platforming + tower defense game made for GitHub Gameoff 2018 jam. TODO: finish this
+This is a source code for Fire Of Kala - a platforming + tower defense game made for GitHub Gameoff 2018 jam. Play the game [here](https://dario-zubovic.itch.io/kala).
 
 ## License
 Source code is provided under MIT license. Please check LICENSE file for more information.
